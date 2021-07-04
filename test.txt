@@ -22,3 +22,6 @@ git commit -m "~~~수정"
 (따움표 안에 꼭 적어줘)
 
 git push origin master
+
+
+git pull origin master  깃에서 받아와서 푸쉬로 올리기
