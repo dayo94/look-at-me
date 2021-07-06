@@ -22,9 +22,14 @@ public class ArrayQuiz5 {
 		int[] arr = { 10, 17, 3, 9, 27, 10, 8, 9, 13, 21 };
 		//			{  5,  3, 10,7,  1,  5, 9, 7,  4,  2 }
 
-		int[] rank_arr = new int[10];
+		int[] rank_arr = new int[arr.length];
 
 
+
+		//i번째 요소를 1등으로가정하고 초기화한다
+		//rank_arr[i] = 1;
+		//마지막에 +1 안해줘도됨
+		
 
 		for(int i=0; i<arr.length; i++) {
 			for(int j=0; j<arr.length; j++) {
