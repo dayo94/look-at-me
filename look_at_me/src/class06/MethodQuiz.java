@@ -16,21 +16,19 @@ public class MethodQuiz {
 	
 
 	
-	public int printHello( int num ) {
+	public void printHello( int num ) {
 		for(int i=0; i<num; i++) {
 			System.out.println("Hello");
 		}
-		return num;
 	}
 	
 
 	
-	public String printText(int cnt, String text) {
+	public void printText(int cnt, String text) {
 		
 		for(int i=0; i<cnt; i++) {
 			System.out.println(text);
 		}
-		return text;
 	}
 
 	
