@@ -3,13 +3,12 @@ package inherit.practice2.product;
 public class Product {
 
 
+
 	protected String model;
 	protected int price;
 
-//	public Product() {
-//
-//	}
 
+	
 	public Product(String model, int price) {
 		this.model = model;
 		this.price = price;
@@ -20,11 +19,6 @@ public class Product {
 
 
 	}
-
-
-
-
-
 
 
 

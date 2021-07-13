@@ -5,9 +5,9 @@ public class Computer extends Product {
 
 
 	public Computer (String model, int price) {
-		super("ÀÌ´Ù¿µ",100); //
-		this.model = model;
-		this.price = price;
+		super(model,price); 
+//		this.model = model;
+//		this.price = price;
 	}
 
 	
@@ -17,8 +17,6 @@ public class Computer extends Product {
 	public void out() {
 		System.out.println("Computer");
 	}
-
-
 
 
 
