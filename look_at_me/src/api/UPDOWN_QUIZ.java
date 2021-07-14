@@ -15,32 +15,34 @@ public class UPDOWN_QUIZ {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("숫자를 입력하세요");
+		System.out.println("1~50 사이의 숫자를 입력하세요");
 		System.out.print(">>");
 		int user = sc.nextInt();
 
 		for(int i=0; i<7; i++) {
-			if(user<com) {
-				System.out.println("up");
-				System.out.println("숫자를 입력하세요");
-				System.out.print(">>");
-				user = sc.nextInt();
+			if(i<6) {
+				if (user<com) {
+					System.out.println("up");
+					System.out.println("숫자를 입력하세요");
+					System.out.print(">>");
+					user = sc.nextInt();
 
-			} else if (user>com) {
-				System.out.println("down");
-				System.out.println("숫자를 입력하세요");
-				System.out.print(">>");
-				user = sc.nextInt();
-			} else if (user == com) {
-				System.out.println("user 승리");
-				return;
-			} else if (i==6) {
-				
-				System.out.println("com 승리");			
+				} else if (user>com) {
+					System.out.println("down");
+					System.out.println("숫자를 입력하세요");
+					System.out.print(">>");
+					user = sc.nextInt();
+				} else if (user == com) {
+					System.out.println("user 승리");
+					break;
+				} 
 			}
 			
-		}
+			if(i==6) {
+				System.out.println("com 승리");
+			}
 
+		}//for
 
 
 	}//main
