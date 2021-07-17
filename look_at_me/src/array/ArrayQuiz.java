@@ -12,7 +12,6 @@ public class ArrayQuiz {
 
 
 
-
 		Scanner sc = new Scanner(System.in);
 
 		int[] arr = new int[6];

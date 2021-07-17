@@ -1,8 +1,11 @@
 package control;
 
+import java.util.Scanner;
+
 public class star {
 
 	public static void main(String[] args) {
+
 
 
 		System.out.println("--------1------------------");
@@ -188,7 +191,7 @@ public class star {
 
 
 
-		
+
 
 		for(int i=1; i<6; i++) {
 			for(int j=0; j<5-i; j++) {
@@ -282,8 +285,8 @@ public class star {
 		System.out.println("--------------13------------");
 
 
-		
-		
+
+
 		for (int i=0; i<9; i++) {
 			if (i<5) {
 				for (int j=0; j<5-i; j++) {
@@ -303,12 +306,12 @@ public class star {
 
 
 		System.out.println("--------------------------------------");
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 
 
 		for(int i=0; i<9; i++) {
@@ -323,28 +326,28 @@ public class star {
 
 
 				}
-					System.out.println();
+				System.out.println();
 			}
 			else if(i>=5) {
-					for(int j=0; j<8-i; j++) {
-						System.out.print(" ");
-					}
-					
-					
-					for(int d=0; d<i-3; d++) {
-						System.out.print('*');
-						
-					}
-					
-					System.out.println();
+				for(int j=0; j<8-i; j++) {
+					System.out.print(" ");
 				}
-				
+
+
+				for(int d=0; d<i-3; d++) {
+					System.out.print('*');
+
+				}
+
+				System.out.println();
 			}
+
+		}
 		System.out.println("-------------------------------");
 
-		
-		
-		
+
+
+
 	}//main
 
 
