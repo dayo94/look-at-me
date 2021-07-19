@@ -1,4 +1,4 @@
-package java10_collection;
+package collection;
 
 import java.util.ArrayList;
 
