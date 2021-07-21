@@ -9,7 +9,7 @@ public class FileOutputStreamEx {
 	public static void main(String[] args) {
 
 
-		File file = new File("./src/java13_io/fileStream", "output");
+		File file = new File("./src/io13/fileStream", "output");
 		System.out.println("[TEST] exists : " + file.exists());
 
 

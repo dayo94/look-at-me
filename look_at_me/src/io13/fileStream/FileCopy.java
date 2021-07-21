@@ -9,9 +9,9 @@ import java.io.IOException;
 public class FileCopy {
 	public static void main(String[] args) {
 
-		File src = new File("./src/java13_io/fileStream", "Source.txt");
+		File src = new File("./src/io13/fileStream", "Source");
 
-		File dest = new File("./src/java13_io/fileStream", "Destination.txt");
+		File dest = new File("./src/io13/fileStream", "Destination");
 
 		FileInputStream fis = null;
 		FileOutputStream fos = null;

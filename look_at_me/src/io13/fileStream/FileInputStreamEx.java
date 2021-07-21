@@ -8,7 +8,7 @@ import java.io.IOException;
 public class FileInputStreamEx {
 	public static void main(String[] args) {
 
-		File file = new File("./src/java13_io/fileStream", "input");
+		File file = new File("./src/io13/fileStream", "input");
 		System.out.println("[TEST] exists : " + file.exists());
 
 

@@ -7,7 +7,7 @@ public class FileEx_02 {
 
 
 	
-		File file1 = new File("D:/workspace/JavaBasic/src/java13_io/file", "Hello");
+		File file1 = new File("C:\\Users\\82107\\Desktop\\coding\\lookAtMe\\look_at_me\\src\\io13\\file", "Hello");
 
 		System.out.println( file1.length() );
 		System.out.println( file1.exists() );
@@ -15,7 +15,7 @@ public class FileEx_02 {
 		
 
 		
-		File file2 = new File("./src/java13_io/file", "Hello");
+		File file2 = new File("./src/io13/file", "Hello");
 
 		System.out.println( file1.length() );
 		System.out.println( file1.exists() );
