@@ -1,8 +1,7 @@
 package collection.quiz2;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.Set;
 
 public class BookManagerMap implements BookManagerMapInterface {
 
@@ -39,19 +38,7 @@ public class BookManagerMap implements BookManagerMapInterface {
 		 * @param book - Book, 새롭게 추가할 책 정보를 담고있는 객체
 		 */
 //		+ putBook(book:Book) : void	//맵에 객체 추가, 도서번호를 키로 사용함
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("도서번호를 입력하세요");
-		book.setbNo(sc.nextLine());
-		System.out.println("도서분류코드를 입력하세요");
-		book.setCategory(sc.nextInt());
-		System.out.println("책 제목을 입력하세요");
-		book.setTitle(sc.nextLine());
-		System.out.println("저자를 입력하세요");
-		book.setAuthor(sc.nextLine());
-		
-		
-		
+		booksMap.put(book.getbNo(),book);
 		
 	}
 
@@ -65,12 +52,7 @@ public class BookManagerMap implements BookManagerMapInterface {
 		 * 
 		 * @param bNo - String, 삭제할 도서의 이름 
 		 */
-//		+ removeBook(key:String) : void	//맵에서 객체 제거
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("삭제할 도서번호를 입력하세요");
-//		booksMap.
-//		booksMap.remove("bNo");
+		booksMap.remove(bNo);
 	}
 
 
@@ -89,6 +71,7 @@ public class BookManagerMap implements BookManagerMapInterface {
 //		+ searchBook(String bTitle) : String	: entrySet() 사용
 //		도서명이 일치하는 객체의 도서번호를 리턴
 //		도서명이 객체가 맵에 없으면, null 리턴함		
+//		booksMap.entrySet("bTitle",(bTitle,booksMap));
 		return null;
 	}
 
@@ -101,9 +84,12 @@ public class BookManagerMap implements BookManagerMapInterface {
 		 *  
 		 */
 //		+ displayAll():void		//맵정보 모두 출력 : keySet() 사용
-		
+		Set<String> key = booksMap.keySet();
+		System.out.println("도서번호\t카테고리\t책제목\t저자");
+		for(String k : key) {
+			printBook(k);
+		}
 	}
-
 
 	@Override
 	public void printBook(String bNo) {
@@ -113,8 +99,17 @@ public class BookManagerMap implements BookManagerMapInterface {
 		 * @param bNo - String, 출력하려는 책의 책번호
 		 */
 //		+ printBook(key:String) : void	//key에 해당하는 Book 출력
+		System.out.print(booksMap.get(bNo).getbNo()+"    \t");
+		System.out.print(booksMap.get(bNo).getCategory()+"    \t");
+		System.out.print(booksMap.get(bNo).getTitle()+"   \t");
+		System.out.print(booksMap.get(bNo).getAuthor()+"\n\n");
 		
 		
+
+		 }
+
+
+
 	}
 	
 
@@ -123,4 +118,4 @@ public class BookManagerMap implements BookManagerMapInterface {
 		
 		
 
-}
+
