@@ -85,3 +85,39 @@ WHERE sal < 2000
 ORDER BY job, deptno;
 
 
+-- 그룹핑
+--GROUP BY
+SELECT deptno, job, count(*) CNT, sum(sal) total_sal
+FROM emp
+GROUP BY deptno, job
+ORDER BY deptno, job;
+
+
+
+--GROUP BY ROLLUP()
+SELECT deptno, job, count(*) CNT, sum(sal) total_sal
+FROM emp
+GROUP BY ROLLUP ( deptno, job )
+ORDER BY deptno, job;
+
+
+
+
+--GROUP BY CUBE()
+SELECT deptno, job, count(*) CNT, sum(sal) total_sal
+FROM emp
+GROUP BY CUBE ( deptno, job )
+ORDER BY deptno, job;
+
+
+
+--GROUP BY GROUPING SETS ()
+-- -> 그룹핑하는 컬럼의 조합을 직접 명시한다
+-- -> 그룸핑 조합을 적지 않으면 그룹화하지않는다
+-- -> 전체 그룹핑은 ()로 적는다
+-- -> 원하는 그룹이 2개 이상의 컬럼으로 이러어져 있으면 ( col1,col2 ) 형식으로 작성한다
+SELECT deptno, job, count(*) CNT, sum(sal) total_sal
+FROM emp
+GROUP BY GROUPING SETS ( deptno, job, ( deptno, job ),())
+ORDER BY deptno, job;
+
