@@ -184,3 +184,152 @@ INSERT INTO cons_08 VALUES (); --에러 VALUES절에 아무 데이터도 없음
 
 
 
+
+--PRIMARY KEY
+--기본키, 주키
+
+CREATE TABLE cons_09 (
+    no NUMBER CONSTRAINT PK_NO PRIMARY KEY, --이름을지정하며, 컬럼 레벨로 설정함
+    data VARCHAR2(10) NOT NULL
+);
+SELECT * FROM cons_09;
+
+
+
+CREATE TABLE cons_10 (
+    no NUMBER PRIMARY KEY, --이름없이 컬럼 레벨로 설정함
+    data VARCHAR2(10) NOT NULL
+);
+
+
+
+CREATE TABLE cons_11 (
+    no NUMBER, --이름없이 컬럼 레벨로 설정함
+    data VARCHAR2(10) NOT NULL,
+    CONSTRAINT PK_CONS11 PRIMARY KEY ( NO ) --이름을 부여하며 테이블 레벨로 설정함
+);
+
+
+CREATE TABLE cons_12 (
+    no NUMBER, --이름없이 컬럼 레벨로 설정함
+    data VARCHAR2(10) NOT NULL,
+    PRIMARY KEY ( NO ) --이름없이 테이블 레벨로 설정함 (절대하지마세욥)
+);
+
+
+
+--FOREIGN KEY
+
+CREATE TABLE cons_13 (
+    num NUMBER,
+    data VARCHAR2(20),
+    CONSTRAINT FK_NUM FOREIGN KEY ( num )-- FK설정, 자신 케이블의 컬럼으로 설정한다
+        REFERENCES cons_12 ( no ) --참조할 PK설정, 참조할 테이블과 컬럼명으로 설정한다
+);
+
+
+
+CREATE TABLE pk_test (
+    no NUMBER,
+    data VARCHAR2(20),
+    CONSTRAINT pkno PRIMARY KEY ( NO )
+);
+
+
+CREATE TABLE fk_test (
+    id VARCHAR2(30),
+    no NUMBER,
+    CONSTRAINT pkid PRIMARY KEY ( id ),
+    CONSTRAINT fkno FOREIGN KEY ( no )
+        REFERENCES pk_test ( no )
+);
+
+
+
+INSERT INTO pk_test VALUES ( 1, 'APPLE' );
+INSERT INTO pk_test VALUES ( 2, 'BANANA' );
+INSERT INTO pk_test VALUES ( 3, 'CHERRY' );
+
+
+INSERT INTO fk_test VALUES ( 'A', 10 ); --에러, 10은 참조대상 PK의 값으로 존재하지 않는다
+INSERT INTO fk_test VALUES ( 'A', 1 );
+INSERT INTO fk_test VALUES ( 'B', 2 );
+
+--에러, PK의 값 '1'은 FK가 참조하고 있는 값이기떄문에 삭제할수없다
+DELETE pk_test WHERE no = 1;
+
+--참조하고 있는 FK가 없기 때문에 '3'운 삭제할수있다
+DELETE pk_test WHERE no = 3;
+
+
+
+--ON DELETE CASCADE
+
+--테이블 삭제
+DROP TABLE fk_test;
+DROP TABLE pk_test;
+
+CREATE TABLE pk_test (
+    no NUMBER,
+    data VARCHAR2(20),
+    CONSTRAINT pkno PRIMARY KEY ( no ) );
+
+CREATE TABLE fk_test (
+    id VARCHAR2(30),
+    no NUMBER,
+    CONSTRAINT pkid PRIMARY KEY ( id ),
+    CONSTRAINT fkno FOREIGN KEY ( no )
+        REFERENCES pk_test ( no )
+        ON DELETE CASCADE -- PK가 지워지면 FK도 같이 지워지도록 설정한다
+);
+
+INSERT INTO pk_test VALUES ( 1, 'Apple' );
+INSERT INTO pk_test VALUES ( 2, 'Banana' );
+INSERT INTO pk_test VALUES ( 3, 'Cherry' );
+
+INSERT INTO fk_test VALUES ( 'A', 1 );
+INSERT INTO fk_test VALUES ( 'B', 2 );
+
+
+
+--ON DELETE CASCADE 설정 때문에, PK와 FK가 모두 지워진다
+DELETE pk_test WHERE no = 1;
+
+SELECT * FROM pk_test;
+SELECT * FROM fk_test;
+
+
+
+
+--ON DELETE SET NULL
+
+--테이블 삭제
+DROP TABLE fk_test;
+DROP TABLE pk_test;
+
+CREATE TABLE pk_test (
+    no NUMBER,
+    data VARCHAR2(20),
+    CONSTRAINT pkno PRIMARY KEY ( no ) );
+
+CREATE TABLE fk_test (
+    id VARCHAR2(30),
+    no NUMBER,
+    CONSTRAINT pkid PRIMARY KEY ( id ),
+    CONSTRAINT fkno FOREIGN KEY ( no )
+        REFERENCES pk_test ( no )
+        ON DELETE SET NULL -- PK가 지워지면 FK는 NULL값으로 변경한다
+);
+
+INSERT INTO pk_test VALUES ( 1, 'Apple' );
+INSERT INTO pk_test VALUES ( 2, 'Banana' );
+INSERT INTO pk_test VALUES ( 3, 'Cherry' );
+
+INSERT INTO fk_test VALUES ( 'A', 1 );
+INSERT INTO fk_test VALUES ( 'B', 2 );
+
+--ON DELETE CASCADE 설정 때문에, PK와 FK가 모두 지워진다
+DELETE pk_test WHERE no = 1;
+
+SELECT * FROM pk_test;
+SELECT * FROM fk_test;
