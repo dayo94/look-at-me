@@ -31,3 +31,6 @@ SELECT * FROM user_tab_comments --테이블 주석 자료사전
 WHERE table_name = upper('emp');
 SELECT * FROM user_col_comments --컬럼 주석 자료사전
 WHERE table_name = upper('emp');
+
+
+
