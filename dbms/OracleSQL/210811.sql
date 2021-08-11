@@ -180,6 +180,8 @@ AS (
     WHERE empno < 7600
 );
 
+DROP VIEW TEST_VIEW;
+
 
 --뷰 자료사전
 SELECT * FROM user_views
@@ -195,4 +197,105 @@ SELECT * FROM (
     SELECT "EMPNO","ENAME","JOB","MGR","HIREDATE","SAL","COMM","DEPTNO" FROM EMP
     WHERE empno < 7600
 );
+
+
+CREATE OR REPLACE VIEW TEST_VIEW
+AS (
+    SELECT empno, ename FROM EMP
+    WHERE empno < 7700
+);
+
+--뷰를 이용한 조회
+SELECT * FROM TEST_VIEW;
+
+SELECT * FROM user_views;
+
+--뷰를 이용한 데이터 삽입
+INSERT INTO TEST_VIEW ( empno, ename )
+VALUES ( 8000, '뷰TEST' ); --뷰의 조건문 범위를 벗어나지만 원본테이블에는 들어감
+
+--뷰를 이용한 데이터 삽입
+INSERT INTO TEST_VIEW ( empno, ename )
+VALUES ( 7000, '뷰TEST' );
+
+
+INSERT INTO TEST_VIEW ( empno, deptno ) --서브쿼리에 없는 컬럼은 X
+VALUES ( 8500,30 );
+
+SELECT * FROM EMP;
+
+--WITH CHECK OPTION 적용하기
+-- -> 뷰를 통해서 조회되지 않는 데이터는 INSERT 할 수 없도록 설정한다
+CREATE OR REPLACE VIEW TEST_VIEW
+AS (
+    SELECT empno, ename FROM emp
+    WHERE empno < 7700
+)
+WITH CHECK OPTION;
+
+
+--DELETE EMP
+--	WHERE empno = 9000; --삭제할 행 지정하기
+
+
+INSERT INTO TEST_VIEW VALUES ( 9000, 'TEST!!'); --에러, 조회가능 범위를 벗어난 데이터
+INSERT INTO TEST_VIEW VALUES ( 7001, 'TEST!!'); 
+
+
+--시퀀스, SEQUENCE
+
+--시퀀스 생성
+CREATE SEQUENCE seq_emp;
+
+--시퀀스 자료사전
+SELECT * FROM user_sequences;
+
+
+--시퀀스의 다음값 : 시퀀스이름.nextval
+--시퀀스의 현재값 : 시퀀스이름.currval
+
+SELECT seq_emp.nextval FROM dual;
+SELECT seq_emp.currval FROM dual;
+
+
+INSERT INTO emp (empno, ename)
+VALUES (seq_emp.nextval, 'GGGGGGG');
+
+SELECT * FROM EMP
+WHERE EMPNO < 1000;
+
+DROP SEQUENCE seq_emp; 
+
+
+--옵션(조건) 을 부여해서 시퀀스 생성하기
+CREATE SEQUENCE TEST_SEQ
+START WITH 2001
+INCREMENT BY 100
+MINVALUE 2001
+MAXVALUE 3000;
+
+
+--2001부터 100씩 증가한다, 3000을 넘어갈 수 없다
+SELECT TEST_SEQ.NEXTVAL FROM DUAL;
+
+
+
+--CYCLE(순환구조) 부여하기 -> 에러, 1사이클의 개수가 캐시의 개수보다 적음
+ALTER SEQUENCE TEST_SEQ
+CYCLE;
+
+SELECT * FROM user_sequences
+WHERE sequence_name = 'TEST_SEQ';
+
+
+
+ALTER SEQUENCE TEST_SEQ
+CACHE 5 --캐시의 개수를 5개로 변경함
+CYCLE;
+
+--순환구조(CYCLE)이 적용되어 에러없이 NEXTVAL을 생성한다
+SELECT TEST_SEQ.NEXTVAL FROM DUAL;
+
+
+
 
