@@ -12,32 +12,18 @@ SELECT * FROM inpatient; --입원
 --   환자번호, 환자이름, 생년월일, 성별, 진료의사명, 진료과명
 -- 스칼라 서브쿼리로 표현
 
-SELECT PAT_CODE, PAT_NAME, PAT_BIRTH, PAT_GENDER, (
-SELECT D.DOC_NAME
-FROM TREAT T, DOCTOR D
-WHERE T.DOC_CODE = D.DOC_CODE
-AND T.TRT_YEAR = '2014'
-AND T.TRT_DATE = '0102') DOC_NAME
-FROM PATIENT;
-
-
-
-SELECT DE.DEP_NAME
-FROM DOCTOR D, DEPARTMENT DE
-WHERE D.DEP_CODE = DE.DEP_CODE
-AND 
-
-
-
---( SELECT T.TRT_YEAR, T.TRT_DATE, D.DOC_CODE
---FROM TREAT T, DOCTOR D
---WHERE T.DOC_CODE = D.DOC_CODE
---AND T.TRT_YEAR = '2014'
---AND T.TRT_DATE = '0102' ) DOCNAME
-
-
-
-
+SELECT
+    T.pat_code
+    , ( SELECT pat_name FROM PATIENT P WHERE T.pat_code=P.pat_code ) pat_name
+    , ( SELECT pat_birth FROM PATIENT P WHERE T.pat_code=P.pat_code ) pat_birth
+    , ( SELECT pat_gender FROM PATIENT P WHERE T.pat_code=P.pat_code ) pat_gender
+    , ( SELECT DOC_NAME FROM DOCTOR D WHERE D.doc_code = T.doc_code ) DOC_NAME
+    , ( SELECT DEP_NAME FROM DEPARTMENT M, DOCTOR D WHERE D.doc_code = T.doc_code AND M.DEP_CODE=D.DEP_CODE ) DEP_NAME
+FROM TREAT T
+WHERE 1=1
+    AND trt_year='2014'
+    AND trt_date='0102'
+ORDER BY PAT_CODE;
 
 
 1	오환자1	19831203	F	황선생	외상과
