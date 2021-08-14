@@ -67,3 +67,24 @@ ORDER BY PAT_CODE;
 34	송환자	19700713	F	구선생	혈관이식외과
 35	황환자	19970323	M	한선생	간담췌외과
 44	송학	19831129	M	황선생	대장항문외과
+
+
+SELECT
+    T.pat_code
+    , ( SELECT pat_name FROM PATIENT P WHERE T.pat_code=P.pat_code ) pat_name
+    , ( SELECT pat_birth FROM PATIENT P WHERE T.pat_code=P.pat_code ) pat_birth
+    , ( SELECT pat_gender FROM PATIENT P WHERE T.pat_code=P.pat_code ) pat_gender
+    , ( SELECT DOC_NAME FROM DOCTOR D WHERE D.doc_code = T.doc_code ) DOC_NAME
+    , ( SELECT DEP_NAME FROM DEPARTMENT M, DOCTOR D WHERE D.doc_code = T.doc_code AND M.DEP_CODE=D.DEP_CODE ) DEP_NAME
+FROM TREAT T
+WHERE 1=1
+    AND trt_year='2014'
+    AND trt_date='0102'
+    AND SUBSTR((
+        SELECT M.DEP_code
+        FROM DEPARTMENT M, DOCTOR D
+        WHERE D.doc_code = T.doc_code
+            AND M.DEP_CODE=D.DEP_CODE
+    ),1,2) = '02'
+ORDER BY PAT_CODE;
+
