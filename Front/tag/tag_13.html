@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<style type="text/css">
+
+label {
+	width: 60px;
+	display: inline-block; /* 너비를 지정할수 있도록설정 (레이아웃 형태 변경) */
+}
+
+
+</style>
+
+
+</head>
+<body>
+
+<h1>form 태그</h1>
+<h3>fieldset, legend</h3>
+<hr>
+
+<form action="" method="get"></form>
+
+
+
+<fieldset style="width: 250px;"> <!-- 폼태그의 내용물들을 감싸주는 영역 -->
+
+<legend>로그인 정보</legend> <!--필드셋의 제목 이름  -->
+
+<label for="userid">아이디</label>
+<input type="text" id="userid" name="userid" />
+<br>
+
+<label for="userpw">패스워드</label>
+<input type="text" id="userpw" name="userpw" />
+</fieldset>
+
+<fieldset style="width: 250px;">
+
+<legend>추가 정보</legend>
+
+<label for="test1">테스트1</label>
+<input type="text" id="test1" name="test" /> <br><br>
+<label for="test2">테스트2</label>
+<input type="text" id="test2" name="test" /> <br><br>
+<label for="test3">테스트3</label>
+<input type="text" id="test3" name="test" /> <br><br>
+
+</fieldset>
+<br>
+
+<input type="submit" value="로그인" />
+
+</body>
+</html>

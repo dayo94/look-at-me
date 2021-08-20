@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<h1>form태그</h1>
+<h3>datalist, textarea, select</h3>
+<hr>
+
+
+<form action="" method="get"> <!-- 길어서 post가 적합 -->
+<!-- <form action="" method="post"> -->
+
+<datalist id="fruits">
+	<option>사과</option>
+	<option>바나나</option>
+	<option>체리</option>
+</datalist>
+<label for="fr">과일</label>
+<input list="fruits" name="f" id="fr" />
+
+
+<hr>
+
+본문 작성<br>
+<textarea rows="10" cols="50" name="contene" placeholder="긴 글 작성" >기본값</textarea>
+<!-- value x -->
+<!-- 여는태그와 닫는태그 사이(innerhtml)에 전송할 데이터를 입력할수있다 -->
+
+<hr>
+
+<!-- name속성은 select태그에 적는다 -->
+<!-- value속성은 option태그에 적는다 -->
+
+<!-- value속성을 지정하지 않으면 옵션태그의 innerhtml 내용을 전송한다 -->
+
+<select name="month">
+	<option value="0" selected="selected">선택 안함</option>
+	<option value="one">1 개월</option>
+	<option value="two">2 개월</option>
+	<option value="three">3 개월</option>
+</select>
+
+
+<br><br>
+<button>전송</button>
+
+
+</form>
+
+
+
+</body>
+</html>
