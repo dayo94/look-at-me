@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 임베디드 방식으로 css적용하기 -->
+<style type="text/css">
+/* css 주석 */
+/* 스타일시트가 적용될 대상(태그)을 선택자(selector)로 지정해줘야한다 */
+
+p {
+	font-size: 30px;
+}
+
+span {
+	font-style: italic;
+}
+
+/* id속성값이 hi인 태그를 선택한다(id선택자) 고유속성 */
+#hi {
+	color: blue;
+}
+
+/* class속성의 값이 hello인 태그를선택한다(class선택자) 중복지정가능 */
+.hello {
+	color: tomato;
+}
+
+</style>
+
+
+
+
+
+
+</head>
+<body>
+<!-- 인라인 방식으로 스타일 적용하기 -->
+<p style="color: red;">안녕하세요!!</p>
+
+
+<!-- 스타일시트 -->
+<!-- 스타일 속성: 스타일값; 형식으로 지정한다 -->
+<!-- color: red; <-글자 색 -->
+
+
+
+
+<hr>
+<p id="hi">hihihihihihi</p> 
+<p class="hello">반가워요</p>
+<span>여기는 span태그!!</span> <br><br>
+<span class="hello">안녕하세요</span>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+div {
+	width: 40px;
+	height: 100px;
+	font-size: 50px;
+}
+
+
+
+
+
+</style>
+
+</head>
+<body>
+
+
+
+<h1>CSS 색상</h1>
+<h3>Color Name, RGB, RGBA, HEX, HSL, HSLA</h3>
+<hr>
+<div style="background: gray;">테스트</div>
+
+<hr>
+
+<!-- Color Name 표현법 -->
+<div style="background: red;">red</div>
+<div style="background: green;">green</div>
+<div style="background: blue;">blue</div>
+
+<hr>
+
+<!-- RGB 표현법 -->
+
+<div style="background: rgb(255,0,0);">red</div>
+<div style="background: rgb(0,255,0);">green(lime)</div>
+<div style="background: rgb(0,0,255);">blue</div>
+
+<div style="background: rgb(255,255,0);">yellow</div>
+<div style="background: rgb(0%,100%,100%);">cyan</div>
+
+
+<hr>
+
+<!-- RGBA 표현법 alpha(투명도) --> 
+<!-- 0 -> 투명 1 -> 원래그대로 -->
+
+<div style="background: rgba(255,0,255,1.0);">magenta</div>
+<div style="background: rgba(255,0,255,0.3);">magenta(pale)</div>
+
+<div style="background: rgba(30%,0%,30%,1.0);">magenta(30%)</div>
+<div style="background: rgba(70%,0%,37%,1.0);">magenta(70%)</div>
+
+
+
+<hr>
+<!-- 젤중요!!!!!!!!!!!!!!!! -->
+<!-- HEX 표현법 (16진수) -->
+<!-- 10진수 0 -> 16진수 00 -->
+<!-- 10진수 255 -> 16진수 FF -->
+
+<div style="background: #6633ff;">#6633ff</div>
+<div style="background: #63f;">#63f</div> <!-- 축약코드 (각자리숫자가 같으면) -->
+
+<div style="background: #46312b;">#46312b</div>
+<div style="background: #f58282;">#f58282</div>
+
+
+
+<hr>
+
+<!-- HSL 표현법 -->
+<!-- hue 색조, satulation 채도, lightness 명도  -->
+
+<!-- hue 색조 -->
+
+<p style="color: hsl(0,100%,50%)">안녕하세요</p>
+<p style="color: hsl(120,100%,50%)">안녕하세요</p>
+<p style="color: hsl(240,100%,50%)">안녕하세요</p>
+<p style="color: hsl(360,100%,50%)">안녕하세요</p>
+
+<p style="color: hsl(60,100%,50%)">안녕하세요</p>
+<p style="color: hsl(180,100%,50%)">안녕하세요</p>
+<p style="color: hsl(300,100%,50%)">안녕하세요</p>
+
+
+<hr>
+<!-- satulation 채도 -->
+
+<p style="color: hsl(0,0%,50%)">안녕하세요</p>
+<p style="color: hsl(0,50%,50%)">안녕하세요</p>
+<p style="color: hsl(0,100%,50%)">안녕하세요</p>
+
+
+<hr>
+<!-- lightness 명도 -->
+
+<p style="color: hsl(240,100%,0%);">안녕하세요</p>
+<p style="color: hsl(240,100%,25%);">안녕하세요</p>
+<p style="color: hsl(240,100%,50%);">안녕하세요</p>
+<p style="color: hsl(240,100%,80%);">안녕하세요</p>
+<p style="color: hsl(240,100%,100%);">안녕하세요</p>
+
+
+
+
+<hr>
+<!-- HSLA 표현법 -->
+
+<p style="color: hsl(240,100%,50%,0.1);">안녕하세요</p>
+<p style="color: hsl(240,100%,50%,0.4);">안녕하세요</p>
+<p style="color: hsl(240,100%,50%,1.0);">안녕하세요</p>
+
+
+<hr>
+
+<div style="background: rgb(0,0,0); color: rgb(255,255,255);">black</div>
+<div style="background: rgb(255,255,255);">white</div>
+
+<hr>
+
+<div style="background: rgb(255,255,255);">white</div>
+
+
+
+
+</body>
+</html>
