@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+/* div태그의 자손 중에서 id가 myDiv인 요소들 선택 */
+div #myDiv {
+	/* 해당 요소 없음 */
+	background: red;
+}
+
+/* id가 myDiv인 div태그를 선택한다 */
+div#myDiv {
+	color: #666;
+}
+
+/* ------------------------------------------------------ */
+
+/* 모든 ul태그 선택 */
+ul {
+}
+
+/* #myDiv태그의 자손 중에서 ul태그들 선택 */
+#myDiv ul {
+	border: 1px solid #808;
+}
+
+/* #myDiv태그의 자식 중에서 ul태그들 선택 */
+#myDiv > ul {
+	border: 1px dotted tomato;
+}
+
+/* 자식, 자손 선택자의 우선순위가 같다 */
+
+/* 스타일적용 우선순위가 같은 선택자들끼리는 나중에 적용한 선택자코드가 반영된다 */
+
+</style>
+
+</head>
+<body>
+
+<h1>복합선택자</h1>
+<h3>자식, 자손 선택자</h3>
+<hr>
+
+<ul>
+</ul>
+
+<div id="myDiv">
+<ul>
+	<li>1</li>
+	<ul>
+		<li>2</li>
+		<ul>
+			<li>2-1</li>
+			<li>2-2</li>
+		</ul>
+	</ul>
+</ul>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

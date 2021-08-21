@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+/* 마우스가 올라간 div요소 선택 */
+div:hover {
+	color: red;
+}
+
+/* 마우스가 올라간 span요소 선택 */
+span:hover {
+	background-color: green;
+}
+
+/* ------------------------------------------------ */
+
+/* 마우스 눌림(클릭)이 발생한 span요소 선택 */
+span:active {
+	color: orange;
+	font-size: 30px;
+}
+
+/* 마우스 눌림이 발생한 button태그요소 선택 */
+/*  -> <input type="button" />은 선택하지 않는다 */
+/*  -> disabled속성을 가진 <button>도 선택하지 않는다 */
+button:active {
+	color: blue;
+}
+
+/* 마우스 눌림이 발생한 type속성이 "button"으로 지정된 input요소 선택 */
+input[type="button"]:active {
+	color: tomato;
+}
+
+/* ------------------------------------------------ */
+
+/* 방문 전 상태의 a태그요소 선택 */
+a:link {
+	color: green;
+}
+
+/* 방문 후 상태의 a태그요소 선택 */
+a:visited {
+	color: red;
+}
+
+/* ctrl + shift + del : 브라우저 인터넷 사용기록 삭제 */
+
+/* ------------------------------------------------ */
+
+/* 비활성화 상태 요소 선택 */
+:disabled {
+	font-size: 8px;
+}
+
+/* 활성화 상태 요소 선택 */
+:enabled {
+	font-style: italic; 
+}
+
+/* ------------------------------------------------ */
+
+/* checkbox나 radio가 checked상태일 때 선택 */
+:checked {
+	width: 50px;
+	height: 50px;
+}
+
+/* checked된 상태의 "checkbox"의 인접 형제 label요소 선택 */
+input[type="checkbox"]:checked + label {
+	color: blue;
+}
+
+/* checked된 상태의 #chk의 인접 형제 label요소 선택 */
+#chk:checked + label {
+	background: tomato;
+}
+
+/* ------------------------------------------------ */
+
+/* 포커스를 얻은 요소 선택 */
+:focus {
+	color: maroon;
+}
+
+/* ------------------------------------------------ */
+
+/* 자식이 없는 요소 선택 */
+/* :empty { */
+div:empty { /* 자식이 없는 div요소 선택 */
+	height: 20px;
+	background: yellow;
+}
+
+</style></head><body>
+
+<div>
+<span>span태그 안쪽</span>span태그 바깥쪽<br>
+<input type="button" value="확인" /><br>
+
+<a href="https://www.naver.com">네이버</a>
+<a href="https://www.daum.net">다음</a>
+<a href="https://www.daum.net">다음</a>
+<hr>
+
+<label><input type="checkbox" />확인</label>
+<label><input type="radio" />라디오</label>
+
+<input type="checkbox" id="chk" />
+<label for="chk">체크</label>
+
+<button disabled="disabled">버튼</button>
+<button>버튼</button>
+<hr>
+
+<div></div>
+<hr>
+
+<input type="text" />
+</div>
+
+</body>
+</html>
+
+
+
+

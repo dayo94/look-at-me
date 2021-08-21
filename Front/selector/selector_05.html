@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+/* h1태그의 곧바로 다음에 인접한 p태그요소 한 개 선택 */
+h1 + p {	background: yellow; }
+
+/* h1태그의 곧바로 다음에 인접한 h1태그요소 한 개 선택 */
+/* (선택되는 대상 없음) */
+h1 + h1 {	background: green; }
+
+/* h1태그의 뒤따르는 모든 p태그 형제요소들 선택 */
+h1 ~ p {	border: 1px solid red; }
+/* #content h1 ~ p {	border: 1px solid red; } */
+
+/* ------------------------------------------------- */
+
+/* h1태그의 인접 형제 .choco 선택 */
+/* (선택 대상 없음) */
+h1 + .choco {	color: chocolate; }
+
+/* h1태그의 일반 형제 .choco 선택 */
+h1 ~ .choco {	background: chocolate;}
+
+/* .choco의 인접 형제 .choco */
+.choco + .choco {	color: blue; }
+
+/* p태그의 인접 형제 p태그 */
+p + p {	font-style: italic;}
+
+</style></head><body>
+
+<div id="title">
+<h1>복합선택자</h1>
+<h3>일반형제, 인접형제</h3>
+<hr>
+</div>
+
+<div id="content">
+<p>첫번째</p>
+<h1>두번째</h1>
+<p>세번째</p>
+<p class="choco">네번째</p>
+<p class="choco">다섯번째</p>
+<h1>여섯번째</h1>
+<p>일곱번째</p>
+<p>여덟번째</p>
+</div>
+
+</body>
+</html>
