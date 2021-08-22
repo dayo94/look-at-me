@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+fieldset {
+	width: 280px;
+}
+
+label {
+	width: 70px;
+	display: block;
+}
+
+
+
+</style>
+
+
+
+</head>
+<body>
+
+<h1>태그 퀴즈</h1>
+
+
+<form action="" method="get">
+
+<fieldset>
+
+<label> 아이디 <input type="text" name="userid" /></label>
+<label> 비밀번호 <input type="password" name="password" /></label>
+<label> 이메일 <input type="email" name="email" /></label>
+성별
+<label><input type="radio" name="gender" value="m" />남</label>
+<label><input type="radio" name="gender" vlaue="f" />여</label>
+<label> 결혼여부 <input type="checkbox" name="married" id="married" /></label>
+
+<datalist id="locotion">
+	<option>서울</option>
+	<option>경기</option>
+	<option>전라</option>
+	<option>경상</option>
+</datalist>
+<label for="location">지역</label>
+<input list="location" name="loc" id="loc" />
+<br>
+하고싶은 말 <textarea rows="2" cols="10" name="contene" placeholder="입략하세요" ></textarea>
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<button type="submit">제출</button>
+<button type="reset">취소</button>
+</fieldset>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
