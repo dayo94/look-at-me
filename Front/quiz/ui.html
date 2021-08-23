@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+#box {
+	width: 600px;
+	margin: 0 auto;
+}
+
+header {
+	background: #d8e6e7;
+	border: 2px solid black;
+	margin-bottom: 3px;
+}
+
+#header {
+	height: 60px;
+	border: 1px solid #6e7783;
+	margin: 4px;
+	background: #e3dede;
+	overflow: hidden;
+}
+
+.boxL {
+	float: left;
+	margin-top: 18px;
+	margin-left: 18px;
+}
+
+.boxR {
+	float: right;
+	margin-top: 18px;
+	margin-right: 18px;
+}
+
+#header a {
+	margin-left: 10px;
+}
+
+#container {
+	background: #d8e6e7;
+	border: 2px solid black;
+	margin-bottom: 3px;
+	overflow: hidden;
+}
+
+.content {
+	box-sizing: border-box;
+	float: left;
+	width: 290px;
+	height: 300px;
+	border: 1px solid #6e7783;
+	background: #e3dede;
+	margin: 4px;
+}
+
+caption {
+	text-align: left;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+table {
+	width: 98%;
+	border: 1px solid #6e7783;
+	margin: 0 auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+thead tr {
+	color: white;
+	background: gray;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+
+tbody tr:nth-child(2) {
+	background: white;
+}
+
+tbody tr:nth-child(4) {
+	background: white;
+}
+
+tbody {
+	border-bottom: 2px solid black;
+}
+
+tbody tr td:nth-child(1) {
+	text-align: center;
+}
+
+footer {
+	background: #d8e6e7;
+	border: 2px solid black;
+}
+
+#footer {
+	background: #e3dede;
+	height: 60px;
+	border: 1px solid #6e7783;
+	text-align: center;
+	margin: 4px;
+}
+
+a:link {
+	color: black;
+}
+
+a:visited {
+	color:purple;
+}
+
+a:hover {
+	color: blue;
+}
+
+
+a {
+	text-decoration: none
+}
+</style>
+</head>
+
+<body>
+
+	<div id="box">
+		<header>
+			<div id="header">
+				<div class="boxL">
+					<img alt="로고이미지" src="로고이미지주소" />
+					<a href="메뉴1창"><span>메뉴 1</span></a>
+					<a href="메뉴2창"><span>메뉴 2</span></a>
+					<a href="메뉴3창"><span>메뉴 3</span></a>
+				</div>
+				<div class="boxR">
+					<a href="로그인창"><span>로그인</span></a>
+				</div>
+			</div>
+		</header>
+
+		<div id="container">
+			<div class="content">
+				<table>
+					<caption>최근에 등록된 게시글 1</caption>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>날짜</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>5</td>
+							<td><a href="게시글주소">게시글 5</a></td>
+							<td>02/25</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td><a href="게시글주소">게시글 4</a></td>
+							<td>02/25</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td><a href="게시글주소">게시글 3</a></td>
+							<td>02/23</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td><a href="게시글주소">게시글 2</a></td>
+							<td>02/23</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td><a href="게시글주소">게시글 1</a></td>
+							<td>02/22</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="content">
+				<table>
+					<caption>최근에 등록된 게시글 2</caption>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>날짜</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>5</td>
+							<td><a href="게시글주소">게시글 5</a></td>
+							<td>02/26</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td><a href="게시글주소">게시글 4</a></td>
+							<td>02/25</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td><a href="게시글주소">게시글 3</a></td>
+							<td>02/24</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td><a href="게시글주소">게시글 2</a></td>
+							<td>02/23</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td><a href="게시글주소">게시글 1</a></td>
+							<td>02/23</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
+		</div>
+
+		<footer>
+			<div id="footer">
+				<p>Copyright c Create By XXXXX</p>
+			</div>
+		</footer>
+	</div>
+
+</body>
+</html>
