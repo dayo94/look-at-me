@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+/* span태그의 앞에 가상 요소를 추가한다 */
+span::before {
+/* span::after { */
+	
+	/* 가상 요소에 적용될 컨텐츠(내용물) */
+	content: "span \A before\A";
+	
+	/* \A - 개행문자 */
+	/* (처음에는 적용되지 않는다) */
+
+	/* 공백문자를 처리하는 방식을 지정한다 */
+	white-space: pre; 
+	
+	/* 가상요소에 CSS스타일 적용 */
+	color: orange;
+	background-color: gray;
+}
+
+/* ------------------------------------------------ */
+
+.test {
+/* 	white-space: no-wrap; */
+/* 	white-space: pre; */
+/* 	white-space: pre-line; */
+	white-space: pre-wrap;
+}
+
+/* no-wrap (기본값) */
+/* 		띄어쓰기, 개행문자, 탭 모두 띄어쓰기 한 개로 바꾼다 */
+/* 		자동줄바꿈 O */
+
+/* pre */
+/* 		공백문자 적용된다 */
+/* 		자동줄바꿈 X */
+
+/* pre-line */
+/* 		띄어쓰기, 탭을 하나의 띄어쓰기로 바꾼다 */
+/* 		개행은 적용된다 */
+/* 		자동줄바꿈 O */
+
+/* pre-wrap */
+/* 		공백문자 적용된다 */
+/* 		자동줄바꿈 O */
+
+/* ------------------------------------------------ */
+
+.new::after {
+	content: "new";
+	
+	font-size: 10px;
+	background-color: #f66;
+	color: #fff;
+	
+	padding: 0 2px; /* 상하여백0, 좌우여백2px */
+	
+	border-radius: 3px;	
+}
+
+/* ------------------------------------------------ */
+
+/* 보여지는 화면의 첫번째 줄 선택 */
+p::first-line {
+	color: blue;
+}
+
+/* 문장의 첫번째 글자 선택 */
+p::first-letter {
+	color: red;
+	font-size: 20px;
+}
+
+/* ------------------------------------------------ */
+
+p:not(.new) {
+	background-color: #eee;
+}
+
+
+</style>
+
+</head>
+<body>
+
+<p class="new">첫 번째(p)</p>
+<span>두 번째(span)</span>
+<div class="new">세 번째(div)</div>
+<p class="test">네번째(p). This is a p Tag. This is a p Tag. This is a p Tag. This is a p Tag. This is a p Tag.<br>
+이름과,                  별을 강아지,<br>
+ 
+ 
+ 
+ 거외다. 		다 내일 청춘이 무덤 비둘기,
+  내 버리었습니다. 		소학교 추억과
+   하나의 새워 잠, 
+   동경과 별들을 밤을 까닭입니다. 가을 위에도 그리워 봅니다.</p>
+
+</body>
+</html>
