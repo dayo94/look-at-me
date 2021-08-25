@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+.box {
+	width: 150px;
+	height: 50px;
+	color: #999;
+	border: 1px solid red;
+}
+
+/* -------------------------------- */
+
+.absolute {
+	position: absolute;
+}
+
+/* -------------------------------- */
+
+#a1 {
+	top: 100px;
+	left: 50px;
+}
+
+#a2 {
+	bottom: 100px;
+	right: 100px;
+}
+
+/* -------------------------------- */
+
+.relative {
+	position: relative;
+}
+
+#r1 {
+	top: 100px;
+	left: 200px;
+}
+
+/* -------------------------------- */
+
+.fixed {
+	position: fixed;
+	
+	bottom: 200px;
+	right: 150px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="a1" class="box absolute">절대위치 박스 1</div>
+<div id="a2" class="box absolute">절대위치 박스 2</div>
+
+<div id="a3" class="box absolute">
+	<div id="a4" class="box absolute">절대위치 박스 4</div>
+</div>
+
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+안녕하세요<br>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec nisi eros. Nam augue sapien, facilisis eu volutpat egestas, sagittis vel lorem. Vestibulum pharetra, orci vel vestibulum semper, mauris mauris elementum lectus, id suscipit tortor felis sit amet quam. Sed pretium maximus tellus, fermentum semper dolor pulvinar scelerisque. Vestibulum iaculis fermentum tellus, eget ultricies est rutrum ac. Duis semper efficitur tellus nec porta. Integer commodo purus in diam vulputate, at fringilla lacus lacinia. Integer finibus velit dui, nec auctor metus tincidunt ut. Proin a justo eros. Vestibulum massa nisl, maximus et commodo ac, porta non magna. Nam a ante eu est mattis sodales. Integer finibus mauris non ligula convallis consequat. Integer vehicula ultricies turpis ac dignissim. Donec sit amet efficitur enim. Ut interdum mi eu porttitor aliquam.</p>
+
+<p>Nulla sed tortor id ex rutrum posuere. In hac habitasse platea dictumst. Vivamus in vehicula est. Sed non sagittis tortor, non sodales tellus. Duis ultrices metus sed congue maximus. Phasellus felis erat, feugiat ac placerat porttitor, posuere quis sapien. Fusce auctor mi enim. In dignissim vitae enim quis viverra. Donec ut rutrum mauris, at porttitor metus. Suspendisse pellentesque scelerisque facilisis. Nunc gravida mi sed tempus auctor. Ut aliquam elementum tortor.</p>
+
+
+<div id="r1" class="box relative">상대위치 박스</div>
+
+<p>Pellentesque eleifend purus vitae tincidunt rhoncus. Nam facilisis odio in lacus laoreet, sed blandit lorem venenatis. Duis leo arcu, euismod eget sem non, volutpat commodo nunc. Donec non ultrices neque, eu lacinia nisl. Vestibulum eleifend dui ac eros cursus hendrerit. Suspendisse sodales quam ut hendrerit pellentesque. Integer non metus ut ligula tempor commodo sit amet at est. Nulla et arcu non ante tempor suscipit faucibus id lacus. Mauris in ligula at quam aliquet posuere vel ac turpis. Aenean maximus gravida pulvinar. Ut at elementum ante, eu dictum ex. Nullam sagittis lectus a magna pulvinar, a suscipit purus rhoncus. Suspendisse et enim elit.</p>
+
+<div class="relative">
+	<div class="box absolute">
+		상대위치(relative) 부모 태그 안에 생성된 절대위치(absolute) 박스
+	</div>
+</div>
+
+<div class="box fixed">고정위치 박스</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
