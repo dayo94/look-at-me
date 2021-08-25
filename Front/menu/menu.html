@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+/* 메인 메뉴 - 1depth */
+ul.nav {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;	
+}
+
+
+
+ul.nav > li {
+	position: relative;
+	float: left;
+	background: #666;	
+	line-height: 40px;
+	border-right: 1px solid #fff;
+}
+
+
+ul.nav > li > a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: "돋움";
+	padding: 10px 15px;
+	margin: 0 3px;
+}
+
+
+ul.nav > li > a:hover {
+	color: tomato;
+}
+
+ul.nav > li > ul {
+	position: absolute;
+	left: 10px;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	width: 150px;
+}
+
+ul.nav > li > ul > li {
+	background: #999;
+	padding-left: 10px;
+	height: 0; 
+	font-size: 0;
+	line-height: 0; 
+}
+
+
+ul.nav > li:hover > ul > li {
+	height: 40px;
+	font-size: 20px;
+	line-height: 40px;
+}
+
+
+ul.nav > li > ul > li > a {
+	background: #ccc;
+	color: #333;
+	text-decoration: none;
+	display: block;
+}
+
+
+ul.nav > li > ul > li > a:hover {
+	color: #c00;
+	background: #0c0;
+}
+
+</style>
+
+</head>
+<body>
+
+<h1>2Depth 메뉴</h1>
+<hr>
+
+<ul class="nav">
+	<li><a href="#">HOME</a></li>
+	
+	<li>
+		<a href="#">웹개발팀</a>
+		<ul>
+			<li><a href="#">웹디자이너</a>
+			<li><a href="#">웹퍼블리셔</a>
+			<li><a href="#">웹개발자</a>
+			<li><a href="#">웹엔지니어</a>
+		</ul>
+	</li>
+	
+	<li>
+		<a href="#">게시판</a>
+		<ul>
+			<li><a href="#">공지사항</a></li>
+			<li><a href="#">자유게시판</a></li>
+		</ul>
+	</li>
+	
+	<li><a href="#">문의하기</a></li>
+</ul>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
