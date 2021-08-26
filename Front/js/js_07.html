@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+//변수 선언
+var data;
+console.log( data ) //undefined
+
+// console.log( num ) //에러, 선언되지 않은 변수
+
+console.log("----------")
+
+if( data == undefined ) {
+	console.log("data변수가 초기화되지 않았음")
+}
+
+if( data == null ) {
+	console.log("data변수가 null이다")
+	console.log("참조대상이 없다")
+}
+
+console.log("----------")
+
+if( data === undefined ) {
+	console.log("data변수가 초기화되지 않았음")
+}
+
+if( data === null ) {
+	console.log("data변수가 null이다")
+	console.log("참조대상이 없다")
+}
+
+console.log("----------")
+
+if( !data ) { //true
+	console.log("!undefined")
+}
+console.log( !data )
+
+console.log("----------")
+
+if( undefined == false ) { //false
+	console.log("undefined == false")
+}
+
+console.log("----------")
+
+// !부정연산자와 만났을 경우 false 취급하는 데이터들
+
+console.log( !undefined )
+console.log( !null )
+
+console.log( !false )
+console.log( !NaN )
+console.log( !0 )
+console.log( !"" )
+
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
