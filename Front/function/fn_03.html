@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+function hello() {
+	console.log("안녕하세요")
+}
+
+
+function thanks() {
+	console.log("감사해요")
+}
+
+
+function action( fn ) {
+	fn(); //매개변수로 받은 함수를 호출하기
+
+	return fn; //매개변수로 받은 함수를 리턴하기
+}
+
+
+// action(123) 에러, 함수 안쪽에서 전달인자를 함수로 사용중
+
+
+action(hello) //action함수를 이용하여 hello함수 호출하기
+
+action(thanks) //action함수를 이용하여 thanks함수 호출하기
+
+
+var f = action( hello )
+
+f();
+
+
+action( action( action(thanks) ) )()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

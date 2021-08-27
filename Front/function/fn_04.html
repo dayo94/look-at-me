@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+
+//변수의 스코프, Scope
+// ->변수의 유효범위
+// -> 변수가 인식되고 사용될 수 있는 범위
+
+
+//-----------------------------------------------------
+
+//에러, 선언되지 않은 변수를 사용함
+console.log( data )
+
+
+//에러나지 않음
+// -> 변수 선언 코드보다 이전에 변수를 사용해도 에러나지않는다
+
+console.log( num )//undefined
+
+var num = 10;
+
+console.log( num )//10
+
+//js엔진은 코드를 실행하기 전 (정적인 시점)에 선언된 변수를
+// 전부 생성한다
+//단, 초기화는 하지 않는다(undefined상태가 된다)
+
+
+// -> 호이스팅(hoisting)현상
+
+//글로벌 변수, 전역 변수
+// global Scope에 선언된 변수
+// <scripr>태그 내에 곧바로 선언된 변수
+
+var value = 123;
+
+
+
+
+
+
+
+//------------------------------------
+
+//함수 스코프의 변수를 사용할 수 없음
+// 	console.log(func_var)
+
+function func() {
+	//함수 지역 스코프, function scope	
+
+	console.log(value)
+	//에러나지않음(호이스팅)
+	// -> function scope에서 호이스팅
+	console.log(func_var)
+	
+	var func_var = 0;
+}
+
+//함수 호출
+func();
+
+
+
+
+//{} 중괄호블록
+// 블록지역 스코프
+{
+	//실행가능
+	var block_var = 30;
+	console.log (block_var)
+	
+	
+}
+
+	//실행가능
+	//블록스코프는 무시된다
+	console.log (block_var)
+
+
+	
+//{} 중괄호블록
+{
+	let block_let = 40;
+	console.log( block_let )
+}
+
+//에러
+// let변수는 블록스코프에 영향받는다
+//스코프르 조절하는 키워드
+//블록 스코프를 벗어나면 사용할 수 없는 변수
+
+// 	console.log( block_let )
+	
+for (var i = 0; i < 5; i++) {
+	
+}	
+console.log( i )
+	
+/*	
+for (let j = 0; j < 5; j++) {
+	
+}	
+console.log( j )
+*/
+
+
+//let변수도 호이스팅 발생한다
+// -> 변수는 미리 만들어짐
+// -> 하지만 변수 초기화 전에 접근할 수 없도록 해두었다
+// -> 에러발생
+
+// console.log(data2)
+
+let data2 = "clare"
+
+
+
+//var는 덮어쓰기가능
+
+
+var data_var = 10;
+
+var data_var = 20;
+
+
+console.log(data_var)
+
+
+//let은 불가능
+
+
+
+let data_let = 10;
+
+let data_let = 20;
+
+
+console.log(data_let)
+
+
+
+//const 상수 생성 키워드
+
+
+//에러, 선언과 동시에 초기화 필수
+//const data_const;
+
+//에러
+// console.log (data_const)
+const data_const = 60;
+
+console.log(data_const)
+
+
+//에러 대입불가
+// data_const = 70;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
