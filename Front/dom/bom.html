@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+//전역변수
+var data = 123;
+console.log( data );
+
+//전역변수는 window객체에 등록되어있다
+console.log( window.data )
+
+//---------------------------------------------------
+
+//window객체에는 각종 내장함수들이 등록되어있다
+
+//팝업창을 띄우는 함수 - open()
+//	window.open( url, name, option ) : windowid
+
+// open("https://www.naver.com/", "네이버")
+
+// "_self" - 현재창
+// open("https://www.naver.com/", "네이버", "_self")
+
+// "_blank" - 새창
+// open("https://www.naver.com/", "네이버", "_blank")
+
+// open("https://www.naver.com/", "네이버"
+// 		, "width=300,height=200,top=100,left=1500")
+
+//---------------------------------------------------
+
+console.log("--- navigator ---")
+
+//브라우저 + 운영체제의 정보 속성
+console.log(navigator.userAgent)
+
+//언어권 정보, Locale 정보
+console.log(navigator.language)
+
+//브라우저 벤더, 배포 회사
+console.log(navigator.vendor)
+
+
+
+
+
+console.log("--- location ---")
+
+// http://localhost:8088/dom/bom.html
+
+console.log( location.protocol )	//프로토콜
+console.log( location.host )		//도메인주소
+console.log( location.hostname )	//호스트네임
+console.log( location.port )		//포트번호
+console.log( location.pathname )	//자원의 경로
+
+//전체 URL 정보
+console.log( location.href )
+
+//페이지 이동
+// location.href = "/tag/tag_06.html"
+// location.href = "https://www.naver.com"
+
+// location.href속성의 값을 변경하면 현재 보고있는
+//페이지가 이동된다
+//	-> <a>태그의 링크를 클릭한 것과 같은 효과
+//	-> 자바스크립트코드를 이용한 페이지 이동 시 사용한다
+
+
+
+
+
+console.log("--- history ---")
+
+//이전 방문 페이지로 이동
+// history.back()
+
+//다음 방문 페이지로 이동
+// history.forward()
+
+//history.go(n)
+//	n값은 정수
+//	히스토리페이지를 이동할 개수를 지정한다
+
+//	0이면 현재 페이지
+//	양수면 다음 방문 페이지로 가기
+//	음수면 이전 방문 페이지로 가기
+
+//	history.go(-1) == history.back()
+
+
+
+
+
+console.log("--- screen ---")
+
+//브라우저를 최대화했을 때 차지할 수 있는 영역
+//	-> 픽셀값으로 수치가 나온다
+//	-> 작업표시줄(시작메뉴) 40px 높이는 제외된다
+console.log( screen.availWidth )
+console.log( screen.availHeight )
+
+console.log("-----")
+
+//모니터 해상도 크기시작메뉴 무시)
+console.log( screen.width )
+console.log( screen.height )
+
+console.log("-----")
+
+//브라우저의 외곽 크기 -> window객체의 속성이다
+console.log( window.outerWidth )
+console.log( window.outerHeight )
+
+console.log("-----")
+
+//브라우저의 내부 크기 -> window객체의 속성이다
+//	-> <body>태그가 보여지는 곳의 크기
+//	-> 메뉴, 탭, 북마크, 스크롤, 외곽선 등을 제외한 크기
+console.log( window.innerWidth )
+console.log( window.innerHeight )
+
+console.log("-----")
+
+//브라우저의 위치
+//	-> 브라우저의 좌측 상단 지점을 기준으로 한다
+
+//IE9.0이상 브라우저에서 사용 가능
+//Non-IE 브라우저에서 사용 가능
+console.log( window.screenX )
+console.log( window.screenY )
+
+//IE 브라우저에서 사용
+console.log( window.screenLeft )
+console.log( window.screenTop )
+
+
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
