@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+
+//전역변수
+var num = 111;
+
+
+//외부함수 호출
+hello();
+
+//외부함수
+function hello() {
+	
+	//지역변수num이 없다면 전역변수num에 접근한다
+	//지역변수num이 있다면 지역변수num에 호이스팅한다
+	
+	console.log(num)
+	
+	//지역변수
+	var num = 222;
+	console.log("안녕하세요 :", num)
+	
+	//내부함수 호출
+	//-> 먼저써도 함수호출가능
+	inner();
+	
+	//내부함수
+	function inner() {
+		
+		//내부함수의 지역변수
+		var num = 333;
+		console.log("내부함수입니다 :", num)
+	}
+	
+	//내부함수 호출
+	inner();
+	
+	
+}
+
+
+//외부함수 호출
+hello();
+
+//에러, 내부함수를 외부에서 호출할수없다
+// ->함수가 정의된 스코프를 ㅓㅄ어나서 호출할수없다
+//inner();
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

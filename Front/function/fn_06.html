@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+//전역변수
+
+var result
+
+//덧셈함수
+function add(n1, n2) {
+	result = n1 + n2; //전역변수에 덧셈결과 저장
+	
+}
+
+//결과출력함수
+function print() {
+	console.log( result ) //전역변수의 값 출력
+	
+}
+
+
+//덧셈 수행
+add(100,200)
+
+//출력
+print();
+
+
+console.log(result)
+
+
+
+//무결성이 깨지는 경우가 있기때문에 전역변수를 최대한 사용하지않고 지역변수로 처리하는게 좋다
+
+
+console.log("------------------------------")
+		
+//콜백 함수, callback function
+// 직접 호출해서 사용하지 않고 외부의 동작(이벤트처리)에 의해 호출되도록 만들어진 함수
+
+
+function sum(n1,n2,callback) {
+	var res = n1 + n2;
+	
+	callback(res); //콜백함수 호출 (이름걍알아보기쉽게적은거)
+}
+
+//결과값을 console로 출력하는 함수
+function display(data) {
+
+	console.log("결과값 :", data)
+	
+}
+//sum함수 호출
+sum(11,22,display);
+
+
+//결과값을 alert로 출력하는 함수
+function alertResult(data) {
+
+	alert("결과값 :" + data);
+	
+}
+
+//sum함수 호출
+sum(22,33,alertResult);
+
+//콜백으로 사용되는 함수를 다르게 적용하여
+//sum함수의 결과출력 동작을 매번 다르게 적용할 수 있다
+		
+		
+		
+//-------------------------------------
+
+//sum함수 호출 -익명함수를 이용한 전달
+sum(777,888,function( data ){
+	
+	//바디태그에 태그텍스트를 출력한다
+	// ->브라우저 화면에 결과가 보인다
+	document.write("<h1>" + data + "</h1>")
+	
+});
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
