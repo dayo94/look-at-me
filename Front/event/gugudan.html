@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+#n1, #n2 {
+	width: 80px;
+}
+
+#answer {
+	width: 90px;
+}
+
+#correct, #incorrect {
+	width: 100px;
+}
+</style>
+
+<script type="text/javascript">
+window.onload = function() {
+	
+	//구구단 초기화
+	init();
+	
+	//결과확인 버튼에 클릭이벤트 적용하기
+	calc.onclick = play;
+	
+	//정답입력 창에 엔터키 이벤트 등록하기
+	answer.onkeydown = playEnter;
+	
+}
+
+
+
+//엔터키 처리
+function playEnter() {
+//		console.log("answer keydown")
+//		console.log( event ) //현재 발생한 이벤트 객체
+//		console.log( event.keyCode ) //입력한 키코드
+	
+	if( event.keyCode == 13 ) { //엔터키를 입력했을 때
+		play();
+	}
+}
+
+
+
+//구구단 퀴즈 게임 시작
+function play() {
+// 	console.log("calc clicked")
+
+	if( answer.value == '' ) {
+		alert("숫자를 입력하세요!")
+		return;
+	}
+	
+	//정답인지 오답인지 판별
+	if( n1.value * n2.value == answer.value ) {
+		alert("정답입니다!")
+		correct.value++
+	} else {
+		alert("틀렸습니다!")
+		incorrect.value++
+	}
+	
+	init(); //구구단 초기화
+}
+
+
+
+//구구단 퀴즈 초기화
+function init() {
+	n1.value = ran(2, 8); // 2~9
+	n2.value = ran(1, 9); // 1~9
+
+	answer.value = ""; //정답 입력창 지우기
+	answer.focus(); //정답 입력창으로 포커스 이동
+}
+
+
+
+//start부터 시작하는 count개수의 랜덤 생성
+function ran(start, count) {
+	return Math.floor(Math.random()*count) + start;
+}
+
+</script>
+
+</head>
+<body>
+
+<!-- Math.random() 함수 이용하여 숫자 2개 생성 -->
+
+<!-- 사용자 입력 받기 -->
+
+<!-- 결과 비교해서 정답/오답 판단 결과 적용 -->
+
+<h1>구구단 퀴즈</h1>
+<hr>
+
+<input type="number" id="n1" readonly="readonly" /> x
+<input type="number" id="n2" readonly="readonly" /><br><br>
+
+= <input type="number" id="answer" />
+<input type="button" value="결과 확인" id="calc" /><br><br>
+
+정답 횟수 : <input type="number" id="correct" value="0" readonly="readonly" /><br>
+틀린 횟수 : <input type="number" id="incorrect" value="0" readonly="readonly" />
+	
+</body>
+</html>
+
+
+
+
+
+
+
