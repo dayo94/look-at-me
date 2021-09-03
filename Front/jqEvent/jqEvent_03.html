@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- QUIZ -->
+
+<!-- 전송버튼을 클릭하면 입력된 메시지를 alert()로 보여준다 -->
+
+<!-- 추가. -->
+<!-- 	 메시지 입력창에서 엔터키(13)를 누르면
+		#btnSend에 클릭이벤트를 발생시킨다 -->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	//입력창에 focus이벤트 발생시키기 -> 최초 입력위치 조절
+	$("input[name~='msg']").focus();
+	
+	//-------------------------------------------------------
+	
+	$("#btnSend").click(function() {
+		console.log("#btnSend clicked")
+		
+		
+// 		alert("입력 메시지 : " + $("input[name~='msg']").val() )
+// 		$("input[name~='msg']").val("");//input의 입력값 지우기
+// 		$("input[name~='msg']").focus();//input에 포커스 주기
+		
+		
+		//jQuery DOM객체를 변수에 저장하고 사용하기
+// 		var $input = $("input[name~='msg']");
+// 		alert("입력 메시지 : " + $input.val() )
+// 		$input.val("");//input의 입력값 지우기
+// 		$input.focus();//input에 포커스 주기
+		
+		
+		alert("입력 메시지 : " + $(this).prev().val() )
+		$(this).prev().val("");//input의 입력값 지우기
+		$(this).prev().focus();//input에 포커스 주기
+	})
+	
+	//-------------------------------------------------------
+	
+	$("input[name~='msg']").keydown(function( e ) {
+		console.log("keydown")
+		console.log( event.keyCode ) //JS 스타일
+		console.log( e.keyCode ) //jQuery 스타일
+		
+		if( e.keyCode == 13 ) { //엔터키
+			console.log("enter key")
+			
+			//입력값이 없을 때
+			if( $(this).val() == '' ) {
+				alert("[WARNING] 내용을 입력하세요")
+				return;
+			}
+			
+			//#btnSend에 클릭이벤트 발생시키기
+			$("#btnSend").click()
+		}
+	})
+
+	//-------------------------------------------------------
+	
+	$("#btnSend").prop("disabled", true)
+	
+	$("input[name~='msg']").keyup(function() {
+		console.log("keyup", $(this).val())
+		
+		if( $(this).val() == '' ) {
+			$(this).next().prop("disabled", true)
+		} else if( $(this).val() != '' ) {
+			$(this).next().prop("disabled", false)
+		}
+	})
+	
+})
+</script>
+
+</head>
+<body>
+
+<div>
+	<input type="text" name="msg" />
+	<button id="btnSend">전송</button>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

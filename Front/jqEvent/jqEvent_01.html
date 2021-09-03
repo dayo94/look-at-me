@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	//#btnOk 버튼 생성
+	//	-> DOM트리에는 아직 추가되지 않음
+	var $btnOk = $("<button id='btnOk'>확인</button>");
+	
+	//#btnAlert의 클릭 이벤트 처리
+	$("#btnAlert").on("click", function() {
+		console.log("HIHI")
+		
+		//div태그의 첫번째 자식으로 #btnOk 추가
+		$btnOk.prependTo( $("div") )
+		
+		
+		//#btnOk에 클릭 이벤트 처리코드 등록
+// 		$("#btnOk").on("click", function() {
+// 			a lert("btnOk CLICKED")
+// 		})
+		
+		// 이벤트리스너 코드 안에서 다른 이벤트 등록코드를
+		//작성하면 안된다!
+		//	-> 이벤트 코드가 실행될 때마다 다른 이벤트가
+		//	 중첩으로 등록된다
+		
+		//	-> 내부 이벤트 코드가 여러 번 실행됨
+		
+	})
+	
+	//----------------------------------------------------------------
+	
+	//#btnOk에 클릭 이벤트 처리코드 등록
+	//	-> 이벤트 처리코드로 등록되지 않음 (이벤트 처리 안됨)
+	$("#btnOk").on("click", function() {
+		alert("btnOk CLICKED")
+	})
+	
+	//이벤트리스너와 요소노드와 bind되는 시점에 #btnOk요소가 DOM트리에 존재하지 않는다
+	//	-> 페이지 첫 로드 이후에 동적으로 추가되는 요소에는 이벤트리스너가 등록되지 않는다
+	
+	//	-> 동적으로 추가된(생성된) 요소에는 직접 이벤트리스너를 등록하지 않는다
+	
+	//	-> 추가되는 요소의 부모노드에 이벤트를 등록한다
+	//	-> 이벤트를 감지하는 요소로 추가되는 요소를 지정한다
+	
+	//	-> 이벤터리스너의 동적 바인딩
+	
+	//div태그에 click이벤트리스너를 등록한다
+	//실제 이벤트의 동작은 "div #btnOk"에서 반응한다
+	$("div").on("click", "#btnOk", function() {
+		alert("Hello")
+		
+		//#btnAlert의 이벤트 제거
+		$("#btnAlert").off("click")
+	})
+	
+	//----------------------------------------------------------------
+	
+	$("#btnCancel").on("click", function() {
+		console.log("cancel button")
+		
+		
+		//#btnOk의 이벤트가 제거되지 않음
+		$("#btnOk").off("click")
+		
+		//"div #btnOk"에 동적으로 걸린 이벤트 제거
+		$("div").off("click", "#btnOk")
+		
+	})
+	
+})
+</script>
+</head>
+<body>
+
+<div>
+	<button id="btnAlert">알림</button>
+	
+	<button id="btnCancel">확인 이벤트 제거</button>
+</div>
+
+</body>
+</html>
+
+
+
+
