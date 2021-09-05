@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#upload").change(function( e ) {
+		console.log("#upload changed")
+		//----------------------------------------------
+		
+		console.log("--- 이벤트 객체 ---")
+		console.log( e )
+		
+		console.log("--- 이벤트 발생 DOM객체 ---")
+		console.log( e.target )
+		
+		console.log("--- 선택된 파일들 ---")
+		console.log( e.target.files )
+		//----------------------------------------------
+		
+		var files = e.target.files;
+		
+		//이미지만 처리할 수 있도록 적용
+		if( !files[0].type.includes("image") ) {
+			alert("이미지가 아닙니다")
+			
+			//선택한 파일 해제하기
+			e.target.value = null;
+			
+			//이벤트 처리 중단시키기
+			return false;
+		}
+		//----------------------------------------------
+		//FileReader 객체 생성
+		var reader = new FileReader();
+
+		
+		// FileReader가 파일의 내용을 전부 읽어 들인 이후
+		//발생하는 load이벤트 처리
+		reader.onload = function( ev ) {
+			console.log( ev.target.result )
+			
+			//이미지를 선택할 때마다 아래쪽에 추가됨
+// 			$("<img>").attr("src", ev.target.result).appendTo( $("#preview") );
+			
+			//이미지를 선택하면 이전 이미지를 지우고 한 장만 유지됨
+			$("#preview").html(
+				$("<img>").attr({
+					"src": ev.target.result
+					, "width": 300
+					, "height": 200
+				})
+			)
+		}
+		
+		
+// 		reader.readAsText( file ) //파일을 텍스트로 읽어들임
+// 		reader.readAsDataURL( file ) //파일을 DataURL로 읽어들임
+		
+		reader.readAsDataURL( files[0] )
+		
+		console.log( reader )
+		
+		//선택된 파일의 내용 보이지 않는다
+		//	-> 파일의 내용을 불러들이기 전에 console.log가 동작됨
+		console.log( reader.result )
+	})
+})
+</script>
+</head>
+<body>
+
+<input type="file" id="upload" />
+
+<div id="preview"></div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
