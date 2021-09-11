@@ -1,0 +1,21 @@
+ + Project : Member 
+ + Controller
+	controller.MemberController.java - Servlet class
+
+ + Service
+	service.face.MemberService.java - interface
+	service.impl.MemberServiceImpl.java - class
+
+ + DAO
+	dao.face.MemberDao.java - interface
+	dao.impl.MemberDaoImpl.java - class
+
+ + DBUtil
+	common.JDBCTemplate.java - class
+
+ + DTO
+	dto.Member.java - class
+
+ + VIEW
+	/WebContent/WEB-INF/views/member/joinForm.jsp - JSP
+	/WebContent/WEB-INF/views/member/result.jsp - JSP
