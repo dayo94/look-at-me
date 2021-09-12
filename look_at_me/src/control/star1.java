@@ -2,7 +2,7 @@ package control;
 
 import java.util.Scanner;
 
-public class star {
+public class star1 {
 
 	public static void main(String[] args) {
 
