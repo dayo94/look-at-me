@@ -30,16 +30,15 @@ public interface FileDao {
 	 * @param uploadFile - 저장할 파일 정보 DTO객체
 	 * @return 삽입 수행 결과값 (1 -정상삽입, 0 -실패)
 	 */
-	int insertParam(Connection conn, UploadFile uploadFile);
+	int insertFile(Connection conn, UploadFile uploadFile);
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * 파일 정보 테이블 전체 조회
+	 * 
+	 * @param connection - DB연결 객체
+	 * @return 테이블 전체 조회 결과 List
+	 */
+	public List<UploadFile> selectAll(Connection connection);
 
 }

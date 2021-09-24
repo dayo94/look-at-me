@@ -12,7 +12,12 @@ public interface FileService {
 	 */
 	public void fileupload(HttpServletRequest req, HttpServletResponse resp);
 	
-	
+	/**
+	 * 파일 전체 목록을 조회한다
+	 * 
+	 * @return 조회된 전체 파일 목록
+	 */
+	public List<UploadFile> list();	
 	
 	
 	

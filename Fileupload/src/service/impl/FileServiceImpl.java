@@ -361,6 +361,15 @@ public class FileServiceImpl implements FileService {
 		
 		
 	}//fileupload end
+
+
+	@Override
+	public List<UploadFile> list() {
+
+		return fileDao.selectAll(JDBCTemplate.getConnection());
+		
+	}
+
 	
 	
 }//class
