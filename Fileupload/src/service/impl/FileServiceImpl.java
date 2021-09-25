@@ -370,6 +370,21 @@ public class FileServiceImpl implements FileService {
 		
 	}
 
+
+	@Override
+	public void filesave(UploadFile up) {
+		
+		int result = fileDao.insertFile(JDBCTemplate.getConnection(), up);
+
+		if( result > 0 ) {
+			JDBCTemplate.commit(JDBCTemplate.getConnection());
+		} else {
+			JDBCTemplate.rollback(JDBCTemplate.getConnection());
+		}
+		
+	}
+
+
 	
 	
 }//class

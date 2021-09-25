@@ -19,7 +19,12 @@ public interface FileService {
 	 */
 	public List<UploadFile> list();	
 	
-	
+	/**
+	 * 업로드된 파일의 정보를 저장한다
+	 * 
+	 * @param up - 업로드된 파일의 정보 DTO객체
+	 */
+	public void filesave(UploadFile up);
 	
 	
 	
