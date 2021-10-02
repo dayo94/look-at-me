@@ -38,9 +38,22 @@ public class BoardListController extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(req, resp);
 	
 	
+		
+		
+		
+		
+		
+		
 	
 	
 	}
+	
+	
+//	
+//	+ 요청시작 화면 - /board/list : 글 제목 클릭
+//	  - 클릭하면 /board/view로 이동하도록 <a> 추가
+//	   ( "/board/view?boardno=xxx" 형식으로 추가 )
+//	
 	
 	
 
