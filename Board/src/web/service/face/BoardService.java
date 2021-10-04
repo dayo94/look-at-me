@@ -35,5 +35,16 @@ public interface BoardService {
 	 * @return 페이징 계산이 완료된 Paging 객체
 	 */
 	public Paging getPaging(HttpServletRequest req);
+
+
+	/**
+	 * 게시글정보 조회하기
+	 * 주어진 게시글번호를 이용하여 게시글정보를 조회하고 DTO객체로 반환한다
+	 * 
+	 * @param boardno - 조회할 게시글번호
+	 * @return 조회된 게시글정보를 저장한 객체, 없으면 null
+	 */
+	public Board view(int boardno);
+
 	
 }

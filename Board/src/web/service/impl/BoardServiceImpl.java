@@ -53,6 +53,18 @@ public class BoardServiceImpl implements BoardService {
 		return paging;
 	}
 
+	@Override
+	public Board view(int boardno) {
+		
+		//Connection객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Board board = boardDao.selectBoardByBoardno(conn, boardno);
+		
+		return board;
+	}
+
+
 }
 
 
