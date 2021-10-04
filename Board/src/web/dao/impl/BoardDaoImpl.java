@@ -138,79 +138,80 @@ public class BoardDaoImpl implements BoardDao {
 		return count;
 	}
 	
-
 	@Override
-	public Board selectBoardByBoardno(Connection conn, int boardno) {
+	public Board selectBoardByBoardno(Connection conn, Board boardno) {
 		
-		PreparedStatement ps = null; //SQL수행 객체
-		ResultSet rs = null; //결과 집합 객체
-		
-		//--- SQL 작성 ---
+		//SQL 작성
 		String sql = "";
-		sql += "SELECT";
-		sql += " boardno, title, userid, content, hit, write_date";
-		sql += " FROM board ";
+		sql += "SELECT * FROM board";
 		sql += " WHERE boardno = ?";
 		
-		//조회된 결과를 저장할 객체
-		Board res = null;
-		
+		//결과 저장할 Board객체
+		Board viewBoard = null;
 		
 		try {
-			//--- SQL수행 객체 ---
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, boardno);
+			ps = conn.prepareStatement(sql); //SQL수행 객체
 			
-			//--- SQL수행 및 결과 반환 ---
-			rs = ps.executeQuery();
+			ps.setInt(1, boardno.getBoardno()); //조회할 게시글 번호 적용
 			
-			//--- 결과 처리 ---
+			rs = ps.executeQuery(); //SQL 수행 및 결과집합 저장
+			
+			//조회 결과 처리
 			while(rs.next()) {
-				res = new Board();
+				viewBoard = new Board(); //결과값 저장 객체
 				
-				res.setBoardno( rs.getInt("boardno") );
-				res.setTitle( rs.getString("title") );
-				res.setUserid( rs.getString("userid") );
-				res.setContent( rs.getString("content") );
-				res.setHit( rs.getInt("hit") );
-				res.setWriteDate( rs.getDate("write_date") );
+				//결과값 한 행 처리
+				viewBoard.setBoardno( rs.getInt("boardno") );
+				viewBoard.setTitle( rs.getString("title") );
+				viewBoard.setUserid( rs.getString("userid") );
+				viewBoard.setContent( rs.getString("content") );
+				viewBoard.setHit( rs.getInt("hit") );
+				viewBoard.setWriteDate( rs.getDate("write_date") );
+				
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			//--- 자원 해제 ---
+			//DB객체 닫기
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(ps);
 		}
 		
+		//최종 결과 반환
+		return viewBoard;
+	}
 
+	@Override
+	public int updateHit(Connection conn, Board boardno) {
 		
+		//SQL 작성
+		String sql = "";
+		sql += "UPDATE board";
+		sql += " SET hit = hit + 1";
+		sql += " WHERE boardno = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			ps.setInt(1, boardno.getBoardno()); //조회할 게시글 번호 적용
+			
+			res = ps.executeUpdate(); //SQL 수행
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//DB객체 닫기
+			JDBCTemplate.close(ps);
+		}
 		
 		return res;
 	}
-
-
+	
+	
+	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

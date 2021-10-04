@@ -1,5 +1,6 @@
 package web.service.impl;
 
+import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,33 +54,44 @@ public class BoardServiceImpl implements BoardService {
 		return paging;
 	}
 
+	
 	@Override
-	public Board view(int boardno) {
+	public Board getBoardno(HttpServletRequest req) {
 		
-		//Connection객체
+		//boardno를 저장할 객체 생성
+		Board boardno = new Board();
+		
+		//boardno 전달파라미터 검증 - null, ""
+		String param = req.getParameter("boardno");
+		if(param!=null && !"".equals(param)) {
+			
+			//boardno 전달파라미터 추출
+			boardno.setBoardno( Integer.parseInt(param) );
+		}
+		
+		//결과 객체 반환
+		return boardno;
+	}
+
+	@Override
+	public Board view(Board boardno) {
+
 		Connection conn = JDBCTemplate.getConnection();
+
+		//조회수 증가
+		if( boardDao.updateHit(conn, boardno) == 1 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		
-		Board board = boardDao.selectBoardByBoardno(conn, boardno);
+		//게시글 조회
+		Board board = boardDao.selectBoardByBoardno(conn, boardno); 
 		
 		return board;
 	}
-
-
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

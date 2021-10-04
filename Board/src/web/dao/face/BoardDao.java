@@ -33,15 +33,21 @@ public interface BoardDao {
 	 * @return int - Board테이블 전체 행 수 조회 결과
 	 */
 	public int selectCntAll(Connection conn);
+	
+	
+	
+	/**
+	 * 특정 게시글 조회
+	 * 
+	 * @param boardno - 조회할 boardno를 가진 객체
+	 * @return Board - 조회된 결과 객체
+	 */
+	public Board selectBoardByBoardno(Connection conn, Board boardno);
 
 	/**
-	 * 전달된 empno를 이용하여 사원 정보를 조회한다
+	 * 조회된 게시글의 조회수 증가시키기
 	 * 
-	 * @param conn - DB연결 객체
-	 * @param board - 조회할 게시글의 글번호
-	 * @return 조회된 게시글의 정보를 Board객체로 반환한다, 존재하지 않으면 null
+	 * @param boardno - 조회된 게시글 번호를 가진 객체
 	 */
-	public Board selectBoardByBoardno(Connection conn, int board);
-
-	
+	public int updateHit(Connection conn, Board boardno);
 }

@@ -1,3 +1,4 @@
+<%@page import="web.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -5,41 +6,64 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
+<script type="text/javascript">
+$(document).ready(function() {
+	//목록버튼 동작
+	$("#btnList").click(function() {
+		$(location).attr("href", "/board/list");
+	});
+	
+	//수정버튼 동작
+	$("#btnUpdate").click(function() {
+	});
+
+	//삭제버튼 동작
+	$("#btnDelete").click(function() {
+	});
+	
+});
+</script>
+
 <div class="container">
-    
 
-<h1>board 상세보기</h1>
+<h1>게시글 상세보기</h1>
 <hr>
-<table class="table table-striped table-hover table-condensed">
+
+<table class="table table-bordered">
 <tr>
-	<th>글번호</th>
-	<th>제목</th>
-	<th>아이디</th>
-	<th>본문</th>
-	<th>조회수</th>
-	<th>작성일</th>
+<td class="info">글번호</td><td colspan="3">${viewBoard.boardno }</td>
 </tr>
 
 <tr>
-	<td>${board.boardno }</td>
-	<td>${board.title }</td>
-	<td>${board.userid }</td>
-	<td>${board.content }</td>
-	<td>${board.hit }</td>
-	<td>${board.writeDate }</td>
+<td class="info">제목</td><td colspan="3">${viewBoard.title }</td>
 </tr>
+
+<tr>
+<td class="info">아이디</td><td>${viewBoard.userid }</td>
+<td class="info">닉네임</td><td>[ 추후 추가 ]</td>
+</tr>
+
+<tr>
+<td class="info">조회수</td><td>${viewBoard.hit }</td>
+<td class="info">추천수</td><td>[ 추후 추가 ]</td>
+</tr>
+
+<tr>
+<td class="info">작성일</td><td colspan="3">${viewBoard.writeDate }</td>
+</tr>
+
+<tr><td class="info"  colspan="4">본문</td></tr>
+
+<tr><td colspan="4">${viewBoard.content }</td></tr>
 
 </table>
 
+<div class="text-center">	
+	<button id="btnList" class="btn btn-primary">목록</button>
+	<button id="btnUpdate" class="btn btn-info">수정</button>
+	<button id="btnDelete" class="btn btn-danger">삭제</button>
 </div>
 
-<c:import url="/WEB-INF/views/layout/paging.jsp" />
+</div>
 
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
-
-<!--  + View : /WebContent/WEB-INF/views/board/view.jsp -->
-<!--   - 게시글 상세 내용 보여주기 -->
-<!--   - 글번호, 제목, 아이디, 닉네임(추후추가), 본문, 조회수, 추천수(추후추가), 작성일 -->
-
-<!--   - 목록, 수정, 삭제 버튼 만들기 -->
-<!--    (목록만 구현, 나머지는 추후 추가 구현함) -->
