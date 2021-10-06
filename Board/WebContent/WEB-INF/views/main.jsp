@@ -17,7 +17,7 @@
 </c:if>
 
 <!-- 로그인상태 -->
-<c:if test="${login }">
+<c:if test="${not empty login and login }">
 	<strong>${usernick }님, 환영합니다</strong><br>
 	<button onclick='location.href="/board/list";'>게시판 가기</button>
 	<button onclick='location.href="/member/logout";'>로그아웃</button>

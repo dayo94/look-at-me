@@ -36,7 +36,6 @@ public interface BoardService {
 	 */
 	public Paging getPaging(HttpServletRequest req);
 	
-	
 	/**
 	 * 요청파라미터 얻기
 	 * 
@@ -54,4 +53,23 @@ public interface BoardService {
 	 */
 	public Board view(Board boardno);
 	
+	/**
+	 * Board 객체의 id 를 이용한 닉네임 조회
+	 * 
+	 * @param viewBoard - 조회할 게시글 정보
+	 * @return String - 게시글 작성자의 닉네임
+	 */
+	public String getNick(Board viewBoard);
+	
+	/**
+	 * 게시글 작성
+	 * 	입력한 게시글 내용을 DB에 저장
+	 * 
+	 *  [ 추가 예정 ] 첨부파일을 함께 업로드 할 수 있도록 처리
+	 * 
+	 * @param req - 요청정보 객체(게시글내용 + 첨부파일)
+	 * 
+	 */
+	public void write(HttpServletRequest req);
+
 }

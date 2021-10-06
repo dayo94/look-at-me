@@ -210,8 +210,88 @@ public class BoardDaoImpl implements BoardDao {
 		return res;
 	}
 	
+	@Override
+	public String selectNickByUserid(Connection conn, Board viewBoard) {
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT usernick FROM member";
+		sql += " WHERE userid = ?";
+		
+		//결과 저장할 String 변수
+		String usernick = null;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, viewBoard.getUserid()); //조회할 id 적용
+			
+			rs = ps.executeQuery(); //SQL 수행 및 결과집합 저장
+			
+			//조회 결과 처리
+			while(rs.next()) {
+				usernick = rs.getString("usernick");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		//최종 결과 반환
+		return usernick;
+		
+	}
 	
-	
-	
+	@Override
+	public int insert(Connection conn, Board board) {
+		
+		//다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "INSERT INTO board(BOARDNO, TITLE, USERID, CONTENT, HIT)";
+		sql += " VALUES (board_seq.nextval, ?, ?, ?, 0)";
+		
+		int res = 0;
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, board.getTitle());
+			ps.setString(2, board.getUserid());
+			ps.setString(3, board.getContent());
+
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

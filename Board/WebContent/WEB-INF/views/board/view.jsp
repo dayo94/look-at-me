@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 <tr>
 <td class="info">아이디</td><td>${viewBoard.userid }</td>
-<td class="info">닉네임</td><td>[ 추후 추가 ]</td>
+<td class="info">닉네임</td><td>${nick }</td>
 </tr>
 
 <tr>

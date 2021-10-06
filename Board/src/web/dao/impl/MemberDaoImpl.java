@@ -115,13 +115,8 @@ public class MemberDaoImpl implements MemberDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				//DB객체 닫기
-				if(ps!=null)	ps.close();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			//DB객체 닫기
+			JDBCTemplate.close(ps);
 		}
 		
 		return res;

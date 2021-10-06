@@ -54,7 +54,6 @@ public class BoardServiceImpl implements BoardService {
 		return paging;
 	}
 
-	
 	@Override
 	public Board getBoardno(HttpServletRequest req) {
 		
@@ -90,10 +89,34 @@ public class BoardServiceImpl implements BoardService {
 		
 		return board;
 	}
-	
+
+	@Override
+	public String getNick(Board viewBoard) {
+		return boardDao.selectNickByUserid(JDBCTemplate.getConnection(), viewBoard);
+	}
+
+	@Override
+	public void write(HttpServletRequest req) {
+		
+		Board board = new Board();
+
+		board.setTitle( req.getParameter("title") );
+		board.setContent( req.getParameter("content") );
+
+		//작성자id 처리
+		board.setUserid((String) req.getSession().getAttribute("userid"));
+
+		if(board.getTitle()==null || "".equals(board.getTitle())) {
+			board.setTitle("(제목없음)");
+		}
+
+		Connection conn = JDBCTemplate.getConnection();
+		if( boardDao.insert(conn, board) > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	}
+
 }
-
-
-
-
 

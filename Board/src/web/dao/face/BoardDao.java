@@ -34,8 +34,6 @@ public interface BoardDao {
 	 */
 	public int selectCntAll(Connection conn);
 	
-	
-	
 	/**
 	 * 특정 게시글 조회
 	 * 
@@ -50,4 +48,20 @@ public interface BoardDao {
 	 * @param boardno - 조회된 게시글 번호를 가진 객체
 	 */
 	public int updateHit(Connection conn, Board boardno);
+
+	/**
+	 * id를 이용해 nick을 조회한다
+	 * 
+	 * @param viewBoard - 조회할 id를 가진 객체
+	 * @return String - 작성자 닉네임
+	 */
+	public String selectNickByUserid(Connection conn, Board viewBoard);
+	
+	/**
+	 * 게시글 입력
+	 * 
+	 * @param board - 삽입될 게시글 내용
+	 */
+	public int insert(Connection conn, Board board);
+
 }

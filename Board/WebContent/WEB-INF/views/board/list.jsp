@@ -5,6 +5,17 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	//글쓰기 버튼 누르면 이동
+	$("#btnWrite").click(function() {
+		location.href="/board/write";
+	});
+	
+});
+</script>
+
 <div class="container">
 
 <h1>게시글 목록</h1>
@@ -22,7 +33,11 @@
 <c:forEach items="${boardList }" var="board">
 <tr>
 	<td>${board.boardno }</td>
-	<td>${board.title }</td>
+	<td>
+		<a href="/board/view?boardno=${board.boardno }">
+		${board.title }
+		</a>
+	</td>
 	<td>${board.userid }</td>
 	<td>${board.hit }</td>
 	<td>${board.writeDate }</td>
@@ -31,6 +46,11 @@
 
 </table>
 
+<div id="btnBox" class="pull-left">
+	<button id="btnWrite" class="btn btn-primary">글쓰기</button>
+</div>
+
+<!-- .container -->
 </div>
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
