@@ -316,6 +316,29 @@ public class BoardServiceImpl implements BoardService {
 	public BoardFile viewFile(Board viewBoard) {
 		return boardDao.selectFile(JDBCTemplate.getConnection(), viewBoard);
 	}
+
+	@Override
+	public void delete(Board board) {
+		
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		boardDao.delete(conn, board);
+		
+	}
+		
+		
+	
+	@Override
+	public void delete(BoardFile board) {
+
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		boardFileDao.delete(conn, board);
+		
+	}
+
 }
 
 

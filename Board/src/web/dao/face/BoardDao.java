@@ -93,6 +93,13 @@ public interface BoardDao {
 	 */
 	public BoardFile selectFile(Connection conn, Board viewBoard);
 
+	/**
+	 * 
+	 * @param board - 삭제할 게시글
+	 */
+	public void delete(Connection conn,Board board);
+
+
 }
 
 
