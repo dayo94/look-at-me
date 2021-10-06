@@ -58,6 +58,13 @@ $(document).ready(function() {
 
 </table>
 
+<!-- 첨부파일 -->
+<div>
+<c:if test="${not empty boardFile }">
+<a href="/upload/${boardFile.storedname }" download="${boardFile.originname }">${boardFile.originname }</a>
+</c:if>
+</div>
+
 <div class="text-center">	
 	<button id="btnList" class="btn btn-primary">목록</button>
 	<button id="btnUpdate" class="btn btn-info">수정</button>

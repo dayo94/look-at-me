@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import oracle.net.aso.p;
 import web.common.JDBCTemplate;
 import web.dao.face.BoardDao;
 import web.dto.Board;
+import web.dto.BoardFile;
 import web.util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
@@ -251,16 +253,24 @@ public class BoardDaoImpl implements BoardDao {
 		//다음 게시글 번호 조회 쿼리
 		String sql = "";
 		sql += "INSERT INTO board(BOARDNO, TITLE, USERID, CONTENT, HIT)";
-		sql += " VALUES (board_seq.nextval, ?, ?, ?, 0)";
+		sql += " VALUES (?, ?, ?, ?, 0)";
+		
+//		sql += " VALUES (board_seq.nextval, ?, ?, ?, 0)";
 		
 		int res = 0;
 		
 		try {
 			//DB작업
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, board.getTitle());
-			ps.setString(2, board.getUserid());
-			ps.setString(3, board.getContent());
+			
+			ps.setInt(1, board.getBoardno());
+			ps.setString(2, board.getTitle());
+			ps.setString(3, board.getUserid());
+			ps.setString(4, board.getContent());
+			
+//			ps.setString(1, board.getTitle());
+//			ps.setString(2, board.getUserid());
+//			ps.setString(3, board.getContent());
 
 			res = ps.executeUpdate();
 			
@@ -273,6 +283,99 @@ public class BoardDaoImpl implements BoardDao {
 		return res;
 	}
 
+	@Override
+	public int selectNextBoardno(Connection conn) {
+		
+		String sql = "";
+		sql += "SELECT board_seq.nextval FROM dual";
+		
+		//결과 저장 변수
+		int nextBoardno = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				nextBoardno = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return nextBoardno;
+	}
+	
+	@Override
+	public int insertFile(Connection conn, BoardFile boardFile) {
+
+		String sql = "";
+		sql += "INSERT INTO boardfile( fileno, boardno, originname, storedname, filesize )";
+		sql += " VALUES( boardfile_seq.nextval, ?, ?, ?, ? )";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, boardFile.getBoardno());
+			ps.setString(2, boardFile.getOriginname());
+			ps.setString(3, boardFile.getStoredname());
+			ps.setInt(4, boardFile.getFilesize());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public BoardFile selectFile(Connection conn, Board viewBoard) {
+		
+		String sql = "";
+		sql += "SELECT * FROM boardfile";
+		sql += " WHERE boardno = ?";
+
+		BoardFile boardFile = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, viewBoard.getBoardno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				boardFile = new BoardFile();
+				
+				boardFile.setFileno( rs.getInt("fileno") );
+				boardFile.setBoardno( rs.getInt("boardno") );
+				boardFile.setOriginname( rs.getString("originname") );
+				boardFile.setStoredname( rs.getString("storedname") );
+				boardFile.setFilesize( rs.getInt("filesize") );
+				boardFile.setWrite_date( rs.getDate("write_date") );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+				
+		return boardFile;
+	}
+	
 }
 
 

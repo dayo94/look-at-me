@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import web.dto.Board;
+import web.dto.BoardFile;
 import web.util.Paging;
 
 public interface BoardDao {
@@ -64,4 +65,49 @@ public interface BoardDao {
 	 */
 	public int insert(Connection conn, Board board);
 
+	/**
+	 * 다음 게시글 번호 조회
+	 * 
+	 * 	게시글 테이블과 첨부파일 테이블에 입력될 공통 boardno값을 시퀀스를 통해 조회한다
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return 다음 게시글 번호
+	 */
+	public int selectNextBoardno(Connection conn);
+
+	/**
+	 * 첨부파일 입력
+	 * 
+	 * @param conn - DB연결 객체
+	 * @param boardFile - 첨부파일 정보
+	 * @return 삽입 결과
+	 */
+	public int insertFile(Connection conn, BoardFile boardFile);
+
+	/**
+	 * 첨부파일 조회
+	 * 
+	 * @param connection - DB연결 객체
+	 * @param viewBoard - 첨부파일을 조회할 게시글번호 객체
+	 * @return BoardFile - 조회된 첨부파일
+	 */
+	public BoardFile selectFile(Connection conn, Board viewBoard);
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -33,7 +33,7 @@ $(document).ready(function() {
 <hr>
 
 <div>
-<form action="/board/write" method="post">
+<form action="/board/write" method="post" enctype="multipart/form-data">
 
 <table class="table table-bordered">
 <tr><td class="info">아이디</td><td>${userid }</td></tr>
@@ -42,6 +42,8 @@ $(document).ready(function() {
 <tr><td class="info" colspan="2">본문</td></tr>
 <tr><td colspan="2"><textarea id="content" name="content"></textarea></td></tr>
 </table>
+
+첨부파일 <input type="file" name="file" />
 
 </form>
 </div>

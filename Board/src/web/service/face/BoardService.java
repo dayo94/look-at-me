@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import web.dto.Board;
+import web.dto.BoardFile;
 import web.util.Paging;
 
 public interface BoardService {
@@ -72,4 +73,27 @@ public interface BoardService {
 	 */
 	public void write(HttpServletRequest req);
 
+	/**
+	 * 첨부파일 정보 조회
+	 * 
+	 * @param viewBoard - 첨부파일과 연결된 게시글번호를 포함한 DTO객체
+	 * @return BoardFile - 첨부파일 정보 DTO객체
+	 */
+	public BoardFile viewFile(Board viewBoard);
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
