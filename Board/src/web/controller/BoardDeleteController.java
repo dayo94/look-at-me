@@ -13,42 +13,23 @@ import web.dto.BoardFile;
 import web.service.face.BoardService;
 import web.service.impl.BoardServiceImpl;
 
-/**
- * Servlet implementation class BoardDeleteController
- */
 @WebServlet("/board/delete")
 public class BoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	//BoardService 객체
+
+	//BoardService 객체 생성
 	private BoardService boardService = new BoardServiceImpl();
 	
-	
 	@Override
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		Board board = boardService.getBoardno(req);
 		
-		//전달파라미터 얻기 - boardno
-		Board boardno = boardService.getBoardno(req);
+		boardService.delete(board);
 		
-		BoardFile boardFile = new BoardFile();
-		
-		boardFile.setBoardno(boardno.getBoardno());
-				
-		System.out.println(boardno);
-		System.out.println(boardFile);
-		
-		boardService.delete(boardno);
-		boardService.delete(boardFile);
+		//목록으로 리다이렉트
+		resp.sendRedirect("/board/list");	
 
-		
-		
-		
-		
-		//목록으로 리다이렉션
-		resp.sendRedirect("/board/list");
 	}
 	
-	
-
 }

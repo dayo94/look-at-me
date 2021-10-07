@@ -94,25 +94,27 @@ public interface BoardDao {
 	public BoardFile selectFile(Connection conn, Board viewBoard);
 
 	/**
+	 * 게시글 수정 
 	 * 
-	 * @param board - 삭제할 게시글
+	 * @param board - 수정할 내용을 담은 객체
 	 */
-	public void delete(Connection conn,Board board);
+	public int update(Connection conn, Board board);
 
+	/**
+	 * 게시글 삭제
+	 * 
+	 * @param board - 삭제할 게시글번호를 담은 객체
+	 */
+	public int delete(Connection conn, Board board);
+	
+	/**
+	 * 게시글에 첨부된 파일 기록 삭제
+	 * 
+	 * @param board - 삭제할 게시글번호를 담은 객체
+	 */
+	public int deleteFile(Connection conn, Board board);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

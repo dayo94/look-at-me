@@ -1,4 +1,3 @@
-<%@page import="web.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -15,11 +14,14 @@ $(document).ready(function() {
 	
 	//수정버튼 동작
 	$("#btnUpdate").click(function() {
+		$(location).attr("href", "/board/update?boardno=${viewBoard.boardno }");
 	});
 
 	//삭제버튼 동작
 	$("#btnDelete").click(function() {
-		$(location).attr("href","/board/delete?boardno=${viewBoard.boardno }");
+		if( confirm("게시글을 삭제하시겠습니까?") ) {
+			$(location).attr("href", "/board/delete?boardno=${viewBoard.boardno }");
+		}
 	});
 	
 });

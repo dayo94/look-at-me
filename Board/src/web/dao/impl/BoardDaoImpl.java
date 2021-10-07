@@ -345,6 +345,7 @@ public class BoardDaoImpl implements BoardDao {
 		String sql = "";
 		sql += "SELECT * FROM boardfile";
 		sql += " WHERE boardno = ?";
+		sql += " ORDER BY fileno";
 
 		BoardFile boardFile = null;
 		
@@ -375,50 +376,102 @@ public class BoardDaoImpl implements BoardDao {
 				
 		return boardFile;
 	}
-
+	
 	@Override
-	public void delete(Connection conn, Board board) {
-
+	public int update(Connection conn, Board board) {
 		
+		//다음 게시글 번호 조회 쿼리
 		String sql = "";
-		sql += "DELETE FROM board WHERE boardno = ?";
+		sql += "UPDATE board";
+		sql += " SET title = ?,";
+		sql += " 	content = ?";
+		sql += " WHERE boardno = ?";
+		
+		//DB 객체
+		PreparedStatement ps = null; 
+		
+		int res = -1;
 		
 		try {
 			//DB작업
 			ps = conn.prepareStatement(sql);
-			
-			ps.setInt(1, board.getBoardno());
+			ps.setString(1, board.getTitle());
+			ps.setString(2, board.getContent());
+			ps.setInt(3, board.getBoardno());
 
-			ps.executeUpdate();
+			res = ps.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		} finally {
 			JDBCTemplate.close(ps);
 		}
 		
+		return res;
 	}
 
+	@Override
+	public int delete(Connection conn, Board board) {
+		
+		//다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "DELETE board";
+		sql += " WHERE boardno = ?";
+		
+		//DB 객체
+		PreparedStatement ps = null; 
+		
+		int res = -1;
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board.getBoardno());
 
-
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
 	
+	@Override
+	public int deleteFile(Connection conn, Board board) {
+		
+		//다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "DELETE boardfile";
+		sql += " WHERE boardno = ?";
+		
+		//DB 객체
+		PreparedStatement ps = null; 
+		
+		int res = -1;
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board.getBoardno());
+
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

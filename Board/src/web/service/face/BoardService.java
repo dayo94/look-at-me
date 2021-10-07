@@ -81,34 +81,21 @@ public interface BoardService {
 	 */
 	public BoardFile viewFile(Board viewBoard);
 
+	/**
+	 * 게시글 수정
+	 * 
+	 * @param req - 요청 정보 객체
+	 */
+	public void update(HttpServletRequest req);
 
 	/**
+	 * 게시글 삭제
 	 * 
-	 * @param board - 삭제할 게시글
+	 * @param board - 삭제할 게시글 번호를 가진 객체
 	 */
 	public void delete(Board board);
-	
-	
-	/**
-	 * 
-	 * @param board - 삭제할 첨부파일
-	 */
-	public void delete(BoardFile board);
-
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
