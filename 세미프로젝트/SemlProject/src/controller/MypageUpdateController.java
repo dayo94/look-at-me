@@ -50,6 +50,8 @@ public class MypageUpdateController extends HttpServlet {
 
 		int user_no = userInfo.getUser_no();
 		
+		System.out.println(user_no);
+		
 		
 		User_info user_info = mypageService.getUserInfo(user_no);
 		System.out.println(user_info);

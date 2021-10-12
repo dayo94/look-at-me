@@ -8,16 +8,17 @@ public class User_info {// implements Serializable {
 	private int user_no;
 	private String user_email;
 	private String user_password;
-	private String user_nickname;
 	private int user_point;
 	private String user_name;
 	private Date user_birth;
+	private String user_check; 
+	private String user_nickname;
 	
 	@Override
 	public String toString() {
 		return "User_info [user_no=" + user_no + ", user_email=" + user_email + ", user_password=" + user_password
-				+ ", user_nickname=" + user_nickname + ", user_point=" + user_point + ", user_name=" + user_name
-				+ ", user_birth=" + user_birth + "]";
+				+ ", user_point=" + user_point + ", user_name=" + user_name + ", user_birth=" + user_birth
+				+ ", user_check=" + user_check + ", user_nickname=" + user_nickname + "]";
 	}
 
 	public int getUser_no() {
@@ -44,14 +45,6 @@ public class User_info {// implements Serializable {
 		this.user_password = user_password;
 	}
 
-	public String getUser_nickname() {
-		return user_nickname;
-	}
-
-	public void setUser_nickname(String user_nickname) {
-		this.user_nickname = user_nickname;
-	}
-
 	public int getUser_point() {
 		return user_point;
 	}
@@ -76,6 +69,23 @@ public class User_info {// implements Serializable {
 		this.user_birth = user_birth;
 	}
 
+	public String getUser_check() {
+		return user_check;
+	}
+
+	public void setUser_check(String user_check) {
+		this.user_check = user_check;
+	}
+
+	public String getUser_nickname() {
+		return user_nickname;
+	}
+
+	public void setUser_nickname(String user_nickname) {
+		this.user_nickname = user_nickname;
+	}
+	
+	
 
 	
 

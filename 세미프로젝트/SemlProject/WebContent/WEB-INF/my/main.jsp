@@ -108,7 +108,7 @@ ul {
 						<a href="/board/list">내가 쓴 게시글</a>
 					</p>
 					<p>
-						<a href="">내가 쓴 댓글</a>
+						<a href="/reply/list">내가 쓴 댓글</a>
 					</p>
 				</li>
 				<li>

@@ -12,12 +12,12 @@
 </head>
 <body>
 
-<h1>게시글 목록</h1>
+<h1>내가 쓴 글</h1>
 <hr>
 
 <table>
+<h4>커스텀게시판</h4>
 <tr>
-	<th>게시판코드</th>
 	<th>글번호</th>
 	<th>글제목</th>
 	<th>작성일</th>
@@ -27,7 +27,6 @@
 
 <c:forEach items="${customBoardList }" var="custom">
 <tr>
-	<td>${custom.board_type }</td>
 	<td>${custom.custom_board_no }</td>
 	<td>${custom.custom_board_title }</td>
 	<td>${custom.custom_board_date }</td>
@@ -35,9 +34,18 @@
 	<td>${custom.custom_board_vote }</td>
 </tr>
 </c:forEach>
+
+<table>
+<h4>자유게시판</h4>
+<tr>
+	<th>글번호</th>
+	<th>글제목</th>
+	<th>작성일</th>
+	<th>조회수</th>
+	<th>추천수</th>
+</tr>
 <c:forEach items="${freeBoardList }" var="free">
 <tr>
-	<td>${free.board_type }</td>
 	<td>${free.free_board_no }</td>
 	<td>${free.free_board_title }</td>
 	<td>${free.free_board_date }</td>

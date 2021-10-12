@@ -33,20 +33,18 @@ public class MypageBoardListController extends HttpServlet {
 		User_info user_info = (User_info) session.getAttribute("user_info");
 
 		int user_no = user_info.getUser_no();
-		
-		
-		 List<Custom_board> customBoardList = mypageService.selectAll(user_no);
-		
+
+		List<Custom_board> customBoardList = mypageService.customBoardSelectAll(user_no);
+
 		System.out.println(customBoardList);
-		
+
 		session.setAttribute("customBoardList", customBoardList);
-		
-		List<Free_board> freeBoardList = mypageService.selectAll2(user_no);
-		
+
+		List<Free_board> freeBoardList = mypageService.freeBoardSelectAll(user_no);
+
 		System.out.println(freeBoardList);
-		
+
 		session.setAttribute("freeBoardList", freeBoardList);
-		
 
 		req.getRequestDispatcher("/WEB-INF/my/writeList.jsp").forward(req, resp);
 

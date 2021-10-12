@@ -25,26 +25,7 @@ $(document).ready(function() {
 </head>
 <body>
 
-<table>
-<tr>
-	<th>이메일</th>
-	<th>비밀번호</th>
-	<th>닉네임</th>
-	<th>포인트</th>
-	<th>이름</th>
-	<th>생년월일</th>
-</tr>
 
-<tr>
-	<td>${user_info.user_email }	</td>
-	<td>${user_info.user_password }</td>
-	<td>${user_info.user_nickname }</td>
-	<td>${user_info.user_point }</td>
-	<td>${user_info.user_name }</td>
-	<td>${user_info.user_birth }</td>
-</tr>
-
-</table>
 
 <form action="/update" method="post" enctype="multipart/form-data">
 <input type="hidden" name="user_no" value="${user_info.user_no }" />

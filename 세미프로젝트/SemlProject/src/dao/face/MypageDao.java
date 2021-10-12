@@ -5,7 +5,10 @@ import java.util.List;
 
 import dto.Attachment_profile;
 import dto.Custom_board;
+import dto.Custom_reply;
 import dto.Free_board;
+import dto.Free_board_reply;
+import dto.Official_reply;
 import dto.User_info;
 
 
@@ -175,8 +178,29 @@ public interface MypageDao {
 	
 	
 	
+	/**
+	 * 내가쓴 댓글 조회
+	 * 
+	 * @param user_no - 조회할 user_no를 가진 객체
+	 * @return Free_board_reply - 조회된 결과 객체
+	 */
+	public List<Free_board_reply> freeBoardReplyByUserno(Connection conn, int user_no);
 	
+	/**
+	 * 내가쓴 댓글 조회
+	 * 
+	 * @param user_no - 조회할 user_no를 가진 객체
+	 * @return custom_reply - 조회된 결과 객체
+	 */
+	public List<Custom_reply> customReplyByUserno(Connection conn, int user_no);
 	
+	/**
+	 * 내가쓴 댓글 조회
+	 * 
+	 * @param user_no - 조회할 user_no를 가진 객체
+	 * @return official_reply - 조회된 결과 객체
+	 */
+	public List<Official_reply> officialReplyByUserno(Connection conn, int user_no);
 	
 	
 	

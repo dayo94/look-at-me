@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.Attachment_profile;
 import dto.Custom_board;
+import dto.Custom_reply;
 import dto.Free_board;
+import dto.Free_board_reply;
+import dto.Official_reply;
 import dto.User_info;
 
 
@@ -101,7 +104,7 @@ public interface MypageService {
 	 * @param conn - DB연결 객체
 	 * @return List<Custom_board> - Custom_board테이블 전체 조회 결과 리스트
 	 */
-	public List<Custom_board> selectAll(int user_no);
+	public List<Custom_board> customBoardSelectAll(int user_no);
 	
 	
 	/**
@@ -110,7 +113,36 @@ public interface MypageService {
 	 * @param conn - DB연결 객체
 	 * @return List<Free_board> - Free_board테이블 전체 조회 결과 리스트
 	 */
-	public List<Free_board> selectAll2(int user_no);
+	public List<Free_board> freeBoardSelectAll(int user_no);
+	
+	
+	/**
+	 * Free_board_reply테이블 전체 조회
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return List<Free_board_reply> - Free_board_reply테이블 전체 조회 결과 리스트
+	 */
+	public List<Free_board_reply> freeBoardReplySelectAll(int user_no);
+	
+	/**
+	 * Custom_reply테이블 전체 조회
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return List<Custom_reply> - Custom_reply테이블 전체 조회 결과 리스트
+	 */
+	public List<Custom_reply> customReplySelectAll(int user_no);
+	
+	
+	/**
+	 * Official_reply테이블 전체 조회
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return List<Official_reply> - Official_reply테이블 전체 조회 결과 리스트
+	 */
+	public List<Official_reply> officialReplySelectAll(int user_no);
+	
+	
+	
 	
 	
 }

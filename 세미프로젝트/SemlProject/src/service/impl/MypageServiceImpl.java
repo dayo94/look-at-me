@@ -19,7 +19,10 @@ import dao.face.MypageDao;
 import dao.impl.MypageDaoImpl;
 import dto.Attachment_profile;
 import dto.Custom_board;
+import dto.Custom_reply;
 import dto.Free_board;
+import dto.Free_board_reply;
+import dto.Official_reply;
 import dto.User_info;
 import service.face.MypageService;
 
@@ -243,15 +246,34 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<Custom_board> selectAll(int user_no) {
+	public List<Custom_board> customBoardSelectAll(int user_no) {
 		return mypageDao.customBoardByUserno(JDBCTemplate.getConnection(), user_no);
 	}
 
 	
 	@Override
-	public List<Free_board> selectAll2(int user_no) {
+	public List<Free_board> freeBoardSelectAll(int user_no) {
 		return mypageDao.freeBoardByUserno(JDBCTemplate.getConnection(), user_no);
 	}
+	
+	
+	
+	
+	@Override
+	public List<Custom_reply> customReplySelectAll(int user_no) {
+		return mypageDao.customReplyByUserno(JDBCTemplate.getConnection(), user_no);
+	}
+	
+	@Override
+	public List<Free_board_reply> freeBoardReplySelectAll(int user_no) {
+		return mypageDao.freeBoardReplyByUserno(JDBCTemplate.getConnection(), user_no);
+	}
+	
+	@Override
+	public List<Official_reply> officialReplySelectAll(int user_no) {
+		return mypageDao.officialReplyByUserno(JDBCTemplate.getConnection(), user_no);
+	}
+	
 	
 	
 	
@@ -350,6 +372,8 @@ public class MypageServiceImpl implements MypageService {
 				File upFolder = new File(req.getServletContext().getRealPath("upload"));
 				upFolder.mkdir(); // 폴더 생성
 
+
+				
 				// 업로드 파일 객체
 				String origin = item.getName(); // 원본파일명
 //				String stored = origin + "_" + uid; // 원본파일명_uid
@@ -380,26 +404,57 @@ public class MypageServiceImpl implements MypageService {
 			}
 		}
 
-		if (attachment_profile != null) {
+		if (attachment_profile == null) {
 
-			attachment_profile.setProfile_no(mypageDao.getNextProfileNo(conn));
+//			attachment_profile.setProfile_no(mypageDao.getNextProfileNo(conn));
 
 			if (mypageDao.insertFile(conn, attachment_profile) > 0) {
 				JDBCTemplate.commit(conn);
 			} else {
 				JDBCTemplate.rollback(conn);
 			}
-
+		}
+		if (attachment_profile != null) {
+			
 			if (mypageDao.updateProfile(conn, user_info, attachment_profile) > 0) {
 				JDBCTemplate.commit(conn);
 			} else {
 				JDBCTemplate.rollback(conn);
 			}
 
+		
 		}
 
 	}
 	
+	
+	
+	
+	
+//	
+//	
+//	
+//	if (attachment_profile != null) {
+//
+//		attachment_profile.setProfile_no(mypageDao.getNextProfileNo(conn));
+//
+//		if (mypageDao.insertFile(conn, attachment_profile) > 0) {
+//			JDBCTemplate.commit(conn);
+//		} else {
+//			JDBCTemplate.rollback(conn);
+//		}
+//
+//		if (mypageDao.updateProfile(conn, user_info, attachment_profile) > 0) {
+//			JDBCTemplate.commit(conn);
+//		} else {
+//			JDBCTemplate.rollback(conn);
+//		}
+//
+//	}
+//
+//}
+
+
 	
 	
 	

@@ -11,7 +11,10 @@ import common.JDBCTemplate;
 import dao.face.MypageDao;
 import dto.Attachment_profile;
 import dto.Custom_board;
+import dto.Custom_reply;
 import dto.Free_board;
+import dto.Free_board_reply;
+import dto.Official_reply;
 import dto.User_info;
 
 public class MypageDaoImpl implements MypageDao {
@@ -43,10 +46,11 @@ public class MypageDaoImpl implements MypageDao {
 				info.setUser_no(rs.getInt("user_no"));
 				info.setUser_email(rs.getString("user_email"));
 				info.setUser_password(rs.getString("user_password"));
-				info.setUser_nickname(rs.getString("user_nickname"));
 				info.setUser_point(rs.getInt("user_point"));
 				info.setUser_name(rs.getString("user_name"));
 				info.setUser_birth(rs.getDate("user_birth"));
+				info.setUser_check(rs.getString("user_check"));
+				info.setUser_nickname(rs.getString("user_nickname"));
 
 				// 리스트에 결과값 저장
 				user_info.add(info);
@@ -130,10 +134,11 @@ public class MypageDaoImpl implements MypageDao {
 				result.setUser_no(rs.getInt("user_no"));
 				result.setUser_email(rs.getString("user_email"));
 				result.setUser_password(rs.getString("user_password"));
-				result.setUser_nickname(rs.getString("user_nickname"));
 				result.setUser_point(rs.getInt("user_point"));
 				result.setUser_name(rs.getString("user_name"));
 				result.setUser_birth(rs.getDate("user_birth"));
+				result.setUser_check(rs.getString("user_check"));
+				result.setUser_nickname(rs.getString("user_nickname"));
 			}
 
 		} catch (SQLException e) {
@@ -331,10 +336,11 @@ public class MypageDaoImpl implements MypageDao {
 				result.setUser_no(rs.getInt("user_no"));
 				result.setUser_email(rs.getString("user_email"));
 //				result.setUser_password(rs.getString("user_password"));
-				result.setUser_nickname(rs.getString("user_nickname"));
 				result.setUser_point(rs.getInt("user_point"));
 				result.setUser_name(rs.getString("user_name"));
 				result.setUser_birth(rs.getDate("user_birth"));
+				result.setUser_check(rs.getString("user_check"));
+				result.setUser_nickname(rs.getString("user_nickname"));
 			}
 
 		} catch (SQLException e) {
@@ -376,9 +382,7 @@ public class MypageDaoImpl implements MypageDao {
 
 				// 결과값 한 행 처리
 				viewBoard.setCustom_board_no(rs.getInt("custom_board_no"));
-				viewBoard.setBoard_type(rs.getString("board_type"));
 				viewBoard.setUser_no(rs.getInt("user_no"));
-				viewBoard.setAttach_no(rs.getInt("attach_no"));
 				viewBoard.setCustom_board_title(rs.getString("custom_board_title"));
 				viewBoard.setCustom_board_content(rs.getString("custom_board_content"));
 				viewBoard.setCustom_board_date(rs.getDate("custom_board_date"));
@@ -428,9 +432,7 @@ public class MypageDaoImpl implements MypageDao {
 
 				// 결과값 한 행 처리
 				viewBoard.setFree_board_no(rs.getInt("free_board_no"));
-				viewBoard.setBoard_type(rs.getString("board_type"));
 				viewBoard.setUser_no(rs.getInt("user_no"));
-				viewBoard.setAttach_no(rs.getInt("attach_no"));
 				viewBoard.setFree_board_title(rs.getString("free_board_title"));
 				viewBoard.setFree_board_content(rs.getString("free_board_content"));
 				viewBoard.setFree_board_date(rs.getDate("free_board_date"));
@@ -637,4 +639,155 @@ public class MypageDaoImpl implements MypageDao {
 		return res;
 	}
 
+	
+	
+	
+	
+	@Override
+	public List<Custom_reply> customReplyByUserno(Connection conn, int user_no) {
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM custom_reply";
+		sql += " WHERE user_no = ?";
+
+		// 결과 저장할 Board객체
+		List<Custom_reply> BoardList = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setInt(1, user_no); // 조회할 게시글 번호 적용
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+
+				Custom_reply viewBoard = new Custom_reply();
+
+				viewBoard = new Custom_reply(); // 결과값 저장 객체
+
+				// 결과값 한 행 처리
+				viewBoard.setCustom_reply_no(rs.getInt("custom_reply_no"));
+				viewBoard.setCustom_board_no(rs.getInt("custom_board_no"));
+				viewBoard.setUser_no(rs.getInt("user_no"));
+				viewBoard.setCustom_reply_content(rs.getString("custom_reply_content"));
+				viewBoard.setComment_date(rs.getDate("comment_date"));
+
+				BoardList.add(viewBoard);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return BoardList;
+	}
+	
+	
+	@Override
+	public List<Free_board_reply> freeBoardReplyByUserno(Connection conn, int user_no) {
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM free_board_reply";
+		sql += " WHERE user_no = ?";
+
+		// 결과 저장할 Board객체
+		List<Free_board_reply> BoardList = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setInt(1, user_no); // 조회할 게시글 번호 적용
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+
+				Free_board_reply viewBoard = new Free_board_reply();
+
+				viewBoard = new Free_board_reply(); // 결과값 저장 객체
+
+				// 결과값 한 행 처리
+				viewBoard.setFree_reply_no(rs.getInt("free_reply_no"));
+				viewBoard.setFree_board_no(rs.getInt("free_board_no"));
+				viewBoard.setUser_no(rs.getInt("user_no"));
+				viewBoard.setFree_reply_content(rs.getString("free_reply_content"));
+				viewBoard.setFree_reply_date(rs.getDate("free_reply_date"));
+
+				BoardList.add(viewBoard);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return BoardList;
+	}
+	
+	
+	@Override
+	public List<Official_reply> officialReplyByUserno(Connection conn, int user_no) {
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM official_reply";
+		sql += " WHERE user_no = ?";
+
+		// 결과 저장할 Board객체
+		List<Official_reply> BoardList = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setInt(1, user_no); // 조회할 게시글 번호 적용
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+
+				Official_reply viewBoard = new Official_reply();
+
+				viewBoard = new Official_reply(); // 결과값 저장 객체
+
+				// 결과값 한 행 처리
+				viewBoard.setOfficial_reply_no(rs.getInt("official_reply_no"));
+				viewBoard.setOfficial_board_no(rs.getInt("official_board_no"));
+				viewBoard.setUser_no(rs.getInt("user_no"));
+				viewBoard.setOfficial_reply_content(rs.getString("official_reply_content"));
+				viewBoard.setOfficial_reply_date(rs.getDate("official_reply_date"));
+
+				BoardList.add(viewBoard);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return BoardList;
+	}
+	
+	
+	
+	
+	
 }// class
