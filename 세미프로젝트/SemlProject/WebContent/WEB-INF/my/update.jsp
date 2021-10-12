@@ -46,7 +46,7 @@ $(document).ready(function() {
 
 </table>
 
-<form action="/update" method="post">
+<form action="/update" method="post" enctype="multipart/form-data">
 <input type="hidden" name="user_no" value="${user_info.user_no }" />
 
 <table>
@@ -64,6 +64,28 @@ $(document).ready(function() {
 <tr><td>생년월일</td><td>${user_info.user_birth }</td></tr>
 
 </table>
+
+
+
+<!-- 첨부파일 -->
+<!-- <div> -->
+<!-- 	<div id="beforeFile"> -->
+<!-- 		기존 첨부파일:  -->
+<%-- 		<a href="/upload/${attachmentFile.stored_file_name}" download="${attachmentFile.original_file_name }">${attachmentFile.original_file_name }</a> --%>
+<!-- 	</div> -->
+	
+	<div>
+	<div id="beforeFile">
+		기존 첨부파일: 
+		<a href="/upload/${attachmentFile.profile_name}" download="${attachmentFile.profile_name }">${attachmentFile.profile_name }</a>
+	</div>
+
+	<div id="afterFile">
+		새 첨부파일:
+		<input type="file" name="file" />
+	</div>
+</div>
+
 <button>수정</button>
 
 </form>

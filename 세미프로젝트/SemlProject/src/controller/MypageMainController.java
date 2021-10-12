@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class MypageController
  */
 @WebServlet("/main")
-public class MypageController extends HttpServlet {
+public class MypageMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		req.getRequestDispatcher("/WEB-INF/my/mypage.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/my/main.jsp").forward(req, resp);
 	}
 	
 	

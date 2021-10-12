@@ -60,7 +60,7 @@ public class MypageLoginController extends HttpServlet {
 //			session.setAttribute("user_nickname", user_info.getUser_nickname());
 			
 			session.setAttribute("user_info", user_info);
-			
+			session.setMaxInactiveInterval(60 * 30); 
 			
 		}
 		

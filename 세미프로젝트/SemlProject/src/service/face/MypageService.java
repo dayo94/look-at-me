@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.Attachment_profile;
+import dto.Custom_board;
+import dto.Free_board;
 import dto.User_info;
 
 
@@ -13,7 +16,7 @@ public interface MypageService {
 	/**
 	 * 게시글 전체 조회
 	 * 
-	 * @return List<User_info> - 게시글 전체 조회 결과 리스트
+	 * @return List<User_info> - 유저정보 전체 조회 결과 리스트
 	 */
 	public List<User_info> getList();
 	
@@ -79,6 +82,35 @@ public interface MypageService {
 	
 	
 	
+//	
+//	public Attachment getFile(int attach_no);
+	public Attachment_profile getFile(int user_no);
+
+
+
+
+
+	public User_info getUserInfo(int user_no);
+
+
+
+
+	/**
+	 * Custom_board테이블 전체 조회
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return List<Custom_board> - Custom_board테이블 전체 조회 결과 리스트
+	 */
+	public List<Custom_board> selectAll(int user_no);
+	
+	
+	/**
+	 * Free_board테이블 전체 조회
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return List<Free_board> - Free_board테이블 전체 조회 결과 리스트
+	 */
+	public List<Free_board> selectAll2(int user_no);
 	
 	
 }
