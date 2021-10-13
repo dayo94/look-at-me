@@ -81,7 +81,7 @@ public interface MypageService {
 	 * 
 	 * @param req - 요청 정보 객체
 	 */
-	public void update(HttpServletRequest req);
+	public User_info update(HttpServletRequest req);
 	
 	
 	
@@ -141,6 +141,14 @@ public interface MypageService {
 	 */
 	public List<Official_reply> officialReplySelectAll(int user_no);
 	
+	/**
+	 * 
+	 * @param user_info
+	 */
+	public void unregister(User_info user_info, String password);
+	
+	
+	public User_info getUserInfoAll(int user_no);
 	
 	
 	

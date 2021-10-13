@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import common.JDBCTemplate;
 import dto.Attachment_profile;
 import dto.User_info;
 import service.face.MypageService;
@@ -65,10 +64,12 @@ public class MypageLoginController extends HttpServlet {
 			session.setAttribute("user_info", user_info);
 			
 			
-			Attachment_profile attachment_profile = mypageService.getFile(user_no);
+			Attachment_profile attachmentFile = mypageService.getFile(user_no);
 			
-			session.setAttribute("attachment_profile", attachment_profile);
+			session.setAttribute("attachmentFile", attachmentFile);
 			
+			
+			System.out.println(attachmentFile);
 			
 			session.setMaxInactiveInterval(60 * 30); 
 		}

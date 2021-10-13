@@ -15,7 +15,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-
+	
+	
+	
+	//취소버튼 동작
+	$("#btnCancel").click(function() {
+		history.go(-1);
+	});
 	
 });
 
@@ -34,7 +40,7 @@ $(document).ready(function() {
 <tr><td>이메일</td><td>${user_info.user_email }</td></tr>
 <tr>
 	<td>비밀번호</td>
-	<td><input type="text" name="user_password" value="${user_info.user_password }"/></td>
+	<td><input type="text" name="user_password" value="" id="passwordCheck" /></td>
 </tr>
 <tr>
 	<td>닉네임</td>
@@ -67,7 +73,7 @@ $(document).ready(function() {
 	</div>
 </div>
 
-<button>수정</button>
+<button>수정</button> <button type="button" id="btnCancel">취소</button>
 
 </form>
 

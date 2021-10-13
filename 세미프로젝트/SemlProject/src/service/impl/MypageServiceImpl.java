@@ -250,36 +250,28 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDao.customBoardByUserno(JDBCTemplate.getConnection(), user_no);
 	}
 
-	
 	@Override
 	public List<Free_board> freeBoardSelectAll(int user_no) {
 		return mypageDao.freeBoardByUserno(JDBCTemplate.getConnection(), user_no);
 	}
-	
-	
-	
-	
+
 	@Override
 	public List<Custom_reply> customReplySelectAll(int user_no) {
 		return mypageDao.customReplyByUserno(JDBCTemplate.getConnection(), user_no);
 	}
-	
+
 	@Override
 	public List<Free_board_reply> freeBoardReplySelectAll(int user_no) {
 		return mypageDao.freeBoardReplyByUserno(JDBCTemplate.getConnection(), user_no);
 	}
-	
+
 	@Override
 	public List<Official_reply> officialReplySelectAll(int user_no) {
 		return mypageDao.officialReplyByUserno(JDBCTemplate.getConnection(), user_no);
 	}
-	
-	
-	
-	
-	
+
 	@Override
-	public void update(HttpServletRequest req) {
+	public User_info update(HttpServletRequest req) {
 
 //		// 유저정보 DTO객체
 		User_info user_info = null;
@@ -294,7 +286,7 @@ public class MypageServiceImpl implements MypageService {
 		if (!isMultipart) {
 			System.out.println("[ERROR] multipart/form-data 형식이 아님");
 
-			return;
+		
 		}
 
 		user_info = new User_info();
@@ -372,8 +364,6 @@ public class MypageServiceImpl implements MypageService {
 				File upFolder = new File(req.getServletContext().getRealPath("upload"));
 				upFolder.mkdir(); // 폴더 생성
 
-
-				
 				// 업로드 파일 객체
 				String origin = item.getName(); // 원본파일명
 //				String stored = origin + "_" + uid; // 원본파일명_uid
@@ -395,7 +385,6 @@ public class MypageServiceImpl implements MypageService {
 		// DB연결 객체
 		Connection conn = JDBCTemplate.getConnection();
 
-
 		if (user_info != null) {
 			if (mypageDao.update(conn, user_info) > 0) {
 				JDBCTemplate.commit(conn);
@@ -415,48 +404,84 @@ public class MypageServiceImpl implements MypageService {
 			}
 		}
 		if (attachment_profile != null) {
-			
+
 			if (mypageDao.updateProfile(conn, user_info, attachment_profile) > 0) {
 				JDBCTemplate.commit(conn);
 			} else {
 				JDBCTemplate.rollback(conn);
 			}
 
-		
 		}
+		return user_info;
 
 	}
-	
-	
-	
-	
-	
-//	
-//	
-//	
-//	if (attachment_profile != null) {
+
+//	@Override
+//	public void unregister(User_info user_info, String password) {
 //
-//		attachment_profile.setProfile_no(mypageDao.getNextProfileNo(conn));
+//		Connection conn = JDBCTemplate.getConnection();
 //
-//		if (mypageDao.insertFile(conn, attachment_profile) > 0) {
+//		if (password.equals(user_info.getUser_password())) {
+//
+//			int user_no = user_info.getUser_no();
+//
+//			mypageDao.delete(conn, user_no);
+//
 //			JDBCTemplate.commit(conn);
-//		} else {
-//			JDBCTemplate.rollback(conn);
+//
 //		}
+//	}
+
+//	@Override
+//	public void unregister(User_info user_info, String password) {
 //
-//		if (mypageDao.updateProfile(conn, user_info, attachment_profile) > 0) {
-//			JDBCTemplate.commit(conn);
+//		Connection conn = JDBCTemplate.getConnection();
+//
+//		if (password.equals(user_info.getUser_password())) {
+//
+//			int user_no = user_info.getUser_no();
+//
+//			if (mypageDao.deleteFile(conn, user_no) > 0) {
+//				JDBCTemplate.commit(conn);
+//			}
+//
+//			if (mypageDao.delete(conn, user_no) > 0) {
+//				JDBCTemplate.commit(conn);
+//			}
 //		} else {
+//
 //			JDBCTemplate.rollback(conn);
+//
 //		}
 //
 //	}
-//
-//}
+	
+	
+	
+	@Override
+	public void unregister(User_info user_info, String password) {
 
+		Connection conn = JDBCTemplate.getConnection();
 
-	
-	
-	
-	
+		if (password.equals(user_info.getUser_password())) {
+
+			int user_no = user_info.getUser_no();
+
+			if (mypageDao.delete(conn, user_no) > 0) {
+				JDBCTemplate.commit(conn);
+			}
+		} else {
+
+			JDBCTemplate.rollback(conn);
+
+		}
+
+	}
+
+	@Override
+	public User_info getUserInfoAll(int user_no) {
+
+		return mypageDao.unregsterUserInfoByUserNo(JDBCTemplate.getConnection(), user_no);
+	}
+
 }// class

@@ -3,6 +3,9 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,9 +78,19 @@ ul {
 		<div class="nav">
 			<h2>마이페이지</h2>
 			<ul>
-				<li><img
+				<li>
+				<c:if test="${empty login or not login }">
+				<img
 					src="https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20201110_157%2F1604988552132g3niM_JPEG%2F6124385887958596_1519189238.jpg&type=sc960_832"
-					alt="" /></li>
+					alt="엘모" />
+				</c:if>
+				<c:if test="${not empty login and login }">
+				<img
+					src="/upload/${attachmentFile.profile_name }"
+					alt="프로필사진" />
+				</c:if>
+				
+				</li>
 				<li>
 					<c:if test="${empty login or not login }">
 						<strong>로그인이 필요합니다</strong>
@@ -86,7 +99,7 @@ ul {
 					</c:if>
 					
 					<c:if test="${not empty login and login }">
-						<strong>${user_info.user_nickname}님, 환영합니다</strong><br>
+						<strong>${user_info.user_nickname }님, 환영합니다</strong><br>
 					<button onclick='location.href="/logout";'>로그아웃</button>
 </c:if>
 				</li>
@@ -138,20 +151,29 @@ ul {
 				<li>
 					<h4>나의 문의 내역</h4>
 					<p>
-						<a href="">1:1 문의 내역</a>
+						<a href="/qna">1:1 문의 내역</a>
 					</p>
 				</li>
 				<li>
-					<h4>회원 탈퇴</h4>
+					<h4><a href="/unregister">회원 탈퇴</a></h4>
 				</li>
 				<!-- li 형식 반복 -->
 			</ul>
 			<div class="profileWrap">
+				
+				<c:if test="${empty login or not login }">
 				<img
 					src="https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20201110_157%2F1604988552132g3niM_JPEG%2F6124385887958596_1519189238.jpg&type=sc960_832"
-					alt="" />
+					alt="엘모" />
+				</c:if>
+				<c:if test="${not empty login and login }">
+				<img
+					src="/upload/${attachmentFile.profile_name }"
+					alt="프로필사진" />
+				</c:if>
+				
 				<p>
-					<span>다요바보</span> 님
+					<span>${user_info.user_nickname }</span>
 				</p>
 				<button type="button"><a href="/update">내 정보 수정하기</a></button>
 				<!-- 페이지 이동이면 <a><span>내 정보 수정하기</span></a> -->

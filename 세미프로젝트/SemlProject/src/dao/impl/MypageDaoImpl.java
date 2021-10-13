@@ -404,7 +404,7 @@ public class MypageDaoImpl implements MypageDao {
 		// 최종 결과 반환
 		return BoardList;
 	}
-	
+
 	@Override
 	public List<Free_board> freeBoardByUserno(Connection conn, int user_no) {
 
@@ -454,7 +454,7 @@ public class MypageDaoImpl implements MypageDao {
 		// 최종 결과 반환
 		return BoardList;
 	}
-	
+
 //	
 //	@Override
 //	public List joinBoard(Connection conn, int user_no) {
@@ -510,10 +510,6 @@ public class MypageDaoImpl implements MypageDao {
 //		return ;
 //	}
 //	
-	
-	
-	
-	
 
 	@Override
 	public Attachment_profile getByUser_no(Connection conn, int user_no) {
@@ -535,10 +531,10 @@ public class MypageDaoImpl implements MypageDao {
 			while (rs.next()) {
 				attachment_profile = new Attachment_profile();
 
-				attachment_profile.setProfile_no( rs.getInt("profile_no") );
-				attachment_profile.setUser_no( rs.getInt("user_no") );
-				attachment_profile.setProfile_name( rs.getString("profile_name") );
-				
+				attachment_profile.setProfile_no(rs.getInt("profile_no"));
+				attachment_profile.setUser_no(rs.getInt("user_no"));
+				attachment_profile.setProfile_name(rs.getString("profile_name"));
+
 			}
 
 		} catch (SQLException e) {
@@ -550,31 +546,29 @@ public class MypageDaoImpl implements MypageDao {
 
 		return attachment_profile;
 	}
-	
-	
 
 	@Override
 	public int getNextProfileNo(Connection conn) {
-		
+
 		String sql = "";
 		sql += "SELECT attachment_profile_seq.nextval FROM dual";
-		
+
 		int profileNo = 0;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			rs.next();
 
 			profileNo = rs.getInt(1);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(ps);
 		}
-		
+
 		return profileNo;
 	}
 
@@ -583,9 +577,9 @@ public class MypageDaoImpl implements MypageDao {
 		String sql = "";
 		sql += "INSERT INTO attachment_profile( profile_no, user_no, profile_name )";
 //		sql += " values(attachment_profile_seq.nextval,?,?)";
-		if( attachment_profile.getProfile_no() != 0 ) { //attach_no 가 매개변수에 존재할 경우 그 값 활용하여 처리
-			sql += " VALUES( "+ attachment_profile.getProfile_no() +", ?, ? )";
-		} else if ( attachment_profile.getProfile_no() == 0 ) { //attach_no가 없을경우 시퀀스를 이용한 nextval 처리
+		if (attachment_profile.getProfile_no() != 0) { // attach_no 가 매개변수에 존재할 경우 그 값 활용하여 처리
+			sql += " VALUES( " + attachment_profile.getProfile_no() + ", ?, ? )";
+		} else if (attachment_profile.getProfile_no() == 0) { // attach_no가 없을경우 시퀀스를 이용한 nextval 처리
 			sql += " VALUES( attachment_profile_seq.nextval, ?, ? )";
 		}
 
@@ -639,10 +633,6 @@ public class MypageDaoImpl implements MypageDao {
 		return res;
 	}
 
-	
-	
-	
-	
 	@Override
 	public List<Custom_reply> customReplyByUserno(Connection conn, int user_no) {
 		// SQL 작성
@@ -689,8 +679,7 @@ public class MypageDaoImpl implements MypageDao {
 		// 최종 결과 반환
 		return BoardList;
 	}
-	
-	
+
 	@Override
 	public List<Free_board_reply> freeBoardReplyByUserno(Connection conn, int user_no) {
 		// SQL 작성
@@ -737,8 +726,7 @@ public class MypageDaoImpl implements MypageDao {
 		// 최종 결과 반환
 		return BoardList;
 	}
-	
-	
+
 	@Override
 	public List<Official_reply> officialReplyByUserno(Connection conn, int user_no) {
 		// SQL 작성
@@ -785,9 +773,160 @@ public class MypageDaoImpl implements MypageDao {
 		// 최종 결과 반환
 		return BoardList;
 	}
+
+	@Override
+	public int delete(Connection conn, int user_no) {
+		// 다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "UPDATE user_info";
+		sql += " SET";
+		sql += " user_email = null, user_password = null, user_point = null, user_name = null, user_birth = null, user_check = null, user_nickname = null";
+		sql += " WHERE user_no = ?";
+
+		// DB 객체
+		PreparedStatement ps = null;
+
+		int res = -1;
+
+		try {
+			// DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, user_no);
+
+			res = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+
+		return res;
+	}
+
+//	@Override
+//	public User_info delete(Connection conn, int user_no) {
+//		// 다음 게시글 번호 조회 쿼리
+//		String sql = "";
+//		sql += "UPDATE user_info";
+//		sql += " SET";
+//		sql += " user_email =  null, user_password = null, user_point = null, "
+//				+ "user_name = null, user_birth = null, user_check = null, user_nickname = null,";
+//		sql += " WHERE user_no = ?";
+//
+//		// 조회결과를 저장할 객체
+//		User_info result = null;
+//
+//		try {
+//			ps = conn.prepareStatement(sql); // SQL수행 객체
+//
+//			ps.setInt(1, user_no);
+//
+//			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+//
+//			// 조회 결과 처리
+//			while (rs.next()) {
+//				result = new User_info();
+//
+//				result.setUser_email(rs.getString("user_email"));
+//				result.setUser_password(rs.getString("user_password"));
+//				result.setUser_point(rs.getInt("user_point"));
+//				result.setUser_name(rs.getString("user_name"));
+//				result.setUser_birth(rs.getDate("user_birth"));
+//				result.setUser_check(rs.getString("user_check"));
+//				result.setUser_nickname(rs.getString("user_nickname"));
+//			}
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			// DB객체 닫기
+//			JDBCTemplate.close(rs);
+//			JDBCTemplate.close(ps);
+//		}
+//
+//		// 최종 결과 반환
+//		return result;
+//	}
 	
 	
-	
-	
-	
+
+	@Override
+	public User_info unregsterUserInfoByUserNo(Connection conn, int user_no) {
+
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM user_info";
+		sql += " WHERE 1=1";
+		sql += "	AND user_no = ?";
+
+		// 조회결과를 저장할 객체
+		User_info result = null;
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setInt(1, user_no);
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+				result = new User_info();
+
+				result.setUser_no(rs.getInt("user_no"));
+				result.setUser_email(rs.getString("user_email"));
+				result.setUser_password(rs.getString("user_password"));
+				result.setUser_point(rs.getInt("user_point"));
+				result.setUser_name(rs.getString("user_name"));
+				result.setUser_birth(rs.getDate("user_birth"));
+				result.setUser_check(rs.getString("user_check"));
+				result.setUser_nickname(rs.getString("user_nickname"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return result;
+	}
+
+//	@Override
+//	public int deleteFile(Connection conn, int user_no) {
+//
+//		String sql = "";
+//		sql += "UPDATE user_info";
+//		sql += " SET";
+//		sql += " user_email =  null, user_password = null, user_point = null, "
+//				+ "user_name = null, user_birth = null, user_check = null, user_nickname = null,";
+//		sql += " WHERE user_no = ?";
+//
+//		// DB 객체
+//		PreparedStatement ps = null;
+//
+//		int res = -1;
+//
+//		try {
+//			// DB작업
+//			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, user_no);
+//
+//			res = ps.executeUpdate();
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//
+//		} finally {
+//			JDBCTemplate.close(ps);
+//		}
+//
+//		return res;
+//	}
+
 }// class

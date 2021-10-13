@@ -205,6 +205,25 @@ public interface MypageDao {
 	
 	
 	
+	/**
+	 * 회원탈퇴
+	 * 
+	 * @param  - 탈퇴한 회원정보를 담은 객체
+	 */
+//	public User_info delete(Connection conn, int user_no );
+	public int delete(Connection conn, int user_no );
+	
+	
+	
+	
+	public User_info unregsterUserInfoByUserNo(Connection conn, int user_no);
+	
+	
+	
+//	public int deleteFile(Connection conn, int user_no);
+	
+	
+	
 }//class
 
 
