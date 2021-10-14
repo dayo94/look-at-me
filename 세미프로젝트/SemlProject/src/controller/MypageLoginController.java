@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.Attachment_profile;
+import dto.User_admin;
 import dto.User_info;
 import service.face.MypageService;
 import service.impl.MypageServiceImpl;
@@ -26,6 +27,7 @@ public class MypageLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
 		req.getRequestDispatcher("/WEB-INF/my/login.jsp").forward(req, resp);
 
 	}
@@ -61,10 +63,34 @@ public class MypageLoginController extends HttpServlet {
 			System.out.println(attachmentFile);
 
 			session.setMaxInactiveInterval(60 * 30);
+
+			resp.sendRedirect("/main");
 		}
 
-		resp.sendRedirect("/main");
+		// 전달파라미터 얻기 - 로그인 정보
+		User_admin user_admin = mypageService.getLoginAdmin_info(req);
+		
+		// 로그인 인증
+		boolean loginAdmin = mypageService.login(user_admin);
+
+		if( loginAdmin ) {
+			
+			HttpSession session = req.getSession();
+
+			session.setAttribute("loginAdmin", loginAdmin);
+			
+			resp.sendRedirect("/main/admin");
+
+		}		
+		
+		
 
 	}
 
+	
+	
+	
+	
+	
+	
 }

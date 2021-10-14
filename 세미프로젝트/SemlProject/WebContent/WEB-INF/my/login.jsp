@@ -45,7 +45,16 @@
 
 	});
 </script>
+<style type="text/css">
 
+form{
+
+	width: 800px;
+
+}
+
+
+</style>
 </head>
 <body>
 
@@ -69,6 +78,6 @@
 
 		<!-- .container -->
 	</div>
-
+	
 </body>
 </html>

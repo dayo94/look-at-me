@@ -11,6 +11,7 @@ import dto.Free_board_reply;
 import dto.Official_reply;
 import dto.Qna_board;
 import dto.Qna_board_attachment;
+import dto.User_admin;
 import dto.User_info;
 
 public interface MypageDao {
@@ -236,6 +237,26 @@ public interface MypageDao {
 	 */
 	public int deleteFile(Connection conn, Qna_board board);
 	
+	
+	
+	
+	/**
+	 * 관리자 아이디로 로그인했는지 확인한다
+	 * 
+	 * @param User_admin 
+	 * @return int - 1(존재하는 관리자), 0(존재하지 않는 관리자), -1(에러)
+	 */
+	public int loginAdmin(Connection conn, User_admin user_admin);
+
+
+	
+	/**
+	 * Qna_board테이블 전체 조회
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return List<Qna_board> - Qna_board테이블 전체 조회 결과 리스트
+	 */
+	public List<Qna_board> selectAllQna(Connection conn);
 	
 	
 	

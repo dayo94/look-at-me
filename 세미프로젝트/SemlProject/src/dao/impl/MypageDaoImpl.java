@@ -17,6 +17,7 @@ import dto.Free_board_reply;
 import dto.Official_reply;
 import dto.Qna_board;
 import dto.Qna_board_attachment;
+import dto.User_admin;
 import dto.User_info;
 
 public class MypageDaoImpl implements MypageDao {
@@ -874,206 +875,193 @@ public class MypageDaoImpl implements MypageDao {
 		return BoardList;
 	}
 
-	
 	@Override
 	public Qna_board selectQnaBoardByBoardno(Connection conn, Qna_board boardno) {
-		
-		//SQL 작성
+
+		// SQL 작성
 		String sql = "";
 		sql += "SELECT * FROM qna_board";
 		sql += " WHERE qna_board_no = ?";
-		
-		//결과 저장할 Board객체
-		Qna_board viewBoard = null;
-		
-		try {
-			ps = conn.prepareStatement(sql); //SQL수행 객체
-			
-			ps.setInt(1, boardno.getQna_board_no()); //조회할 게시글 번호 적용
-			
-			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
-			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
-			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
-			
-			rs = ps.executeQuery(); //SQL 수행 및 결과집합 저장
-			
-			//조회 결과 처리
-			while(rs.next()) {
-				viewBoard = new Qna_board(); //결과값 저장 객체
-				
-				//결과값 한 행 처리
-				viewBoard.setQna_board_no( rs.getInt("qna_board_no") );
-				System.out.println(rs.getInt("qna_board_no"));
-				viewBoard.setUser_no( rs.getInt("user_no") );
-				System.out.println(rs.getInt("user_no"));
-				viewBoard.setQna_board_title( rs.getString("qna_board_title") );
-				viewBoard.setQna_board_content( rs.getString("qna_board_content") );
-				viewBoard.setQna_board_date( rs.getDate("qna_board_date") );
 
-				
+		// 결과 저장할 Board객체
+		Qna_board viewBoard = null;
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setInt(1, boardno.getQna_board_no()); // 조회할 게시글 번호 적용
+
+			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
+			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
+			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+				viewBoard = new Qna_board(); // 결과값 저장 객체
+
+				// 결과값 한 행 처리
+				viewBoard.setQna_board_no(rs.getInt("qna_board_no"));
+				System.out.println(rs.getInt("qna_board_no"));
+				viewBoard.setUser_no(rs.getInt("user_no"));
+				System.out.println(rs.getInt("user_no"));
+				viewBoard.setQna_board_title(rs.getString("qna_board_title"));
+				viewBoard.setQna_board_content(rs.getString("qna_board_content"));
+				viewBoard.setQna_board_date(rs.getDate("qna_board_date"));
+
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			//DB객체 닫기
+			// DB객체 닫기
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(ps);
 		}
-		
-		//최종 결과 반환
+
+		// 최종 결과 반환
 		System.out.println(viewBoard);
 		return viewBoard;
 	}
-	
-	
+
 	@Override
 	public Qna_board_attachment selectFile(Connection conn, Qna_board viewBoard) {
-		
+
 		String sql = "";
 		sql += "SELECT * FROM qna_board_attachment";
 		sql += " WHERE qna_board_no = ?";
 		sql += " ORDER BY attach_no";
 
 		Qna_board_attachment boardFile = null;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			ps.setInt(1, viewBoard.getQna_board_no());
-			
+
 			System.out.println(viewBoard.getQna_board_no());
 			System.out.println(viewBoard.getQna_board_no());
 			System.out.println(viewBoard.getQna_board_no());
-			
-			
+
 			rs = ps.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				boardFile = new Qna_board_attachment();
-				
-				boardFile.setAttach_no( rs.getInt("attach_no") );
+
+				boardFile.setAttach_no(rs.getInt("attach_no"));
 				System.out.println(rs.getInt("attach_no"));
-				System.out.println("파일넘버"+rs.getInt("attach_no"));
-				boardFile.setQna_board_no( rs.getInt("qna_board_no") );
-				System.out.println("디에이오보드넘버"+( rs.getInt("qna_board_no")));
-				boardFile.setOriginal_file_name( rs.getString("original_file_name") );
-				boardFile.setStored_file_name( rs.getString("stored_file_name") );
-				boardFile.setFile_size( rs.getInt("file_size") );
-				boardFile.setFile_date( rs.getDate("file_date") );
+				System.out.println("파일넘버" + rs.getInt("attach_no"));
+				boardFile.setQna_board_no(rs.getInt("qna_board_no"));
+				System.out.println("디에이오보드넘버" + (rs.getInt("qna_board_no")));
+				boardFile.setOriginal_file_name(rs.getString("original_file_name"));
+				boardFile.setStored_file_name(rs.getString("stored_file_name"));
+				boardFile.setFile_size(rs.getInt("file_size"));
+				boardFile.setFile_date(rs.getDate("file_date"));
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(ps);
 		}
-				
-		System.out.println( "보드파일" + boardFile);
+
+		System.out.println("보드파일" + boardFile);
 		return boardFile;
 	}
-	
-	
+
 	@Override
 	public int delete(Connection conn, Qna_board board) {
-		//다음 게시글 번호 조회 쿼리
+		// 다음 게시글 번호 조회 쿼리
 		String sql = "";
 		sql += "DELETE qna_board";
 		sql += " WHERE qna_board_no = ?";
-		
-		//DB 객체
-		PreparedStatement ps = null; 
-		
+
+		// DB 객체
+		PreparedStatement ps = null;
+
 		int res = -1;
-		
+
 		try {
-			//DB작업
+			// DB작업
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, board.getQna_board_no());
 
 			res = ps.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} finally {
 			JDBCTemplate.close(ps);
 		}
-		
+
 		return res;
 	}
-	
+
 	@Override
 	public int deleteFile(Connection conn, Qna_board board) {
-		//다음 게시글 번호 조회 쿼리
+		// 다음 게시글 번호 조회 쿼리
 		String sql = "";
 		sql += "DELETE qna_board_attachment";
 		sql += " WHERE qna_board_no = ?";
-		
-		//DB 객체
-		PreparedStatement ps = null; 
-		
+
+		// DB 객체
+		PreparedStatement ps = null;
+
 		int res = -1;
-		
+
 		try {
-			//DB작업
+			// DB작업
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, board.getQna_board_no());
 
 			res = ps.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} finally {
 			JDBCTemplate.close(ps);
 		}
-		
+
 		return res;
 	}
 
-	
 	@Override
 	public int update(Connection conn, Qna_board board) {
-		//다음 게시글 번호 조회 쿼리
+		// 다음 게시글 번호 조회 쿼리
 		String sql = "";
 		sql += "UPDATE qna_board";
 		sql += " SET qna_board_title = ?,";
 		sql += " 	qna_board_content = ?";
 		sql += " WHERE qna_board_no = ?";
-		
-		//DB 객체
-		PreparedStatement ps = null; 
-		
+
+		// DB 객체
+		PreparedStatement ps = null;
+
 		int res = -1;
-		
+
 		try {
-			//DB작업
+			// DB작업
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, board.getQna_board_title());
 			ps.setString(2, board.getQna_board_content());
 			ps.setInt(3, board.getQna_board_no());
 
 			res = ps.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} finally {
 			JDBCTemplate.close(ps);
 		}
-		
+
 		return res;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 //	@Override
 //	public int deleteFile(Connection conn, int user_no) {
 //
@@ -1106,8 +1094,86 @@ public class MypageDaoImpl implements MypageDao {
 //		return res;
 //	}
 
+	@Override
+	public int loginAdmin(Connection conn, User_admin user_admin) {
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM user_admin";
+		sql += " WHERE 1=1";
+		sql += "	AND admin_id = ?";
+		sql += "	AND admin_pw = ?";
 
-	
-	
-	
+		// 결과 저장할 변수
+		int cnt = -1;
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setString(1, user_admin.getAdmin_id());
+			ps.setString(2, user_admin.getAdmin_pw());
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return cnt;
+
+	}
+
+	@Override
+	public List<Qna_board> selectAllQna(Connection conn) {
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM qna_board";
+		sql += " ORDER BY qna_board_date DESC";
+
+		// 결과 저장할 List
+		List<Qna_board> qna_board = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+				Qna_board info = new Qna_board(); // 결과값 저장 객체
+
+				// 결과값 한 행 처리
+				info.setQna_board_no(rs.getInt("qna_board_no"));
+				info.setUser_no(rs.getInt("user_no"));
+				info.setQna_board_title(rs.getString("qna_board_title"));
+				info.setQna_board_content(rs.getString("qna_board_content"));
+				info.setQna_board_date(rs.getDate("qna_board_date"));
+				
+
+				// 리스트에 결과값 저장
+				qna_board.add(info);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return qna_board;
+
+	}
+
 }// class

@@ -12,6 +12,7 @@ import dto.Free_board_reply;
 import dto.Official_reply;
 import dto.Qna_board;
 import dto.Qna_board_attachment;
+import dto.User_admin;
 import dto.User_info;
 
 public interface MypageService {
@@ -175,6 +176,31 @@ public interface MypageService {
 	 */
 	public void deleteQna(Qna_board board);
 	
+	
+	
+	/**
+	 * 로그인 정보 추출
+	 * 
+	 * @param req - 요청 정보 객체
+	 * @return User_admin - 로그인 정보
+	 */
+	public User_admin getLoginAdmin_info(HttpServletRequest req);
+
+	/**
+	 * 로그인 처리
+	 * 
+	 * @param user_admin - 로그인 정보
+	 * @return true - 인증됨, false - 인증되지 않음
+	 */
+	public boolean login(User_admin user_admin);
+	
+	
+	/**
+	 * 게시글 전체 조회
+	 * 
+	 * @return List<Qna_board> - 문의글 전체 조회 결과 리스트
+	 */
+	public List<Qna_board> getListQnaBoard();
 	
 	
 	

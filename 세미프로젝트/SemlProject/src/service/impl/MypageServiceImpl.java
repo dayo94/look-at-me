@@ -27,6 +27,7 @@ import dto.Free_board_reply;
 import dto.Official_reply;
 import dto.Qna_board;
 import dto.Qna_board_attachment;
+import dto.User_admin;
 import dto.User_info;
 import service.face.MypageService;
 
@@ -647,11 +648,11 @@ public class MypageServiceImpl implements MypageService {
 		// DB연결 객체
 		Connection conn = JDBCTemplate.getConnection();
 
-		HttpSession session = req.getSession();
+//		HttpSession session = req.getSession();
 
-		User_info user_info = ((User_info) session.getAttribute("user_info"));
+//		User_info user_info = ((User_info) session.getAttribute("user_info"));
 
-		int user_no = user_info.getUser_no();
+//		int user_no = user_info.getUser_no();
 
 		// 게시글 정보가 있을 경우
 		if (board != null) {
@@ -682,4 +683,38 @@ public class MypageServiceImpl implements MypageService {
 
 	}
 
+	@Override
+	public User_admin getLoginAdmin_info(HttpServletRequest req) {
+
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		User_admin user_admin = new User_admin();
+
+		user_admin.setAdmin_id(req.getParameter("user_email"));
+		user_admin.setAdmin_pw(req.getParameter("user_password"));
+
+		return user_admin;
+
+	}
+
+	public boolean login(User_admin user_admin) {
+		if (mypageDao.loginAdmin(JDBCTemplate.getConnection(), user_admin) > 0) {
+			return true; // 로그인 성공
+		} else {
+			return false; // 로그인 실패
+		}
+	}
+
+	@Override
+	public List<Qna_board> getListQnaBoard() {
+		return mypageDao.selectAllQna(JDBCTemplate.getConnection());
+		
+	}
+	
+	
+	
 }// class
