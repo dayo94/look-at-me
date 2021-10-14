@@ -15,23 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 public class MypageLogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	@Override
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//세션 해제
+		// 세션 해제
 		req.getSession().invalidate();
 
-		//메인페이지로 리다이렉트
+		// 메인페이지로 리다이렉트
 		resp.sendRedirect("/");
-	
-	
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

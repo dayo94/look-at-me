@@ -1,71 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>오늘 뭐 마시지 - </title>
+<title>오늘 뭐 마시지 -</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
 
 <style>
-*{
- 		font-family: 'Noto Sans KR', sans-serif;
- 		list-style: none;
- 		text-decoration: none;
- 		border-collapse: collapse;
- 		margin: 0px;
- 		padding: 0px;
- 		color: #000;
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+	list-style: none;
+	text-decoration: none;
+	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
+	color: #000;
 }
- 	
- h1 {
- 	font-size: 48px;
- 	font-weight: 100;
+
+h1 {
+	font-size: 48px;
+	font-weight: 100;
 }
- 
- .contents1{
- 	font-size: 20px;
- 	font-weight: lighter;
+
+.contents1 {
+	font-size: 20px;
+	font-weight: lighter;
 }
- 
- .contents3{
- 	font-size: 14px;
- 	font-weight: 100;
- }
- 
- .contents_bold{
- 	font-size: 18px;
- 	font-weight: bold;
- }
- 
- 
- 
- .result{
- 	font-size: 24px;
- }
- 	
+
+.contents3 {
+	font-size: 14px;
+	font-weight: 100;
+}
+
+.contents_bold {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.result {
+	font-size: 24px;
+}
+
 .intro_bg {
-	    background-image: url('/resources/img/cheers02.jpg');
-        background-repeat: no-repeat;
-/*         background-size: 1500px 900px; */
-/* 		background-image: url("/resources/img/cocktail_bg02.jpg") no-repeat; */
-/* 		background: brown;  */
- 		width:100%;
- 		height:700px;
- 	} 
- 	
+	background-image: url('/resources/img/cheers02.jpg');
+	background-repeat: no-repeat;
+	/*         background-size: 1500px 900px; */
+	/* 		background-image: url("/resources/img/cocktail_bg02.jpg") no-repeat; */
+	/* 		background: brown;  */
+	width: 100%;
+	height: 700px;
+}
+
 .header {
-		top: 0;
- 		display:flex;
- 		width:100%;
- 		margin: auto;
- 		height: 86px;
- 		background: rgba(0,0,0,0.6);
- 		position: fixed;
- 	}
+	top: 0;
+	display: flex;
+	width: 100%;
+	margin: auto;
+	height: 86px;
+	background: rgba(0, 0, 0, 0.6);
+	position: fixed;
+}
 
 .header_logo {
 	margin-top: -10px;
@@ -77,7 +77,7 @@
 	color: #fff;
 }
 
-.login > form > button {
+.login>form>button {
 	color: #fff;
 	background: blue;
 	border: none;
@@ -92,7 +92,7 @@
 	color: #fff;
 }
 
-.join > button {
+.join>button {
 	color: #fff;
 	background: red;
 	border: none;
@@ -101,40 +101,41 @@
 	padding: 5px;
 	cursor: pointer;
 }
- 
- .nav{
- 	display: flex;
- 	justify-content: flex-end;
- 	line-height: 86px;
- 	width: calc(1280px - 400px );
-/*  	margin-right: - 84px; */
+
+.nav {
+	display: flex;
+	justify-content: flex-end;
+	line-height: 86px;
+	width: calc(1280px - 400px);
+	/*  	margin-right: - 84px; */
 	padding-left: 0;
- 	margin-left: 290px;
-/*  	position: relative; */
- }	
- 
- .nav > li:not(:first-child) {
- 	margin-left: 84px;
- }
- 
- .nav > li:first-child {
- }
- 
- .nav > li > a {
- 	 	color: #fff;
- }
- 
- .nav > li > a:hover {
- 	color: orange;
- }
- 
- .content_area {
- 	width: 1280px;
- 	height: 780px;
-/*   	margin-top: -200px; */
- 	background: white;
- 	margin: auto;
- }
+	margin-left: 290px;
+	/*  	position: relative; */
+}
+
+.nav>li:not(:first-child) {
+	margin-left: 84px;
+}
+
+.nav>li:first-child {
+	
+}
+
+.nav>li>a {
+	color: #fff;
+}
+
+.nav>li>a:hover {
+	color: orange;
+}
+
+.content_area {
+	width: 1280px;
+	height: 780px;
+	/*   	margin-top: -200px; */
+	background: white;
+	margin: auto;
+}
 
 footer {
 	display: flex;
@@ -142,13 +143,13 @@ footer {
 	padding: 30px;
 }
 
-footer > div:first-child{
+footer>div:first-child {
 	flex: 3;
 	text-align: center;
 	color: #fff;
 }
 
-footer > div:last-child {
+footer>div:last-child {
 	flex: 9;
 	color: #fff;
 }
@@ -160,8 +161,8 @@ footer > div:last-child {
 		<div class="intro_bg">
 			<div class="header">
 				<div class="header_logo">
-					<a href="/main">
-						<img  width=100px; src='/resources/img/header_logo2.png'/>
+					<a href="/main"> <img width=100px;
+						src='/resources/img/header_logo2.png' />
 					</a>
 				</div>
 				<ul class="nav">
@@ -170,7 +171,7 @@ footer > div:last-child {
 					<li><a href="/main">커뮤니티 게시판</a></li>
 					<li><a href="/main">자유게시판</a></li>
 					<li><a href="/main">쇼핑</a></li>
-					<li><a href="/main">문의게시판</a></li>				
+					<li><a href="/main">문의게시판</a></li>
 				</ul>
 				<div class="login">
 					<form>
@@ -178,10 +179,9 @@ footer > div:last-child {
 					</form>
 				</div>
 				<div class="join">
-						<button>회원가입</button>
+					<button>회원가입</button>
 				</div>
 			</div>
 		</div>
-		<div class="content_area">
-		</div>
+		<div class="content_area"></div>
 	</div>

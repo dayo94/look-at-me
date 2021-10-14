@@ -23,16 +23,11 @@ import service.impl.MypageServiceImpl;
 @WebServlet("/reply/list")
 public class MypageReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	MypageService mypageService = new MypageServiceImpl();
-	
-	
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		
 
 		HttpSession session = req.getSession();
 
@@ -40,16 +35,11 @@ public class MypageReplyListController extends HttpServlet {
 
 		int user_no = user_info.getUser_no();
 
-		
-		
 		List<Free_board_reply> freeBoardReply = mypageService.freeBoardReplySelectAll(user_no);
 
 		System.out.println(freeBoardReply);
 
 		session.setAttribute("freeBoardReply", freeBoardReply);
-		
-		
-		
 
 		List<Custom_reply> customReply = mypageService.customReplySelectAll(user_no);
 
@@ -57,22 +47,14 @@ public class MypageReplyListController extends HttpServlet {
 
 		session.setAttribute("customReply", customReply);
 
-
-		
 		List<Official_reply> officialReply = mypageService.officialReplySelectAll(user_no);
-		
+
 		System.out.println(officialReply);
-		
+
 		session.setAttribute("officialReply", officialReply);
-	
-		
-		
-		
+
 		req.getRequestDispatcher("/WEB-INF/my/replyList.jsp").forward(req, resp);
-	
-	
+
 	}
-	
-	
 
 }

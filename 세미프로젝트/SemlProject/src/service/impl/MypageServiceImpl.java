@@ -6,8 +6,10 @@ import java.sql.Connection;
 import java.util.Iterator;
 import java.util.List;
 //import java.util.UUID;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -23,6 +25,8 @@ import dto.Custom_reply;
 import dto.Free_board;
 import dto.Free_board_reply;
 import dto.Official_reply;
+import dto.Qna_board;
+import dto.Qna_board_attachment;
 import dto.User_info;
 import service.face.MypageService;
 
@@ -88,152 +92,6 @@ public class MypageServiceImpl implements MypageService {
 		return user_no;
 
 	}
-//
-//	@Override
-//	public void update(HttpServletRequest req) {
-//
-////		// 유저정보 DTO객체
-//		User_info user_info = null;
-//
-//		// 첨부파일 정보 DTO객체
-//		Attachment attachment = null;
-//
-//		// 파일업로드 형태의 데이터가 맞는지 검사
-//		boolean isMultipart = false;
-//		isMultipart = ServletFileUpload.isMultipartContent(req);
-//
-//		if (!isMultipart) {
-//			System.out.println("[ERROR] multipart/form-data 형식이 아님");
-//
-//			return;
-//		}
-//
-//		user_info = new User_info();
-//
-//		// 디스크기반 아이템 팩토리
-//		DiskFileItemFactory factory = new DiskFileItemFactory();
-//
-//		// 메모리 처리 사이즈 지정
-//		factory.setSizeThreshold(1 * 1024 * 1024); // 1MB
-//
-//		// 임시 저장소 설정
-//		File repository = new File(req.getServletContext().getRealPath("tmp"));
-//		repository.mkdir(); // 임시 저장소 폴더 생성
-//		factory.setRepository(repository); // 임시 저장소 폴더 지정
-//
-//		// 파일업로드 객체 생성
-//		ServletFileUpload upload = new ServletFileUpload(factory);
-//
-//		// 업로드 용량 제한
-//		upload.setFileSizeMax(10 * 1024 * 1024); // 10MB
-//
-//		// 전달 데이터 파싱
-//		List<FileItem> items = null;
-//		try {
-//			items = upload.parseRequest(req);
-//		} catch (FileUploadException e) {
-//			e.printStackTrace();
-//		}
-//
-//		// 파싱된 전달파라미터를 처리할 반복자
-//		Iterator<FileItem> iter = items.iterator();
-//
-//		while (iter.hasNext()) { // 모든 요청 정보 처리
-//			FileItem item = iter.next();
-//
-//			// --- 1) 빈 파일에 대한 처리 ---
-//			if (item.getSize() <= 0) {
-//				continue; // 빈 파일은 무시하고 다음 FileItem처리로 넘긴다
-//			}
-//
-////			User_info user_info = new User_info();
-//
-//			// --- 2) form-data에 대한 처리 ---
-//			if (item.isFormField()) {
-//				// 키 추출하기
-//				String key = item.getFieldName();
-//
-//				// 값 추출하기
-//				String value = null;
-//				try {
-//					value = item.getString("UTF-8");
-//				} catch (UnsupportedEncodingException e1) {
-//					e1.printStackTrace();
-//				}
-//
-//				// 키(name)에 따라서 value저장하기
-//				if ("user_no".equals(key)) {
-//					user_info.setUser_no(Integer.parseInt(value));
-//				} else if ("user_password".equals(key)) {
-//					user_info.setUser_password(value);
-//				} else if ("user_nickname".equals(key)) {
-//					user_info.setUser_nickname(value);
-//				}
-//
-//			} // if( item.isFormField() ) end
-//
-//			// --- 3) 파일에 대한 처리 ---
-//			if (!item.isFormField()) {
-//
-//				// UUID 생성
-//				UUID uuid = UUID.randomUUID(); // 랜덤 UUID
-//				String uid = uuid.toString().split("-")[0]; // 8자리 uuid
-//
-//				// 로컬 저장소의 업로드 폴더
-//				File upFolder = new File(req.getServletContext().getRealPath("upload"));
-//				upFolder.mkdir(); // 폴더 생성
-//
-//				// 업로드 파일 객체
-//				String origin = item.getName(); // 원본파일명
-//				String stored = origin + "_" + uid; // 원본파일명_uid
-//				File up = new File(upFolder, stored);
-//
-//				try {
-//					item.write(up); // 실제 업로드(임시파일을 최종결과파일로 생성함)
-//					item.delete(); // 임시파일을 삭제
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//
-//				attachment = new Attachment();
-//				attachment.setOriginal_file_name(origin);
-//				attachment.setStored_file_name(stored);
-//				attachment.setFile_size((int) item.getSize());
-//
-//			} // if( !item.isFormField() ) end
-//		} // while( iter.hasNext() ) end
-//
-//		// DB연결 객체
-//		Connection conn = JDBCTemplate.getConnection();
-//
-//
-//		if (user_info != null) {
-//			if (mypageDao.update(conn, user_info) > 0) {
-//				JDBCTemplate.commit(conn);
-//			} else {
-//				JDBCTemplate.rollback(conn);
-//			}
-//		}
-//
-//		if (attachment != null) {
-//
-//			attachment.setAttach_no(mypageDao.getNextAttachNo(conn));
-//
-//			if (mypageDao.insertFile(conn, attachment) > 0) {
-//				JDBCTemplate.commit(conn);
-//			} else {
-//				JDBCTemplate.rollback(conn);
-//			}
-//
-//			if (mypageDao.updateProfile(conn, user_info, attachment) > 0) {
-//				JDBCTemplate.commit(conn);
-//			} else {
-//				JDBCTemplate.rollback(conn);
-//			}
-//
-//		}
-//
-//	}
 
 	@Override
 	public Attachment_profile getFile(int user_no) {
@@ -286,7 +144,6 @@ public class MypageServiceImpl implements MypageService {
 		if (!isMultipart) {
 			System.out.println("[ERROR] multipart/form-data 형식이 아님");
 
-		
 		}
 
 		user_info = new User_info();
@@ -356,17 +213,12 @@ public class MypageServiceImpl implements MypageService {
 			// --- 3) 파일에 대한 처리 ---
 			if (!item.isFormField()) {
 
-				// UUID 생성
-//				UUID uuid = UUID.randomUUID(); // 랜덤 UUID
-//				String uid = uuid.toString().split("-")[0]; // 8자리 uuid
-
 				// 로컬 저장소의 업로드 폴더
 				File upFolder = new File(req.getServletContext().getRealPath("upload"));
 				upFolder.mkdir(); // 폴더 생성
 
 				// 업로드 파일 객체
 				String origin = item.getName(); // 원본파일명
-//				String stored = origin + "_" + uid; // 원본파일명_uid
 				File up = new File(upFolder, origin);
 
 				try {
@@ -393,16 +245,14 @@ public class MypageServiceImpl implements MypageService {
 			}
 		}
 
-		if (attachment_profile == null) {
-
-//			attachment_profile.setProfile_no(mypageDao.getNextProfileNo(conn));
-
-			if (mypageDao.insertFile(conn, attachment_profile) > 0) {
-				JDBCTemplate.commit(conn);
-			} else {
-				JDBCTemplate.rollback(conn);
-			}
-		}
+//		if (attachment_profile == null) {
+//
+//			if (mypageDao.insertFile(conn, attachment_profile) > 0) {
+//				JDBCTemplate.commit(conn);
+//			} else {
+//				JDBCTemplate.rollback(conn);
+//			}
+//		}
 		if (attachment_profile != null) {
 
 			if (mypageDao.updateProfile(conn, user_info, attachment_profile) > 0) {
@@ -416,48 +266,6 @@ public class MypageServiceImpl implements MypageService {
 
 	}
 
-//	@Override
-//	public void unregister(User_info user_info, String password) {
-//
-//		Connection conn = JDBCTemplate.getConnection();
-//
-//		if (password.equals(user_info.getUser_password())) {
-//
-//			int user_no = user_info.getUser_no();
-//
-//			mypageDao.delete(conn, user_no);
-//
-//			JDBCTemplate.commit(conn);
-//
-//		}
-//	}
-
-//	@Override
-//	public void unregister(User_info user_info, String password) {
-//
-//		Connection conn = JDBCTemplate.getConnection();
-//
-//		if (password.equals(user_info.getUser_password())) {
-//
-//			int user_no = user_info.getUser_no();
-//
-//			if (mypageDao.deleteFile(conn, user_no) > 0) {
-//				JDBCTemplate.commit(conn);
-//			}
-//
-//			if (mypageDao.delete(conn, user_no) > 0) {
-//				JDBCTemplate.commit(conn);
-//			}
-//		} else {
-//
-//			JDBCTemplate.rollback(conn);
-//
-//		}
-//
-//	}
-	
-	
-	
 	@Override
 	public void unregister(User_info user_info, String password) {
 
@@ -482,6 +290,396 @@ public class MypageServiceImpl implements MypageService {
 	public User_info getUserInfoAll(int user_no) {
 
 		return mypageDao.unregsterUserInfoByUserNo(JDBCTemplate.getConnection(), user_no);
+	}
+
+	@Override
+	public void write(HttpServletRequest req) {
+
+		// **첨부파일 추가하여 글 작성 처리
+
+		// 게시글 정보 DTO 객체
+		Qna_board board = null;
+
+		// 첨부파일 정보 DTO 객체
+		Qna_board_attachment boardFile = null;
+
+		// 파일업로드 형태의 데이터가 맞는지 검사
+		boolean isMultipart = false;
+		isMultipart = ServletFileUpload.isMultipartContent(req);
+
+		if (!isMultipart) {
+			System.out.println("[ERROR] multipart/form-data 형식이 아님");
+
+			return; // write() 메소드 중단
+		}
+
+		// 게시글 정보를 저장할 DTO객체 생성
+		board = new Qna_board();
+
+		// 디스크기반 아이템 팩토리
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+
+		// 메모리 처리 사이즈 지정
+		factory.setSizeThreshold(1 * 1024 * 1024); // 1MB
+
+		// 임시 저장소 설정
+		File repository = new File(req.getServletContext().getRealPath("tmp"));
+		repository.mkdir(); // 임시 저장소 폴더 생성
+		factory.setRepository(repository); // 임시 저장소 폴더 지정
+
+		// 파일업로드 객체 생성
+		ServletFileUpload upload = new ServletFileUpload(factory);
+
+		// 업로드 용량 제한
+		upload.setFileSizeMax(10 * 1024 * 1024); // 10MB
+
+		// 전달 데이터 파싱
+		List<FileItem> items = null;
+		try {
+			items = upload.parseRequest(req);
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		}
+
+		// 파싱된 전달파라미터를 처리할 반복자
+		Iterator<FileItem> iter = items.iterator();
+
+		while (iter.hasNext()) { // 모든 요청 정보 처리
+			FileItem item = iter.next();
+
+			// --- 1) 빈 파일에 대한 처리 ---
+			if (item.getSize() <= 0) {
+				continue; // 빈 파일은 무시하고 다음 FileItem처리로 넘긴다
+			}
+
+			// --- 2) form-data에 대한 처리 ---
+			if (item.isFormField()) {
+				// 키 추출하기
+				String key = item.getFieldName();
+
+				System.out.println("키" + key);
+
+				// 값 추출하기
+				String value = null;
+				try {
+					value = item.getString("UTF-8");
+				} catch (UnsupportedEncodingException e1) {
+					e1.printStackTrace();
+				}
+
+				// 키(name)에 따라서 value저장하기
+				if ("title".equals(key)) {
+					board.setQna_board_title(value);
+				} else if ("content".equals(key)) {
+					board.setQna_board_content(value);
+				}
+
+//				System.out.println(" 보드 = " + board);
+
+			} // if( item.isFormField() ) end
+
+			// --- 3) 파일에 대한 처리 ---
+			if (!item.isFormField()) {
+
+				// UUID 생성
+				UUID uuid = UUID.randomUUID(); // 랜덤 UUID
+				String uid = uuid.toString().split("-")[0]; // 8자리 uuid
+
+				// 로컬 저장소의 업로드 폴더
+				File upFolder = new File(req.getServletContext().getRealPath("upload"));
+				upFolder.mkdir(); // 폴더 생성
+
+				// 업로드 파일 객체
+				String origin = item.getName(); // 원본파일명
+				String stored = origin + "_" + uid; // 원본파일명_uid
+				File up = new File(upFolder, stored);
+
+				try {
+					item.write(up); // 실제 업로드(임시파일을 최종결과파일로 생성함)
+					item.delete(); // 임시파일을 삭제
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				// 업로드된 파일의 정보 저장
+				boardFile = new Qna_board_attachment();
+				boardFile.setOriginal_file_name(origin);
+				boardFile.setStored_file_name(stored);
+				boardFile.setFile_size((int) item.getSize());
+
+//				System.out.println("파일객체"+ boardFile);
+
+			} // if( !item.isFormField() ) end
+		} // while( iter.hasNext() ) end
+
+		// DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+
+		int board_no = mypageDao.getNextBoardno(conn);
+
+//		System.out.println("메소드이용보드넘버" +  board_no);
+
+		HttpSession session = req.getSession();
+
+		User_info user_info = ((User_info) session.getAttribute("user_info"));
+
+		int user_no = user_info.getUser_no();
+
+//		System.out.println("유저넘버"+user_no);
+
+//		System.out.println("보드넘버" + board_no );
+
+		// 게시글 정보가 있을 경우
+		if (board != null) {
+
+			board.setUser_no(user_no);
+//		System.out.println("보드유저넘버" + board);
+			board.setQna_board_no(board_no);
+//		System.out.println("보드보드넘버"+board_no);				
+
+			if (board.getQna_board_title() == null || "".equals(board.getQna_board_title())) {
+				board.setQna_board_title("(제목없음)");
+			}
+
+			if (mypageDao.insertQna(conn, board) > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		}
+
+		// 첨부파일 정보가 있을 경우
+		if (boardFile != null) {
+
+			int attach_no = mypageDao.getNextAttachno(conn);
+			boardFile.setAttach_no(attach_no);
+
+//			System.out.println("파일객체에넣을보드넘버" + board_no);
+
+			boardFile.setQna_board_no(board_no); // 게시글 번호 입력 (FK)
+//			System.out.println("파일에들어간" + board_no);
+
+			if (mypageDao.insertFile(conn, boardFile) > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		}
+
+	}
+
+	@Override
+	public Qna_board getBoardno(HttpServletRequest req) {
+
+		// boardno를 저장할 객체 생성
+		Qna_board boardno = new Qna_board();
+
+		// boardno 전달파라미터 검증 - null, ""
+		String param = req.getParameter("boardno");
+		if (param != null && !"".equals(param)) {
+
+			// boardno 전달파라미터 추출
+			boardno.setQna_board_no(Integer.parseInt(param));
+		}
+
+		System.out.println(boardno);
+		// 결과 객체 반환
+		return boardno;
+	}
+
+	@Override
+	public List<Qna_board> qnaBoardSelectAll(int user_no) {
+		return mypageDao.QnaBoardByUserno(JDBCTemplate.getConnection(), user_no);
+
+	}
+
+	@Override
+	public Qna_board view(Qna_board boardno) {
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		Qna_board qna_board = mypageDao.selectQnaBoardByBoardno(conn, boardno);
+		System.out.println("큐엔에이보드서비스임플" + qna_board);
+
+		return qna_board;
+	}
+
+	@Override
+	public Qna_board_attachment viewFile(Qna_board viewBoard) {
+
+		return mypageDao.selectFile(JDBCTemplate.getConnection(), viewBoard);
+
+	}
+
+	@Override
+	public void deleteQna(Qna_board board) {
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		if (mypageDao.deleteFile(conn, board) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+		if (mypageDao.delete(conn, board) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+	}
+
+	@Override
+	public void updateQna(HttpServletRequest req) {
+		// 게시글 정보 DTO 객체
+		Qna_board board = null;
+
+		// 첨부파일 정보 DTO 객체
+		Qna_board_attachment boardFile = null;
+
+		// 파일업로드 형태의 데이터가 맞는지 검사
+		boolean isMultipart = false;
+		isMultipart = ServletFileUpload.isMultipartContent(req);
+
+		if (!isMultipart) {
+			System.out.println("[ERROR] multipart/form-data 형식이 아님");
+
+			return; // write() 메소드 중단
+		}
+
+		// 게시글 정보를 저장할 DTO객체 생성
+		board = new Qna_board();
+
+		// 디스크기반 아이템 팩토리
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+
+		// 메모리 처리 사이즈 지정
+		factory.setSizeThreshold(1 * 1024 * 1024); // 1MB
+
+		// 임시 저장소 설정
+		File repository = new File(req.getServletContext().getRealPath("tmp"));
+		repository.mkdir(); // 임시 저장소 폴더 생성
+		factory.setRepository(repository); // 임시 저장소 폴더 지정
+
+		// 파일업로드 객체 생성
+		ServletFileUpload upload = new ServletFileUpload(factory);
+
+		// 업로드 용량 제한
+		upload.setFileSizeMax(10 * 1024 * 1024); // 10MB
+
+		// 전달 데이터 파싱
+		List<FileItem> items = null;
+		try {
+			items = upload.parseRequest(req);
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		}
+
+		// 파싱된 전달파라미터를 처리할 반복자
+		Iterator<FileItem> iter = items.iterator();
+
+		while (iter.hasNext()) { // 모든 요청 정보 처리
+			FileItem item = iter.next();
+
+			// --- 1) 빈 파일에 대한 처리 ---
+			if (item.getSize() <= 0) {
+				continue; // 빈 파일은 무시하고 다음 FileItem처리로 넘긴다
+			}
+
+			// --- 2) form-data에 대한 처리 ---
+			if (item.isFormField()) {
+				// 키 추출하기
+				String key = item.getFieldName();
+
+				// 값 추출하기
+				String value = null;
+				try {
+					value = item.getString("UTF-8");
+				} catch (UnsupportedEncodingException e1) {
+					e1.printStackTrace();
+				}
+
+				// 키(name)에 따라서 value저장하기
+
+				if ("boardno".equals(key)) {
+					board.setQna_board_no(Integer.parseInt(value));
+				} else if ("title".equals(key)) {
+					board.setQna_board_title(value);
+				} else if ("content".equals(key)) {
+					board.setQna_board_content(value);
+				}
+
+			} // if( item.isFormField() ) end
+
+			// --- 3) 파일에 대한 처리 ---
+			if (!item.isFormField()) {
+
+				// UUID 생성
+				UUID uuid = UUID.randomUUID(); // 랜덤 UUID
+				String uid = uuid.toString().split("-")[0]; // 8자리 uuid
+
+				// 로컬 저장소의 업로드 폴더
+				File upFolder = new File(req.getServletContext().getRealPath("upload"));
+				upFolder.mkdir(); // 폴더 생성
+
+				// 업로드 파일 객체
+				String origin = item.getName(); // 원본파일명
+				String stored = origin + "_" + uid; // 원본파일명_uid
+				File up = new File(upFolder, stored);
+
+				try {
+					item.write(up); // 실제 업로드(임시파일을 최종결과파일로 생성함)
+					item.delete(); // 임시파일을 삭제
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				// 업로드된 파일의 정보 저장
+				boardFile = new Qna_board_attachment();
+				boardFile.setOriginal_file_name(origin);
+				boardFile.setStored_file_name(stored);
+				boardFile.setFile_size((int) item.getSize());
+
+			} // if( !item.isFormField() ) end
+		} // while( iter.hasNext() ) end
+
+		// DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+
+		HttpSession session = req.getSession();
+
+		User_info user_info = ((User_info) session.getAttribute("user_info"));
+
+		int user_no = user_info.getUser_no();
+
+		// 게시글 정보가 있을 경우
+		if (board != null) {
+
+			if (board.getQna_board_title() == null || "".equals(board.getQna_board_title())) {
+				board.setQna_board_title("(제목없음)");
+			}
+
+			if (mypageDao.update(conn, board) > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		}
+
+		// 첨부파일 정보가 있을 경우
+		if (boardFile != null) {
+
+			int attach_no = mypageDao.getNextAttachno(conn);
+			boardFile.setAttach_no(attach_no);
+			boardFile.setQna_board_no(board.getQna_board_no()); // 게시글 번호 입력 (FK)
+			if (mypageDao.insertFile(conn, boardFile) > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		}
+
 	}
 
 }// class

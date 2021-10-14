@@ -15,6 +15,8 @@ import dto.Custom_reply;
 import dto.Free_board;
 import dto.Free_board_reply;
 import dto.Official_reply;
+import dto.Qna_board;
+import dto.Qna_board_attachment;
 import dto.User_info;
 
 public class MypageDaoImpl implements MypageDao {
@@ -185,131 +187,6 @@ public class MypageDaoImpl implements MypageDao {
 		return res;
 	}
 
-//	@Override
-//	public int insertFile(Connection conn, Attachment attachment) {
-//		String sql = "";
-//		sql += "INSERT INTO attachment( attach_no, original_file_name, stored_file_name, file_size, file_date)";
-//		
-//		if( attachment.getAttach_no() != 0 ) { //attach_no 가 매개변수에 존재할 경우 그 값 활용하여 처리
-//			sql += " VALUES( "+ attachment.getAttach_no() +", ?, ?, ?, sysdate )";
-//		} else if ( attachment.getAttach_no() == 0 ) { //attach_no가 없을경우 시퀀스를 이용한 nextval 처리
-//			sql += " VALUES( attachment_seq.nextval, ?, ?, ?, sysdate )";
-//		}
-//
-//		int res = 0;
-//
-//		try {
-//			ps = conn.prepareStatement(sql);
-//
-//			ps.setString(1, attachment.getOriginal_file_name());
-//			ps.setString(2, attachment.getStored_file_name());
-//			ps.setInt(3, attachment.getFile_size());
-//
-//			res = ps.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(ps);
-//		}
-//
-//		return res;
-//	}
-//
-//	@Override
-//	public Attachment getByAttach_no(Connection conn, int attach_no) {
-//
-//		String sql = "";
-//		sql += "SELECT * FROM attachment";
-//		sql += " WHERE attach_no = ?";
-//		sql += " ORDER BY attach_no";
-//
-//		Attachment attachment = null;
-//
-//		try {
-//			ps = conn.prepareStatement(sql);
-//
-//			ps.setInt(1, attach_no);
-//
-//			rs = ps.executeQuery();
-//
-//			while (rs.next()) {
-//				attachment = new Attachment();
-//
-//				attachment.setAttach_no( rs.getInt("attach_no") );
-//				attachment.setBoard_type( rs.getString("board_type") );
-//				attachment.setBoard_no( rs.getInt("board_no") );
-//				attachment.setOriginal_file_name( rs.getString("original_file_name") );
-//				attachment.setStored_file_name( rs.getString("stored_file_name") );
-//				attachment.setFile_size( rs.getInt("file_size") );
-//				attachment.setFile_date( rs.getDate("file_date") );
-//			}
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(rs);
-//			JDBCTemplate.close(ps);
-//		}
-//
-//		return attachment;
-//	}
-//
-//	@Override
-//	public int updateProfile(Connection conn, User_info user_info, Attachment attachment) {
-//
-//		String sql = "";
-//		sql += "update user_info";
-//		sql += " set attach_no = ?";
-//		sql += " where user_no = ? ";
-//
-//		// DB 객체
-//		PreparedStatement ps = null;
-//
-//		int res = -1;
-//
-//		try {
-//			// DB작업
-//			ps = conn.prepareStatement(sql);
-//			ps.setInt(1, attachment.getAttach_no());
-//			ps.setInt(2, user_info.getUser_no());
-//
-//			res = ps.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//
-//		} finally {
-//			JDBCTemplate.close(ps);
-//		}
-//
-//		return res;
-//	}
-//	@Override
-//	public int getNextAttachNo(Connection conn) {
-//		
-//		String sql = "";
-//		sql += "SELECT attachment_seq.nextval FROM dual";
-//		
-//		int attachNo = 0;
-//		
-//		try {
-//			ps = conn.prepareStatement(sql);
-//			rs = ps.executeQuery();
-//			rs.next();
-//
-//			attachNo = rs.getInt(1);
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(rs);
-//			JDBCTemplate.close(ps);
-//		}
-//		
-//		return attachNo;
-//	}
-
 	@Override
 	public User_info selectUserInfoByUserNo(Connection conn, int user_no) {
 
@@ -454,62 +331,6 @@ public class MypageDaoImpl implements MypageDao {
 		// 최종 결과 반환
 		return BoardList;
 	}
-
-//	
-//	@Override
-//	public List joinBoard(Connection conn, int user_no) {
-//		String sql = "";
-//		sql += "SELECT * FROM custom_board WHERE user_no = ? ";
-//		sql += " UNION";
-//		sql += " SELECT * FROM free_board WHERE user_no = ?";
-//		
-//		
-//		// 결과 저장할 Board객체
-//		List<Free_board> BoardList = new ArrayList<>();
-//
-//		try {
-//			ps = conn.prepareStatement(sql); // SQL수행 객체
-//
-//			ps.setInt(1, user_no); // 조회할 게시글 번호 적용
-//
-//			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
-//
-//			// 조회 결과 처리
-//			while (rs.next()) {
-//
-//				Free_board viewBoard = new Free_board();
-//
-//				viewBoard = new Free_board(); // 결과값 저장 객체
-//
-//				// 결과값 한 행 처리
-//				viewBoard.setFree_board_no(rs.getInt("free_board_no"));
-//				viewBoard.setBoard_type(rs.getString("board_type"));
-//				viewBoard.setUser_no(rs.getInt("user_no"));
-//				viewBoard.setAttach_no(rs.getInt("attach_no"));
-//				viewBoard.setFree_board_title(rs.getString("free_board_title"));
-//				viewBoard.setFree_board_content(rs.getString("free_board_content"));
-//				viewBoard.setFree_board_date(rs.getDate("free_board_date"));
-//				viewBoard.setFree_board_hit(rs.getInt("free_board_hit"));
-//				viewBoard.setFree_board_vote(rs.getInt("free_board_vote"));
-//
-//				BoardList.add(viewBoard);
-//
-//			}
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			// DB객체 닫기
-//			JDBCTemplate.close(rs);
-//			JDBCTemplate.close(ps);
-//		}
-//
-//		// 최종 결과 반환
-//		return BoardList;
-//		
-//		return ;
-//	}
-//	
 
 	@Override
 	public Attachment_profile getByUser_no(Connection conn, int user_no) {
@@ -849,8 +670,6 @@ public class MypageDaoImpl implements MypageDao {
 //		// 최종 결과 반환
 //		return result;
 //	}
-	
-	
 
 	@Override
 	public User_info unregsterUserInfoByUserNo(Connection conn, int user_no) {
@@ -897,6 +716,364 @@ public class MypageDaoImpl implements MypageDao {
 		return result;
 	}
 
+	@Override
+	public int insertQna(Connection conn, Qna_board qna_board) {
+		// 다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "INSERT INTO qna_board(qna_board_no, user_no, qna_board_title, qna_board_content, qna_board_date)";
+		sql += " VALUES (?, ?, ?, ?, sysdate)";
+
+//		sql += " VALUES (board_seq.nextval, ?, ?, ?, 0)";
+
+		int res = 0;
+
+		try {
+			// DB작업
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, qna_board.getQna_board_no());
+			ps.setInt(2, qna_board.getUser_no());
+			ps.setString(3, qna_board.getQna_board_title());
+			ps.setString(4, qna_board.getQna_board_content());
+
+			res = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+
+		return res;
+	}
+
+	@Override
+	public int insertFile(Connection conn, Qna_board_attachment qna_board_attachment) {
+
+		String sql = "";
+		sql += "INSERT INTO qna_board_attachment( attach_no, qna_board_no, original_file_name, stored_file_name, file_size, file_date )";
+		sql += " VALUES( ?, ?, ?, ?, ?, sysdate )";
+
+		int res = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, qna_board_attachment.getAttach_no());
+			ps.setInt(2, qna_board_attachment.getQna_board_no());
+			ps.setString(3, qna_board_attachment.getOriginal_file_name());
+			ps.setString(4, qna_board_attachment.getStored_file_name());
+			ps.setInt(5, qna_board_attachment.getFile_size());
+
+			res = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+
+		return res;
+	}
+
+	@Override
+	public int getNextBoardno(Connection conn) {
+
+		String sql = "";
+		sql += "SELECT qna_board_seq.nextval FROM dual";
+
+		int qna_board_no = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			rs.next();
+
+			qna_board_no = rs.getInt(1);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		return qna_board_no;
+	}
+
+	@Override
+	public int getNextAttachno(Connection conn) {
+		String sql = "";
+		sql += "SELECT qna_board_attachment_seq.nextval FROM dual";
+
+		int attach_no = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			rs.next();
+
+			attach_no = rs.getInt(1);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		return attach_no;
+	}
+
+	@Override
+	public List<Qna_board> QnaBoardByUserno(Connection conn, int user_no) {
+
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM qna_board";
+		sql += " WHERE user_no = ?";
+		sql += " ORDER BY qna_board_no DESC";
+
+		// 결과 저장할 Board객체
+		List<Qna_board> BoardList = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setInt(1, user_no); // 조회할 게시글 번호 적용
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+
+				Qna_board viewBoard = new Qna_board();
+
+				viewBoard = new Qna_board(); // 결과값 저장 객체
+
+				// 결과값 한 행 처리
+				viewBoard.setQna_board_no(rs.getInt("qna_board_no"));
+				viewBoard.setUser_no(rs.getInt("user_no"));
+				viewBoard.setQna_board_title(rs.getString("qna_board_title"));
+				viewBoard.setQna_board_content(rs.getString("qna_board_content"));
+				viewBoard.setQna_board_date(rs.getDate("qna_board_date"));
+
+				BoardList.add(viewBoard);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return BoardList;
+	}
+
+	
+	@Override
+	public Qna_board selectQnaBoardByBoardno(Connection conn, Qna_board boardno) {
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM qna_board";
+		sql += " WHERE qna_board_no = ?";
+		
+		//결과 저장할 Board객체
+		Qna_board viewBoard = null;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			ps.setInt(1, boardno.getQna_board_no()); //조회할 게시글 번호 적용
+			
+			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
+			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
+			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
+			
+			rs = ps.executeQuery(); //SQL 수행 및 결과집합 저장
+			
+			//조회 결과 처리
+			while(rs.next()) {
+				viewBoard = new Qna_board(); //결과값 저장 객체
+				
+				//결과값 한 행 처리
+				viewBoard.setQna_board_no( rs.getInt("qna_board_no") );
+				System.out.println(rs.getInt("qna_board_no"));
+				viewBoard.setUser_no( rs.getInt("user_no") );
+				System.out.println(rs.getInt("user_no"));
+				viewBoard.setQna_board_title( rs.getString("qna_board_title") );
+				viewBoard.setQna_board_content( rs.getString("qna_board_content") );
+				viewBoard.setQna_board_date( rs.getDate("qna_board_date") );
+
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		//최종 결과 반환
+		System.out.println(viewBoard);
+		return viewBoard;
+	}
+	
+	
+	@Override
+	public Qna_board_attachment selectFile(Connection conn, Qna_board viewBoard) {
+		
+		String sql = "";
+		sql += "SELECT * FROM qna_board_attachment";
+		sql += " WHERE qna_board_no = ?";
+		sql += " ORDER BY attach_no";
+
+		Qna_board_attachment boardFile = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, viewBoard.getQna_board_no());
+			
+			System.out.println(viewBoard.getQna_board_no());
+			System.out.println(viewBoard.getQna_board_no());
+			System.out.println(viewBoard.getQna_board_no());
+			
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				boardFile = new Qna_board_attachment();
+				
+				boardFile.setAttach_no( rs.getInt("attach_no") );
+				System.out.println(rs.getInt("attach_no"));
+				System.out.println("파일넘버"+rs.getInt("attach_no"));
+				boardFile.setQna_board_no( rs.getInt("qna_board_no") );
+				System.out.println("디에이오보드넘버"+( rs.getInt("qna_board_no")));
+				boardFile.setOriginal_file_name( rs.getString("original_file_name") );
+				boardFile.setStored_file_name( rs.getString("stored_file_name") );
+				boardFile.setFile_size( rs.getInt("file_size") );
+				boardFile.setFile_date( rs.getDate("file_date") );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+				
+		System.out.println( "보드파일" + boardFile);
+		return boardFile;
+	}
+	
+	
+	@Override
+	public int delete(Connection conn, Qna_board board) {
+		//다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "DELETE qna_board";
+		sql += " WHERE qna_board_no = ?";
+		
+		//DB 객체
+		PreparedStatement ps = null; 
+		
+		int res = -1;
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board.getQna_board_no());
+
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public int deleteFile(Connection conn, Qna_board board) {
+		//다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "DELETE qna_board_attachment";
+		sql += " WHERE qna_board_no = ?";
+		
+		//DB 객체
+		PreparedStatement ps = null; 
+		
+		int res = -1;
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board.getQna_board_no());
+
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
+	
+	@Override
+	public int update(Connection conn, Qna_board board) {
+		//다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "UPDATE qna_board";
+		sql += " SET qna_board_title = ?,";
+		sql += " 	qna_board_content = ?";
+		sql += " WHERE qna_board_no = ?";
+		
+		//DB 객체
+		PreparedStatement ps = null; 
+		
+		int res = -1;
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, board.getQna_board_title());
+			ps.setString(2, board.getQna_board_content());
+			ps.setInt(3, board.getQna_board_no());
+
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 //	@Override
 //	public int deleteFile(Connection conn, int user_no) {
 //
@@ -929,4 +1106,8 @@ public class MypageDaoImpl implements MypageDao {
 //		return res;
 //	}
 
+
+	
+	
+	
 }// class
