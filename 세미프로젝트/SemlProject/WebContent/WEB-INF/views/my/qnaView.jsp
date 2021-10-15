@@ -20,6 +20,67 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<style>
+.popupOpen {
+	cursor: pointer;
+}
+
+.popupWrap {
+	z-index: 99999;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.popupWrap .popup {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: -200px;
+	width: 400px;
+	height: 400px;
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 0 10px;
+}
+
+.popupWrap div textarea {
+	width: 100%;
+	padding: 0;
+}
+
+.popupWrap div .title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.popupWrap div .title p {
+	line-height: 50px;
+	margin: 0;
+}
+
+.hide {
+	display: none;
+}
+
+.btnWrap {
+	text-align: right;
+}
+
+.btnWrap button {
+	border-radius: 5px;
+	background-color: rgb(104, 122, 204);
+	color: #fff;
+	border: none;
+	padding: 10px;
+}
+</style>
+
 
 
 <script type="text/javascript">
@@ -52,6 +113,11 @@ $(document).ready(function() {
 <hr>
 
 <table class="table table-bordered">
+<tr>
+	<td class="info">닉네임</td><td colspan="3" class="popupOpen">${user_info.user_nickname }</td>
+</tr>
+
+
 <tr>
 <td class="info">글번호</td><td colspan="3">${viewBoard.qna_board_no }</td>
 </tr>
@@ -89,7 +155,49 @@ $(document).ready(function() {
 	<button id="btnDelete" class="btn btn-danger">삭제</button>
 </div>
 
+
+		<div>
+
+			<div class="popupWrap hide">
+				<form action="/message/test" method="get">
+					<div class="popup">
+						<div class="title">
+							<p>${user_info.user_nickname }</p>
+							<span class="close">❌</span>
+						</div>
+						<textarea name="message" id="message" cols="30" rows="10"></textarea>
+						<div class="btnWrap">
+							<button>보내기</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 </div>
+
+
+
+
+
+
+
+
+
+	<script>
+		$('.popupOpen').on('click', function() {
+			$('.popupWrap').removeClass('hide');
+		});
+		$('.close').on('click', function() {
+			$(this).parents('.popupWrap').addClass('hide');
+			$(this).parents('.popup').children('textarea').val('');
+		});
+	
+		$(".btnWrap").click(function() {
+			$(location).attr("href", "/message/test?boardno=${viewBoard.qna_board_no }");
+		});
+		
+		</script>
+
 
 
 

@@ -427,6 +427,9 @@ public class MypageDaoImpl implements MypageDao {
 	@Override
 	public int updateProfile(Connection conn, User_info user_info, Attachment_profile attachment_profile) {
 
+		System.out.println("MypageDao updateProfile() - " + user_info);
+		System.out.println("MypageDao updateProfile() - " + attachment_profile);
+		
 		String sql = "";
 		sql += "update attachment_profile";
 		sql += " set profile_name = ? ";
@@ -1176,4 +1179,52 @@ public class MypageDaoImpl implements MypageDao {
 
 	}
 
+	
+	@Override
+	public Qna_board QnaBoardInstanceByUserno(Connection conn, int user_no) {
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM qna_board";
+		sql += " WHERE user_no = ?";
+		sql += " ORDER BY qna_board_no DESC";
+
+		// 결과 저장할 Board객체
+		Qna_board qna_board = new Qna_board();
+	
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setInt(1, user_no); // 조회할 게시글 번호 적용
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+
+				// 결과값 한 행 처리
+				qna_board.setQna_board_no(rs.getInt("qna_board_no"));
+				qna_board.setUser_no(rs.getInt("user_no"));
+				qna_board.setQna_board_title(rs.getString("qna_board_title"));
+				qna_board.setQna_board_content(rs.getString("qna_board_content"));
+				qna_board.setQna_board_date(rs.getDate("qna_board_date"));
+
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return qna_board;
+	}
+	
+	
+	
+	
 }// class

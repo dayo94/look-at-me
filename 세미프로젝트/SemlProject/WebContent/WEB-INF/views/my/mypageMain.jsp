@@ -101,11 +101,11 @@ ul {
 				<li><c:if test="${empty login or not login }">
 						<strong>로그인이 필요합니다</strong>
 						<br>
-						<button onclick='location.href="/login";'>로그인</button>
+						<button onclick='location.href="/mypage/login";'>로그인</button>
 					</c:if> <c:if test="${not empty login and login }">
 						<strong>${user_info.user_nickname }님, 환영합니다</strong>
 						<br>
-						<button onclick='location.href="/logout";'>로그아웃</button>
+						<button onclick='location.href="/mypage/logout";'>로그아웃</button>
 					</c:if></li>
 			</ul>
 		</div>
@@ -115,23 +115,23 @@ ul {
 				<li>
 					<h4>프로필 설정</h4>
 					<p>
-						<a href="/update">프로필 관리</a>
+						<a href="/mypage/update">프로필 관리</a>
 					</p>
 
 				</li>
 				<li>
 					<h4>나의 활동</h4>
 					<p>
-						<a href="/board/list">내가 쓴 게시글</a>
+						<a href="/mypage/board/list">내가 쓴 게시글</a>
 					</p>
 					<p>
-						<a href="/reply/list">내가 쓴 댓글</a>
+						<a href="/mypage/reply/list">내가 쓴 댓글</a>
 					</p>
 				</li>
 				<li>
 					<h4>활동 포인트 조회</h4>
 					<p>
-						<a href="">나의 활동 포인트</a>
+						<a href="/mypage/test">나의 활동 포인트</a>
 					</p>
 				</li>
 				<li>
@@ -146,10 +146,10 @@ ul {
 				<li>
 					<h4>쪽지 확인</h4>
 					<p>
-						<a href="">받은 쪽지 확인</a>
+						<a href="/mypage/sendmessage">보낸 쪽지 확인</a>
 					</p>
 					<p>
-						<a href="">보낸 쪽지 확인</a>
+						<a href="/mypage/recmessage">받은 쪽지 확인</a>
 					</p>
 				</li>
 				<li>
@@ -163,7 +163,7 @@ ul {
 				</li>
 				<li>
 					<h4>
-						<a href="/unregister">회원 탈퇴</a>
+						<a href="/mypage/unregister">회원 탈퇴</a>
 					</h4>
 				</li>
 				<!-- li 형식 반복 -->
@@ -183,7 +183,7 @@ ul {
 					<span>${user_info.user_nickname }</span>
 				</p>
 				<button type="button">
-					<a href="/update">내 정보 수정하기</a>
+					<a href="/mypage/update">내 정보 수정하기</a>
 				</button>
 				<!-- 페이지 이동이면 <a><span>내 정보 수정하기</span></a> -->
 			</div>

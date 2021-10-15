@@ -80,7 +80,7 @@ span {
 					src="https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20211001_182%2F1633066482259uo9kQ_JPEG%2F34202317086291954_1790555242.jpg&type=sc960_832"
 					alt="관리자" /></li>
 				<li><strong>관리자</strong> <br>
-					<button onclick='location.href="/logout";'>로그아웃</button></li>
+					<button onclick='location.href="/mypage/logout";'>로그아웃</button></li>
 			</ul>
 		</div>
 

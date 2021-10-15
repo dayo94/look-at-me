@@ -18,7 +18,7 @@ import service.impl.MypageServiceImpl;
 /**
  * Servlet implementation class MypageController
  */
-@WebServlet("/main")
+@WebServlet("/mypage/main")
 public class MypageMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,42 +27,39 @@ public class MypageMainController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// 전달파라미터 얻기 - 로그인 정보
-		User_info UserInfo = mypageService.getLoginUser_info(req);
 
-		// 로그인 인증
-		boolean login = mypageService.login(UserInfo);
-
+		if( req.getSession().getAttribute("login") == null ) {
+			resp.sendRedirect("/mypage/login");
+			return;
+		}
+		
+		//로그인 인증 상태
+		boolean login = (boolean)req.getSession().getAttribute("login");
+		
+//		System.out.println("/main - login : " + login);
+		
 		if (login) {
-
-//			User_info userInfo = mypageService.getUser_no(req);
-//
-//			int user_no = userInfo.getUser_no();
-//
-//			User_info user_info = mypageService.getUserInfo(user_no);
-//
-//			req.setAttribute("user_info", user_info);
-//
-//			Attachment_profile attachmentFile = mypageService.getFile(user_no);
-//
-//			System.out.println(attachmentFile.getProfile_name());
-//			
-//			req.setAttribute("attachmentFile", attachmentFile);
-//			mypageService.update(req);
 
 			HttpSession session = req.getSession();
 			User_info userInfo = (User_info) session.getAttribute("user_info");
+			
+//			System.out.println("/main - " + userInfo);
+			
 			int user_no = userInfo.getUser_no();
 
 			User_info user_info = mypageService.getUserInfo(user_no);
 
+//			System.out.println("MyPageMainController - " + user_info);
 			req.setAttribute("user_info", user_info);
 
 			Attachment_profile attachmentFile = mypageService.getFile(user_no);
 
+//			System.out.println("MyPageMainController - " + attachmentFile);
 			req.setAttribute("attachmentFile", attachmentFile);
+			
 
-		}
+		} 
+			
 
 		// 전달파라미터 얻기 - 로그인 정보
 		User_admin user_admin = mypageService.getLoginAdmin_info(req);
@@ -77,7 +74,7 @@ public class MypageMainController extends HttpServlet {
 			session.setAttribute("loginAdmin", loginAdmin);
 		}
 		
-		req.getRequestDispatcher("/WEB-INF/my/main.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/mypageMain.jsp").forward(req, resp);
 
 	}
 

@@ -38,7 +38,7 @@ public class MypageQnaUpdateController extends HttpServlet {
 		
 
 		
-		req.getRequestDispatcher("/WEB-INF/my/qnaUpdate.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/qnaUpdate.jsp").forward(req, resp);
 
 	}
 

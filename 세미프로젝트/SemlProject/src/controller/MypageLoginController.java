@@ -18,7 +18,7 @@ import service.impl.MypageServiceImpl;
 /**
  * Servlet implementation class MypageLoginController
  */
-@WebServlet("/login")
+@WebServlet("/mypage/login")
 public class MypageLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class MypageLoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		
-		req.getRequestDispatcher("/WEB-INF/my/login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/mypageLogin.jsp").forward(req, resp);
 
 	}
 
@@ -64,7 +64,7 @@ public class MypageLoginController extends HttpServlet {
 
 			session.setMaxInactiveInterval(60 * 30);
 
-			resp.sendRedirect("/main");
+			resp.sendRedirect("/mypage/main");
 		}
 
 		// 전달파라미터 얻기 - 로그인 정보
@@ -79,7 +79,7 @@ public class MypageLoginController extends HttpServlet {
 
 			session.setAttribute("loginAdmin", loginAdmin);
 			
-			resp.sendRedirect("/main/admin");
+			resp.sendRedirect("/mypage/main/admin");
 
 		}		
 		

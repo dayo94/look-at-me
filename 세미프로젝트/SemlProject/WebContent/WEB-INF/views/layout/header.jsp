@@ -7,10 +7,6 @@
 <meta charset="EUC-KR">
 <title>오늘 뭐 마시지 - </title>
 
-<!-- jQuery 2.2.4 -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">

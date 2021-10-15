@@ -17,7 +17,7 @@ import service.impl.MypageServiceImpl;
 /**
  * Servlet implementation class MypageUpdate
  */
-@WebServlet("/update")
+@WebServlet("/mypage/update")
 public class MypageUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,29 +40,16 @@ public class MypageUpdateController extends HttpServlet {
 
 		req.setAttribute("attachmentFile", attachmentFile);
 
-		req.getRequestDispatcher("/WEB-INF/my/update.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/mypageUpdate.jsp").forward(req, resp);
 
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		User_info userInfo = mypageService.update(req);
+		mypageService.update(req);
 
-
-		int user_no = userInfo.getUser_no();
-
-		User_info user_info = mypageService.getUserInfo(user_no);
-
-		req.setAttribute("user_info", user_info);
-
-		Attachment_profile attachmentFile = mypageService.getFile(user_no);
-
-		req.setAttribute("attachmentFile", attachmentFile);
-
-		req.getRequestDispatcher("/WEB-INF/my/main.jsp").forward(req, resp);
-
-//		resp.sendRedirect("/main");
+		resp.sendRedirect("/mypage/main");
 
 	}
 

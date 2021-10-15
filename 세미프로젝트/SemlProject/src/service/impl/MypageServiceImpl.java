@@ -129,8 +129,9 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDao.officialReplyByUserno(JDBCTemplate.getConnection(), user_no);
 	}
 
+	
 	@Override
-	public User_info update(HttpServletRequest req) {
+	public void update(HttpServletRequest req) {
 
 //		// 유저정보 DTO객체
 		User_info user_info = null;
@@ -263,10 +264,17 @@ public class MypageServiceImpl implements MypageService {
 			}
 
 		}
-		return user_info;
+//		return user_info;
 
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void unregister(User_info user_info, String password) {
 
@@ -714,6 +722,22 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDao.selectAllQna(JDBCTemplate.getConnection());
 		
 	}
+	
+	
+	@Override
+	public Qna_board qnaBoardByuserno(int user_no) {
+		Qna_board qna_board = mypageDao.QnaBoardInstanceByUserno(JDBCTemplate.getConnection(), user_no);
+		return qna_board;
+	}
+	
+	
+	
+	@Override
+	public Qna_board qnaBoardByBoardno(Qna_board qna_board) {
+		Qna_board qnaBoard = mypageDao.selectQnaBoardByBoardno(JDBCTemplate.getConnection(),qna_board);
+		return qnaBoard;
+	}
+	
 	
 	
 	

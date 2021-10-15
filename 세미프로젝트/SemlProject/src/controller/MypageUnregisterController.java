@@ -16,7 +16,7 @@ import service.impl.MypageServiceImpl;
 /**
  * Servlet implementation class MypageUnregisterController
  */
-@WebServlet("/unregister")
+@WebServlet("/mypage/unregister")
 public class MypageUnregisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class MypageUnregisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		req.getRequestDispatcher("/WEB-INF/my/unregister.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/mypageUnregister.jsp").forward(req, resp);
 	}
 
 	@Override
@@ -46,19 +46,19 @@ public class MypageUnregisterController extends HttpServlet {
 		System.out.println(user_info);
 
 		mypageService.unregister(user_info, password);
+		
 
 		System.out.println(user_info);
 
-		if (user_info.getUser_email().equals(null)) {
+		if (user_info.getUser_email() == null ) {
 
 			// 세션 해제
 			req.getSession().invalidate();
 
-		}
-		;
+		};
 
 		// 메인페이지로 리다이렉트
-		resp.sendRedirect("/");
+		resp.sendRedirect("/mypage/main");
 
 	}
 

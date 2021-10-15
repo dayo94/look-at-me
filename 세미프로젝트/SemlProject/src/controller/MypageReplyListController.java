@@ -20,7 +20,7 @@ import service.impl.MypageServiceImpl;
 /**
  * Servlet implementation class MypageReplyListController
  */
-@WebServlet("/reply/list")
+@WebServlet("/mypage/reply/list")
 public class MypageReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,7 @@ public class MypageReplyListController extends HttpServlet {
 
 		session.setAttribute("officialReply", officialReply);
 
-		req.getRequestDispatcher("/WEB-INF/my/replyList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/mypageReplyList.jsp").forward(req, resp);
 
 	}
 

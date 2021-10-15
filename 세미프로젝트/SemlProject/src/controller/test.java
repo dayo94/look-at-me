@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,21 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MypageLogoutController
+ * Servlet implementation class test
  */
-@WebServlet("/mypage/logout")
-public class MypageLogoutController extends HttpServlet {
+@WebServlet("/test")
+public class test extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// 세션 해제
-		req.getSession().invalidate();
-
-		// 메인페이지로 리다이렉트
-		resp.sendRedirect("/mypage/main");
-
+		
+		req.getRequestDispatcher("/WEB-INF/views/my/test.jsp").forward(req, resp);
 	}
-
 }

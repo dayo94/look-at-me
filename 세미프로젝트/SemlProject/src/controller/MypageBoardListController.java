@@ -19,7 +19,7 @@ import service.impl.MypageServiceImpl;
 /**
  * Servlet implementation class MypageListController
  */
-@WebServlet("/board/list")
+@WebServlet("/mypage/board/list")
 public class MypageBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +46,7 @@ public class MypageBoardListController extends HttpServlet {
 
 		session.setAttribute("freeBoardList", freeBoardList);
 
-		req.getRequestDispatcher("/WEB-INF/my/writeList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/mypageWriteList.jsp").forward(req, resp);
 
 	}
 

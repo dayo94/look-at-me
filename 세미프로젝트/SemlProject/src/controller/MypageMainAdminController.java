@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MypageMainAdminController
  */
-@WebServlet("/main/admin")
+@WebServlet("/mypage/main/admin")
 public class MypageMainAdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -19,7 +19,7 @@ public class MypageMainAdminController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-		req.getRequestDispatcher("/WEB-INF/my/mainAdmin.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/mypageMainAdmin.jsp").forward(req, resp);
 }
 
 	

@@ -37,7 +37,7 @@ public class MypageQnaListController extends HttpServlet {
 
 		session.setAttribute("boardList", boardList);
 
-		req.getRequestDispatcher("/WEB-INF/my/qnaList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/qnaList.jsp").forward(req, resp);
 
 	}
 

@@ -200,9 +200,10 @@ public interface MypageDao {
 	 * @return Qna_board - 조회된 결과 객체
 	 */
 	public List<Qna_board> QnaBoardByUserno(Connection conn, int user_no);
-	
+
 	public Qna_board selectQnaBoardByBoardno(Connection conn, Qna_board boardno);
-	
+
+	public Qna_board QnaBoardInstanceByUserno(Connection conn, int user_no);
 
 	/**
 	 * 첨부파일 조회
@@ -212,10 +213,7 @@ public interface MypageDao {
 	 * @return Qna_board_attachment - 조회된 첨부파일
 	 */
 	public Qna_board_attachment selectFile(Connection conn, Qna_board viewBoard);
-	
-	
-	
-	
+
 	/**
 	 * 게시글 수정
 	 * 
@@ -236,20 +234,15 @@ public interface MypageDao {
 	 * @param board - 삭제할 게시글번호를 담은 객체
 	 */
 	public int deleteFile(Connection conn, Qna_board board);
-	
-	
-	
-	
+
 	/**
 	 * 관리자 아이디로 로그인했는지 확인한다
 	 * 
-	 * @param User_admin 
+	 * @param User_admin
 	 * @return int - 1(존재하는 관리자), 0(존재하지 않는 관리자), -1(에러)
 	 */
 	public int loginAdmin(Connection conn, User_admin user_admin);
 
-
-	
 	/**
 	 * Qna_board테이블 전체 조회
 	 * 
@@ -260,5 +253,5 @@ public interface MypageDao {
 	
 	
 	
-	
+
 }// class

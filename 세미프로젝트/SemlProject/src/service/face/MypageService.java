@@ -61,7 +61,7 @@ public interface MypageService {
 	 * 
 	 * @param req - 요청 정보 객체
 	 */
-	public User_info update(HttpServletRequest req);
+	public void update(HttpServletRequest req);
 
 	/**
 	 * 
@@ -202,6 +202,11 @@ public interface MypageService {
 	 */
 	public List<Qna_board> getListQnaBoard();
 	
+	
+	public Qna_board qnaBoardByuserno(int user_no);
+	
+	
+	public Qna_board qnaBoardByBoardno(Qna_board qna_board);
 	
 	
 }
