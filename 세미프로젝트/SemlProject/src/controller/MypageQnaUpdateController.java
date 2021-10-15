@@ -26,6 +26,7 @@ public class MypageQnaUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		
+		
 		Qna_board boardno = mypageService.getBoardno(req);
 		
 		Qna_board updateBoard = mypageService.view(boardno);

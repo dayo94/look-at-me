@@ -41,15 +41,11 @@ public class MypageMainController extends HttpServlet {
 		if (login) {
 
 			HttpSession session = req.getSession();
-			User_info userInfo = (User_info) session.getAttribute("user_info");
 			
-//			System.out.println("/main - " + userInfo);
-			
-			int user_no = userInfo.getUser_no();
+			int user_no = (int)session.getAttribute("user_no");
 
 			User_info user_info = mypageService.getUserInfo(user_no);
 
-//			System.out.println("MyPageMainController - " + user_info);
 			req.setAttribute("user_info", user_info);
 
 			Attachment_profile attachmentFile = mypageService.getFile(user_no);

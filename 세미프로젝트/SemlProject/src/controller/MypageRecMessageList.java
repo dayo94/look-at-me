@@ -10,17 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dto.Custom_board;
-import dto.Free_board;
+import dto.Message;
 import dto.User_info;
 import service.face.MypageService;
 import service.impl.MypageServiceImpl;
 
 /**
- * Servlet implementation class MypageListController
+ * Servlet implementation class MypageRecMessageList
  */
-@WebServlet("/mypage/board/list")
-public class MypageBoardListController extends HttpServlet {
+@WebServlet("/mypage/recmessage")
+public class MypageRecMessageList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private MypageService mypageService = new MypageServiceImpl();
@@ -28,24 +27,15 @@ public class MypageBoardListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
 		HttpSession session = req.getSession();
-	
-		int user_no = (int)session.getAttribute("user_no");
-		
-		List<Custom_board> customBoardList = mypageService.customBoardSelectAll(user_no);
 
-		System.out.println(customBoardList);
+		int user_no = (int) session.getAttribute("user_no");
 
-		session.setAttribute("customBoardList", customBoardList);
+		List<Message> message = mypageService.recMessageSelect(user_no);
 
-		List<Free_board> freeBoardList = mypageService.freeBoardSelectAll(user_no);
+		session.setAttribute("message", message);
 
-		System.out.println(freeBoardList);
-
-		session.setAttribute("freeBoardList", freeBoardList);
-
-		req.getRequestDispatcher("/WEB-INF/views/my/mypageWriteList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/my/mypageRecMessageList.jsp").forward(req, resp);
 
 	}
 

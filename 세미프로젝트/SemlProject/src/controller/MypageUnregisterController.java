@@ -36,10 +36,8 @@ public class MypageUnregisterController extends HttpServlet {
 		System.out.println(password);
 
 		HttpSession session = req.getSession();
-
-		User_info userInfo = (User_info) session.getAttribute("user_info");
-
-		int user_no = userInfo.getUser_no();
+		
+		int user_no = (int)session.getAttribute("user_no");
 
 		User_info user_info = mypageService.getUserInfoAll(user_no);
 

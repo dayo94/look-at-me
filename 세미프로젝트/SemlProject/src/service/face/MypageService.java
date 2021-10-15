@@ -9,6 +9,7 @@ import dto.Custom_board;
 import dto.Custom_reply;
 import dto.Free_board;
 import dto.Free_board_reply;
+import dto.Message;
 import dto.Official_reply;
 import dto.Qna_board;
 import dto.Qna_board_attachment;
@@ -202,11 +203,62 @@ public interface MypageService {
 	 */
 	public List<Qna_board> getListQnaBoard();
 	
-	
+	/**
+	 * 
+	 * @param user_no 유저번호로 문의글찾기
+	 * @return Qna_board
+	 */
 	public Qna_board qnaBoardByuserno(int user_no);
 	
-	
+	/**
+	 * 
+	 * @param qna_board - 보드넘버만잇는객체로 객체조회
+	 * @return
+	 */
 	public Qna_board qnaBoardByBoardno(Qna_board qna_board);
+	
+
+	
+	/**
+	 * 
+	 * @param boardno 보드넘버로 객체조회
+	 * @return Qna_board
+	 */
+	public Qna_board qnaBoardByBoardno(int boardno);
+	
+	
+	
+	/**
+	 * DB에 삽입
+	 *  
+	 * @param req
+	 * @param qna_board
+	 * @param user_no
+	 */ 
+	public void insertMessage(HttpServletRequest req, Qna_board qna_board, int user_no );
+
+	
+	
+	
+	
+	/**
+	 * 내가 보낸 Message 전체 조회
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return List<Message> - user_no에 맞는 Message테이블 전체 조회 결과 리스트
+	 */
+	public List<Message> sendMessageSelect(int user_no);
+	
+	
+	/**
+	 * 내가 받은 Message 전체 조회
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return List<Message> - user_no에 맞는 Message테이블 전체 조회 결과 리스트
+	 */
+	public List<Message> recMessageSelect(int user_no);
+	
+	
 	
 	
 }

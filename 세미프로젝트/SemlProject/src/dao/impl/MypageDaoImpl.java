@@ -14,6 +14,7 @@ import dto.Custom_board;
 import dto.Custom_reply;
 import dto.Free_board;
 import dto.Free_board_reply;
+import dto.Message;
 import dto.Official_reply;
 import dto.Qna_board;
 import dto.Qna_board_attachment;
@@ -427,8 +428,6 @@ public class MypageDaoImpl implements MypageDao {
 	@Override
 	public int updateProfile(Connection conn, User_info user_info, Attachment_profile attachment_profile) {
 
-		System.out.println("MypageDao updateProfile() - " + user_info);
-		System.out.println("MypageDao updateProfile() - " + attachment_profile);
 		
 		String sql = "";
 		sql += "update attachment_profile";
@@ -894,10 +893,6 @@ public class MypageDaoImpl implements MypageDao {
 
 			ps.setInt(1, boardno.getQna_board_no()); // 조회할 게시글 번호 적용
 
-			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
-			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
-			System.out.println("디에이오셀렉트큐엔에이어쩌고보드넘버" + boardno.getQna_board_no());
-
 			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
 
 			// 조회 결과 처리
@@ -906,9 +901,7 @@ public class MypageDaoImpl implements MypageDao {
 
 				// 결과값 한 행 처리
 				viewBoard.setQna_board_no(rs.getInt("qna_board_no"));
-				System.out.println(rs.getInt("qna_board_no"));
 				viewBoard.setUser_no(rs.getInt("user_no"));
-				System.out.println(rs.getInt("user_no"));
 				viewBoard.setQna_board_title(rs.getString("qna_board_title"));
 				viewBoard.setQna_board_content(rs.getString("qna_board_content"));
 				viewBoard.setQna_board_date(rs.getDate("qna_board_date"));
@@ -924,7 +917,6 @@ public class MypageDaoImpl implements MypageDao {
 		}
 
 		// 최종 결과 반환
-		System.out.println(viewBoard);
 		return viewBoard;
 	}
 
@@ -943,20 +935,13 @@ public class MypageDaoImpl implements MypageDao {
 
 			ps.setInt(1, viewBoard.getQna_board_no());
 
-			System.out.println(viewBoard.getQna_board_no());
-			System.out.println(viewBoard.getQna_board_no());
-			System.out.println(viewBoard.getQna_board_no());
-
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				boardFile = new Qna_board_attachment();
 
 				boardFile.setAttach_no(rs.getInt("attach_no"));
-				System.out.println(rs.getInt("attach_no"));
-				System.out.println("파일넘버" + rs.getInt("attach_no"));
 				boardFile.setQna_board_no(rs.getInt("qna_board_no"));
-				System.out.println("디에이오보드넘버" + (rs.getInt("qna_board_no")));
 				boardFile.setOriginal_file_name(rs.getString("original_file_name"));
 				boardFile.setStored_file_name(rs.getString("stored_file_name"));
 				boardFile.setFile_size(rs.getInt("file_size"));
@@ -970,7 +955,6 @@ public class MypageDaoImpl implements MypageDao {
 			JDBCTemplate.close(ps);
 		}
 
-		System.out.println("보드파일" + boardFile);
 		return boardFile;
 	}
 
@@ -1223,6 +1207,167 @@ public class MypageDaoImpl implements MypageDao {
 		// 최종 결과 반환
 		return qna_board;
 	}
+	
+	
+	
+	@Override
+	public int insertMessage(Connection conn, Message message) {
+
+		
+		String sql = "";
+		sql += "insert into message(msg_no, msg_send, msg_rec, msg_content, msg_check, send_date)";
+		sql += " values (?, ?, ?, ?,'n', sysdate)";
+		
+		int res = 0;
+
+		try {
+			// DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, message.getMsg_no());
+			ps.setInt(2, message.getMsg_send());
+			ps.setInt(3, message.getMsg_rec());
+			ps.setString(4, message.getMsg_content());
+
+			res = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		return res;
+	
+	}
+
+	public int selectNextMessageNo(Connection conn) {
+		
+		String sql = "";
+		sql += "SELECT message_seq.nextval FROM dual";
+		
+		//결과 저장 변수
+		int nextMessageNo = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				nextMessageNo = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return nextMessageNo;
+	}
+	
+	
+	
+	@Override
+	public List<Message> recMessageByUserno(Connection conn, int user_no) {
+		// SQL 작성
+				String sql = "";
+				sql += "SELECT * FROM message";
+				sql += " WHERE msg_rec = ?";
+
+				// 결과 저장할 Board객체
+				List<Message> BoardList = new ArrayList<>();
+
+				try {
+					ps = conn.prepareStatement(sql); // SQL수행 객체
+
+					ps.setInt(1, user_no); // 조회할 게시글 번호 적용
+
+					rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+					// 조회 결과 처리
+					while (rs.next()) {
+
+						Message viewBoard = new Message();
+
+						viewBoard = new Message(); // 결과값 저장 객체
+
+						// 결과값 한 행 처리
+						viewBoard.setMsg_no(rs.getInt("msg_no"));
+						viewBoard.setMsg_send(rs.getInt("msg_send"));
+						viewBoard.setMsg_rec(rs.getInt("msg_rec"));
+						viewBoard.setMsg_content(rs.getString("msg_content"));
+						viewBoard.setSend_date(rs.getDate("send_date"));
+
+						BoardList.add(viewBoard);
+
+					}
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					// DB객체 닫기
+					JDBCTemplate.close(rs);
+					JDBCTemplate.close(ps);
+				}
+
+				// 최종 결과 반환
+				return BoardList;
+			}
+	
+	
+	
+	@Override
+	public List<Message> sendMessageByUserno(Connection conn, int user_no) {
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM message";
+		sql += " WHERE msg_send = ?";
+
+		// 결과 저장할 Board객체
+		List<Message> BoardList = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+
+			ps.setInt(1, user_no); // 조회할 게시글 번호 적용
+
+			rs = ps.executeQuery(); // SQL 수행 및 결과집합 저장
+
+			// 조회 결과 처리
+			while (rs.next()) {
+
+				Message viewBoard = new Message();
+
+				viewBoard = new Message(); // 결과값 저장 객체
+
+				// 결과값 한 행 처리
+				viewBoard.setMsg_no(rs.getInt("msg_no"));
+				viewBoard.setMsg_send(rs.getInt("msg_send"));
+				viewBoard.setMsg_rec(rs.getInt("msg_rec"));
+				viewBoard.setMsg_content(rs.getString("msg_content"));
+				viewBoard.setSend_date(rs.getDate("send_date"));
+
+				BoardList.add(viewBoard);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		// 최종 결과 반환
+		return BoardList;
+	}
+	
+	
+	
+	
 	
 	
 	

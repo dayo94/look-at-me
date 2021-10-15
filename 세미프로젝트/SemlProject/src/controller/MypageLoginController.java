@@ -47,14 +47,12 @@ public class MypageLoginController extends HttpServlet {
 
 			int user_no = user_info.getUser_no();
 
-			System.out.println(user_info);
-
 			// 세션정보 저장하기
 			HttpSession session = req.getSession();
 
 			session.setAttribute("login", login);
 
-			session.setAttribute("user_info", user_info);
+			session.setAttribute("user_no", user_no);
 
 			Attachment_profile attachmentFile = mypageService.getFile(user_no);
 

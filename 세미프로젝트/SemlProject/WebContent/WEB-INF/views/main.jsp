@@ -50,7 +50,7 @@
 						<li>
 							<div class="login">
 								<form>
-									<button class="btn btn-info">로그인</button>
+									<button type="button" class="btn btn-info" id="loginbutton">로그인</button>
 								</form>
 							</div>
 							<div class="join">
@@ -67,7 +67,7 @@
 					</div>
 					<div class="logout">
 						<form>
-							<button>로그아웃</button>
+							<button id="logoutbutton">로그아웃</button>
 						</form>
 					</div>
 				</c:if>
@@ -321,6 +321,19 @@
 
 	<!-- 팝업 스크립트 불러오기 -->
 	<script type="text/javascript" src="/resources/script/popup_cookie.js"></script>
+		
+			<script type="text/javascript">
+			$(document).ready(function() {
+				$("#loginbutton").click(function() {
+					$(location).attr("href", "/mypage/login");
+				});
+				
+				$("#logoutbutton").click(function() {
+					$(location).attr("href", "/mypage/logout");
+				});
+			});
+			</script>
+
 
 </body>
 

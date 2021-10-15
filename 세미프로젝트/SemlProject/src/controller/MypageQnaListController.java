@@ -28,10 +28,8 @@ public class MypageQnaListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
-
-		User_info user_info = (User_info) session.getAttribute("user_info");
-
-		int user_no = user_info.getUser_no();
+		
+		int user_no = (int)session.getAttribute("user_no");
 
 		List<Qna_board> boardList = mypageService.qnaBoardSelectAll(user_no);
 

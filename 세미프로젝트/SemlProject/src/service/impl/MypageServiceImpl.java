@@ -24,6 +24,7 @@ import dto.Custom_board;
 import dto.Custom_reply;
 import dto.Free_board;
 import dto.Free_board_reply;
+import dto.Message;
 import dto.Official_reply;
 import dto.Qna_board;
 import dto.Qna_board_attachment;
@@ -129,7 +130,6 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDao.officialReplyByUserno(JDBCTemplate.getConnection(), user_no);
 	}
 
-	
 	@Override
 	public void update(HttpServletRequest req) {
 
@@ -267,14 +267,7 @@ public class MypageServiceImpl implements MypageService {
 //		return user_info;
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@Override
 	public void unregister(User_info user_info, String password) {
 
@@ -366,8 +359,6 @@ public class MypageServiceImpl implements MypageService {
 				// 키 추출하기
 				String key = item.getFieldName();
 
-				System.out.println("키" + key);
-
 				// 값 추출하기
 				String value = null;
 				try {
@@ -382,8 +373,6 @@ public class MypageServiceImpl implements MypageService {
 				} else if ("content".equals(key)) {
 					board.setQna_board_content(value);
 				}
-
-//				System.out.println(" 보드 = " + board);
 
 			} // if( item.isFormField() ) end
 
@@ -416,8 +405,6 @@ public class MypageServiceImpl implements MypageService {
 				boardFile.setStored_file_name(stored);
 				boardFile.setFile_size((int) item.getSize());
 
-//				System.out.println("파일객체"+ boardFile);
-
 			} // if( !item.isFormField() ) end
 		} // while( iter.hasNext() ) end
 
@@ -426,25 +413,17 @@ public class MypageServiceImpl implements MypageService {
 
 		int board_no = mypageDao.getNextBoardno(conn);
 
-//		System.out.println("메소드이용보드넘버" +  board_no);
-
 		HttpSession session = req.getSession();
 
 		User_info user_info = ((User_info) session.getAttribute("user_info"));
 
 		int user_no = user_info.getUser_no();
 
-//		System.out.println("유저넘버"+user_no);
-
-//		System.out.println("보드넘버" + board_no );
-
 		// 게시글 정보가 있을 경우
 		if (board != null) {
 
 			board.setUser_no(user_no);
-//		System.out.println("보드유저넘버" + board);
 			board.setQna_board_no(board_no);
-//		System.out.println("보드보드넘버"+board_no);				
 
 			if (board.getQna_board_title() == null || "".equals(board.getQna_board_title())) {
 				board.setQna_board_title("(제목없음)");
@@ -463,10 +442,7 @@ public class MypageServiceImpl implements MypageService {
 			int attach_no = mypageDao.getNextAttachno(conn);
 			boardFile.setAttach_no(attach_no);
 
-//			System.out.println("파일객체에넣을보드넘버" + board_no);
-
 			boardFile.setQna_board_no(board_no); // 게시글 번호 입력 (FK)
-//			System.out.println("파일에들어간" + board_no);
 
 			if (mypageDao.insertFile(conn, boardFile) > 0) {
 				JDBCTemplate.commit(conn);
@@ -491,7 +467,6 @@ public class MypageServiceImpl implements MypageService {
 			boardno.setQna_board_no(Integer.parseInt(param));
 		}
 
-		System.out.println(boardno);
 		// 결과 객체 반환
 		return boardno;
 	}
@@ -508,7 +483,6 @@ public class MypageServiceImpl implements MypageService {
 		Connection conn = JDBCTemplate.getConnection();
 
 		Qna_board qna_board = mypageDao.selectQnaBoardByBoardno(conn, boardno);
-		System.out.println("큐엔에이보드서비스임플" + qna_board);
 
 		return qna_board;
 	}
@@ -720,23 +694,85 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<Qna_board> getListQnaBoard() {
 		return mypageDao.selectAllQna(JDBCTemplate.getConnection());
-		
+
 	}
-	
-	
+
 	@Override
 	public Qna_board qnaBoardByuserno(int user_no) {
 		Qna_board qna_board = mypageDao.QnaBoardInstanceByUserno(JDBCTemplate.getConnection(), user_no);
 		return qna_board;
 	}
+
+	@Override
+	public Qna_board qnaBoardByBoardno(Qna_board qna_board) {
+		Qna_board qnaBoard = mypageDao.selectQnaBoardByBoardno(JDBCTemplate.getConnection(), qna_board);
+		return qnaBoard;
+	}
+
+	@Override
+	public Qna_board qnaBoardByBoardno(int boardno) {
+		Qna_board qnaBoard = new Qna_board();
+		qnaBoard.setQna_board_no(boardno);
+
+		Qna_board qna_Board = mypageDao.selectQnaBoardByBoardno(JDBCTemplate.getConnection(), qnaBoard);
+		return qna_Board;
+	}
+
+	@Override
+	public void insertMessage(HttpServletRequest req, Qna_board qna_board, int user_no) {
+		// DB연결 객체
+		Message message = new Message();
+
+		Connection conn = JDBCTemplate.getConnection();
+		int msgNo = mypageDao.selectNextMessageNo(conn);
+		message.setMsg_no(msgNo);
+
+		message.setMsg_send(user_no);
+		message.setMsg_rec(qna_board.getUser_no());
+		// user_no 전달파라미터 검증 - null, ""
+		String param = req.getParameter("message");
+		try {
+			param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		if (param != null && !"".equals(param)) {
+			message.setMsg_content(param);
+		}
+
+		if (mypageDao.insertMessage(conn, message) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+	}
+
 	
 	
 	
 	@Override
-	public Qna_board qnaBoardByBoardno(Qna_board qna_board) {
-		Qna_board qnaBoard = mypageDao.selectQnaBoardByBoardno(JDBCTemplate.getConnection(),qna_board);
-		return qnaBoard;
+	public List<Message> recMessageSelect(int user_no) {
+		return mypageDao.recMessageByUserno(JDBCTemplate.getConnection(), user_no);
+
 	}
+	
+	@Override
+	public List<Message> sendMessageSelect(int user_no) {
+		return mypageDao.sendMessageByUserno(JDBCTemplate.getConnection(), user_no);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

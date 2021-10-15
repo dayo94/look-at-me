@@ -27,11 +27,9 @@ public class MypageUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
-
-		User_info userInfo = (User_info) session.getAttribute("user_info");
-
-		int user_no = userInfo.getUser_no();
-
+		
+		int user_no = (int)session.getAttribute("user_no");
+		
 		User_info user_info = mypageService.getUserInfo(user_no);
 
 		req.setAttribute("user_info", user_info);

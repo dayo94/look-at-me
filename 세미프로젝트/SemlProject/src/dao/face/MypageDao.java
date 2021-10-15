@@ -8,6 +8,7 @@ import dto.Custom_board;
 import dto.Custom_reply;
 import dto.Free_board;
 import dto.Free_board_reply;
+import dto.Message;
 import dto.Official_reply;
 import dto.Qna_board;
 import dto.Qna_board_attachment;
@@ -39,6 +40,10 @@ public interface MypageDao {
 	 * @return User_info - 조회된 결과 객체
 	 */
 	public User_info selectUser_infoByUser_email(Connection conn, User_info user_info);
+	
+	
+	
+	
 
 	/**
 	 * 회원정보 수정
@@ -47,47 +52,13 @@ public interface MypageDao {
 	 */
 	public int update(Connection conn, User_info user_info);
 
-//	
-//	/**
-//	 * 첨부파일 입력
-//	 * 
-//	 * @param conn - DB연결 객체
-//	 * @param attachment - 첨부파일 정보
-//	 * @return 삽입 결과
-//	 */
-//	public int insertFile(Connection conn, Attachment attachment);
-//
-//	/**
-//	 * 첨부파일 조회
-//	 * 
-//	 * @param connection - DB연결 객체
-//	 * @param attach_no - 첨부파일을 조회할 첨부파일번호
-//	 * @return Attachment - 첨부파일객체
-//	 */
-//	public Attachment getByAttach_no(Connection conn, int attach_no);
-//
-//
-//
-//
-//	/**
-//	 * 사용자의 attach_no를 변경하여 프로필 사진을 업데이트한다
-//	 * @param conn
-//	 * @param user_info
-//	 * @param attachment
-//	 * @return
-//	 */
-//	public int updateProfile(Connection conn, User_info user_info, Attachment attachment);
-//
-//
 
-//	/**
-//	 * 첨부파일 번호 seq의 nextval을 반환한다 
-//	 * 
-//	 * @param conn
-//	 * @return
-//	 */
-//	public int getNextAttachNo(Connection conn);
-
+	/**
+	 * 
+	 * @param conn
+	 * @param user_no - 유저정보를 조회할 전달 파라미터 유저번호
+	 * @return 조회한 객체
+	 */
 	public User_info selectUserInfoByUserNo(Connection conn, int user_no);
 
 	/**
@@ -103,7 +74,7 @@ public interface MypageDao {
 	 * 첨부파일 조회
 	 * 
 	 * @param connection - DB연결 객체
-	 * @param user_no    - 첨부파일을 조회할 첨부파일번호
+	 * @param user_no    - 첨부파일을 조회할유저번호
 	 * @return Attachment_profile - 첨부파일객체
 	 */
 	public Attachment_profile getByUser_no(Connection conn, int user_no);
@@ -142,10 +113,9 @@ public interface MypageDao {
 	 */
 	public List<Free_board> freeBoardByUserno(Connection conn, int user_no);
 
-//	public List<custom_board, free_board> joinBoard(Connection conn, int user_no);
 
 	/**
-	 * 내가쓴 댓글 조회
+	 * 내가 자유게시판에 쓴 댓글 조회
 	 * 
 	 * @param user_no - 조회할 user_no를 가진 객체
 	 * @return Free_board_reply - 조회된 결과 객체
@@ -153,7 +123,7 @@ public interface MypageDao {
 	public List<Free_board_reply> freeBoardReplyByUserno(Connection conn, int user_no);
 
 	/**
-	 * 내가쓴 댓글 조회
+	 * 내가 커스텀게시판에 쓴 댓글 조회
 	 * 
 	 * @param user_no - 조회할 user_no를 가진 객체
 	 * @return custom_reply - 조회된 결과 객체
@@ -161,7 +131,7 @@ public interface MypageDao {
 	public List<Custom_reply> customReplyByUserno(Connection conn, int user_no);
 
 	/**
-	 * 내가쓴 댓글 조회
+	 * 내가 오피셜게시판에 쓴 댓글 조회
 	 * 
 	 * @param user_no - 조회할 user_no를 가진 객체
 	 * @return official_reply - 조회된 결과 객체
@@ -174,35 +144,84 @@ public interface MypageDao {
 	 * @param - 탈퇴한 회원정보를 담은 객체
 	 */
 //	public User_info delete(Connection conn, int user_no );
+	
+	
+	/**
+	 * 
+	 * @param conn
+	 * @param user_no 회원탈퇴할 유저번호 
+	 * @return
+	 */
 	public int delete(Connection conn, int user_no);
 
+	
+	
+	
+	/**
+	 * 
+	 * @param conn
+	 * @param user_no- 유저번호로 탈퇴할 유저의 객체를 반환한다
+	 * @return
+	 */
 	public User_info unregsterUserInfoByUserNo(Connection conn, int user_no);
 
 //	public int deleteFile(Connection conn, int user_no);
 
 	/**
-	 * 게시글 입력
 	 * 
-	 * @param board - 삽입될 게시글 내용
+	 * @param conn
+	 * @param qna_board 
+	 * @return 1 - 성공 , 0 - 실패 -1 -에러
 	 */
 	public int insertQna(Connection conn, Qna_board qna_board);
 
+	
+	/**
+	 * 
+	 * @param conn
+	 * @param boardFile
+	 * @return 1 - 성공 , 0 - 실패 -1 -에러
+	 */
 	public int insertFile(Connection conn, Qna_board_attachment boardFile);
 
+	/**
+	 * 
+	 * @param conn
+	 * @return 다음에 올 보드넘버
+	 */
 	public int getNextBoardno(Connection conn);
 
+	
+	/**
+	 * 
+	 * @param conn
+	 * @return 다음에 올 첨부파일 넘버
+	 */
 	public int getNextAttachno(Connection conn);
 
 	/**
-	 * 내가쓴 게시글 조회
+	 * 내가 쓴 문의 게시글 조회
 	 * 
 	 * @param user_no - 조회할 user_no를 가진 객체
 	 * @return Qna_board - 조회된 결과 객체
 	 */
 	public List<Qna_board> QnaBoardByUserno(Connection conn, int user_no);
-
+	
+	/**
+	 * 
+	 * @param conn
+	 * @param boardno 해당 보드넘버
+	 * @return 해당 보드넘버의 객체 반환
+	 */
 	public Qna_board selectQnaBoardByBoardno(Connection conn, Qna_board boardno);
 
+	
+	/**
+	 * 
+	 * @param conn
+	 * @param user_no 유저번호를 이용하여 해당 객체 반환
+	 * @return 조회된 문의게시판 객체
+	 */
 	public Qna_board QnaBoardInstanceByUserno(Connection conn, int user_no);
 
 	/**
@@ -252,6 +271,60 @@ public interface MypageDao {
 	public List<Qna_board> selectAllQna(Connection conn);
 	
 	
-	
 
+	/**
+	 * 
+	 * @param conn
+	 * @param message
+	 * @return
+	 */
+	public int insertMessage(Connection conn, Message message);	
+	
+	
+	
+	/**
+	 * 다음 쪽지 번호 조회
+	 * 
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return 다음 쪽지 번호
+	 */
+	public int selectNextMessageNo(Connection conn);
+	
+	
+	
+	
+	/**
+	 * 내가쓴 쪽지 조회
+	 * 
+	 * @param user_no - 조회할 user_no를 가진 객체
+	 * @return Message - 조회된 결과 객체
+	 */
+	public List<Message> sendMessageByUserno(Connection conn, int user_no);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 내가보낸 쪽지 조회
+	 * 
+	 * @param user_no - 조회할 user_no를 가진 객체
+	 * @return Message - 조회된 결과 객체
+	 */
+	public List<Message> recMessageByUserno(Connection conn, int user_no);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }// class

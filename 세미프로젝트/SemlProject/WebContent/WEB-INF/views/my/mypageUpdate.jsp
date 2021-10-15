@@ -7,7 +7,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>오늘 뭐 마시지 -</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/headerfooter.css">
 
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
@@ -33,6 +41,7 @@
 </script>
 <style type="text/css">
 form {
+	padding-top: 300px;
 	width: 800px;
 	margin: 0 auto;
 }
@@ -42,59 +51,91 @@ form {
 }
 </style>
 </head>
+
 <body>
-
-
-
-	<form action="/mypage/update" method="post" enctype="multipart/form-data" class="form-horizontal">
-		<input type="hidden" name="user_no" value="${user_info.user_no }" />
-
-		<table>
-			<tr>
-				<td>이메일</td>
-				<td>${user_info.user_email }</td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="text" name="user_password" value=""
-					id="passwordCheck" /></td>
-			</tr>
-			<tr>
-				<td>닉네임</td>
-				<td><input type="text" name="user_nickname"
-					value="${user_info.user_nickname }" /></td>
-			</tr>
-			<tr>
-				<td>포인트</td>
-				<td>${user_info.user_point }</td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td>${user_info.user_name }</td>
-			</tr>
-			<tr>
-				<td>생년월일</td>
-				<td>${user_info.user_birth }</td>
-			</tr>
-
-		</table>
-
-		<div>
-			<div id="beforeFile">
-				기존 첨부파일: <a href="/upload/${attachmentFile.profile_name}"
-					download="${attachmentFile.profile_name }">${attachmentFile.profile_name }</a>
-			</div>
-
-			<div id="afterFile">
-				새 첨부파일: <input type="file" name="file" />
+	<div class="wrap">
+		<div class="intro_bg">
+			<div class="header">
+				<div class="header_logo">
+					<a href="/main"> <img width=100px;
+						src='/resources/img/header_logo2.png' />
+					</a>
+				</div>
+				<ul class="nav">
+					<li><a href="/main">칵테일 검색</a></li>
+					<li><a href="/main">칵테일 제작</a></li>
+					<li><a href="/main">커뮤니티 게시판</a></li>
+					<li><a href="/main">자유게시판</a></li>
+					<li><a href="/main">쇼핑</a></li>
+					<li><a href="/main">문의게시판</a></li>
+				</ul>
+				<div class="login">
+					<form>
+						<button>로그인</button>
+					</form>
+				</div>
+				<div class="join">
+					<button>회원가입</button>
+				</div>
 			</div>
 		</div>
-
-		<button>수정</button>
-		<button type="button" id="btnCancel">취소</button>
-
-	</form>
+		<div class="content_area">
 
 
-</body>
-</html>
+
+
+
+			<form action="/mypage/update" method="post"
+				enctype="multipart/form-data">
+				<input type="hidden" name="user_no" value="${user_info.user_no }" />
+
+				<table>
+					<tr>
+						<td>이메일</td>
+						<td>${user_info.user_email }</td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="text" name="user_password" value=""
+							id="passwordCheck" /></td>
+					</tr>
+					<tr>
+						<td>닉네임</td>
+						<td><input type="text" name="user_nickname"
+							value="${user_info.user_nickname }" /></td>
+					</tr>
+					<tr>
+						<td>포인트</td>
+						<td>${user_info.user_point }</td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td>${user_info.user_name }</td>
+					</tr>
+					<tr>
+						<td>생년월일</td>
+						<td>${user_info.user_birth }</td>
+					</tr>
+
+				</table>
+
+				<div>
+					<div id="beforeFile">
+						기존 첨부파일: <a href="/upload/${attachmentFile.profile_name}"
+							download="${attachmentFile.profile_name }">${attachmentFile.profile_name }</a>
+					</div>
+
+					<div id="afterFile">
+						새 첨부파일: <input type="file" name="file" />
+					</div>
+				</div>
+
+				<button>수정</button>
+				<button type="button" id="btnCancel">취소</button>
+
+			</form>
+
+			<c:import url="/WEB-INF/views/layout/footer.jsp" />
+			
+			
+			

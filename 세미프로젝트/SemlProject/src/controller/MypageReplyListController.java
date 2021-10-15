@@ -30,26 +30,18 @@ public class MypageReplyListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
-
-		User_info user_info = (User_info) session.getAttribute("user_info");
-
-		int user_no = user_info.getUser_no();
+		
+		int user_no = (int)session.getAttribute("user_no");
 
 		List<Free_board_reply> freeBoardReply = mypageService.freeBoardReplySelectAll(user_no);
-
-		System.out.println(freeBoardReply);
 
 		session.setAttribute("freeBoardReply", freeBoardReply);
 
 		List<Custom_reply> customReply = mypageService.customReplySelectAll(user_no);
 
-		System.out.println(customReply);
-
 		session.setAttribute("customReply", customReply);
 
 		List<Official_reply> officialReply = mypageService.officialReplySelectAll(user_no);
-
-		System.out.println(officialReply);
 
 		session.setAttribute("officialReply", officialReply);
 
