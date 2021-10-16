@@ -7,6 +7,7 @@ import free.dto.BoardFile;
 import free.dto.FreeBoard;
 import free.dto.FreeReply;
 import free.util.Paging;
+import mypage.dto.Free_board;
 
 public interface BoardDao {
 

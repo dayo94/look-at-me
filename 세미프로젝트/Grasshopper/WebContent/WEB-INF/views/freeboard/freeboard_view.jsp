@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
-
+<link rel="stylesheet" type="text/css" href="/resources/css/messagePopup.css">
 </script>
 <script type="text/javascript">
 
@@ -131,12 +131,14 @@ $(document).ready(function(){
 		
 	})
 	*/
-	
+}
 
 });
 
 
 </script>
+
+
 <h1>자유게시판</h1>
 <h3>게시글 보기</h3>
 <hr>
@@ -161,7 +163,7 @@ $(document).ready(function(){
 </tr>
 
 <tr>
-<td class="info">닉네임</td><td>${freeboard.user_nickname }</td>
+<td class="info">닉네임</td><td class="popupOpen1">${freeboard.user_nickname }</td>
 <td class="info">작성일</td><td>${freeboard.free_board_date }</td>
 </tr>
 
@@ -225,6 +227,38 @@ $(document).ready(function(){
 </c:forEach>
 
 </table>
-</div>
 
+<div>
+					<div class="popupWrap1 hide1">
+						<form action="/freeboard/message" method="post">
+						<input type="hidden" name="boardno" value="${freeboard.free_board_no }" />
+							<div class="popup1">
+								<div class="title">
+									<p>${freeboard.user_nickname }</p>
+									<span class="close1">❌</span>
+								</div>
+								<textarea name="message" id="message" cols="30" rows="10"></textarea>
+								<div class="btnWrap1">
+									<button>보내기</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+</div>
+<script>
+	$('.popupOpen1').on('click', function() {
+		$('.popupWrap1').removeClass('hide1');
+	});
+	$('.close1').on('click', function() {
+		$(this).parents('.popupWrap1').addClass('hide1');
+		$(this).parents('.popup1').children('textarea').val('');
+	});
+
+	$(".btnWrap1").click(function() {
+		$(this).parents("form").submit();
+// 		history.go(-1);
+	});
+</script>
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>
