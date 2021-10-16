@@ -1,8 +1,10 @@
 package dto;
 
 import java.util.Date;
+import java.io.Serializable;
 
-public class Custom_board {
+
+public class Custom_board implements Serializable {
 
 	
 	private int custom_board_no;

@@ -1,8 +1,8 @@
 package dto;
 
 import java.util.Date;
-
-public class Official_reply {
+import java.io.Serializable;
+public class Official_reply implements Serializable{
 
 	private int official_reply_no;
 	private int official_board_no;

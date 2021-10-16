@@ -1275,6 +1275,7 @@ public class MypageDaoImpl implements MypageDao {
 				String sql = "";
 				sql += "SELECT * FROM message";
 				sql += " WHERE msg_rec = ?";
+				sql += " order by msg_no desc";
 
 				// 결과 저장할 Board객체
 				List<Message> BoardList = new ArrayList<>();
@@ -1324,7 +1325,7 @@ public class MypageDaoImpl implements MypageDao {
 		String sql = "";
 		sql += "SELECT * FROM message";
 		sql += " WHERE msg_send = ?";
-
+		sql += " order by msg_no desc";
 		// 결과 저장할 Board객체
 		List<Message> BoardList = new ArrayList<>();
 

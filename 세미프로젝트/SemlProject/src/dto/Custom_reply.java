@@ -1,8 +1,8 @@
 package dto;
 
 import java.util.Date;
-
-public class Custom_reply {
+import java.io.Serializable;
+public class Custom_reply implements Serializable{
 
 	private int custom_reply_no;
 	private int custom_board_no;

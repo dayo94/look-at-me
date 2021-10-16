@@ -261,4 +261,14 @@ public interface MypageService {
 	
 	
 	
+	/**
+	 * DB에 삽입
+	 *  
+	 * @param req
+	 * @param qna_board
+	 * @param user_no
+	 */ 
+	public void insertMsg(HttpServletRequest req, int user_no , int msg_rec );
+	
+	
 }

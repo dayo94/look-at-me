@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import dto.Custom_reply;
 import dto.Free_board_reply;
 import dto.Official_reply;
-import dto.User_info;
 import service.face.MypageService;
 import service.impl.MypageServiceImpl;
 

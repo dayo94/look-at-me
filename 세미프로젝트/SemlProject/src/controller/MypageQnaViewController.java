@@ -26,6 +26,7 @@ public class MypageQnaViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
 		Qna_board boardno = mypageService.getBoardno(req);
 
 		Qna_board viewBoard = mypageService.view(boardno);
@@ -41,7 +42,8 @@ public class MypageQnaViewController extends HttpServlet {
 		User_info user_info = mypageService.getUserInfo(user_no);
 
 		req.setAttribute("user_info", user_info);
-
+		
+		
 		req.getRequestDispatcher("/WEB-INF/views/my/qnaView.jsp").forward(req, resp);
 
 	}

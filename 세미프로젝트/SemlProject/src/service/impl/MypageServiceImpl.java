@@ -413,11 +413,17 @@ public class MypageServiceImpl implements MypageService {
 
 		int board_no = mypageDao.getNextBoardno(conn);
 
+//		HttpSession session = req.getSession();
+
+//		User_info user_info = ((User_info) session.getAttribute("user_info"));
+
+//		int user_no = user_info.getUser_no();
+		
 		HttpSession session = req.getSession();
-
-		User_info user_info = ((User_info) session.getAttribute("user_info"));
-
-		int user_no = user_info.getUser_no();
+		
+		int user_no = (int)session.getAttribute("user_no");
+		
+//		User_info user_info = mypageDao.selectUserInfoByUserNo(conn, user_no);
 
 		// 게시글 정보가 있을 경우
 		if (board != null) {
@@ -464,7 +470,8 @@ public class MypageServiceImpl implements MypageService {
 		if (param != null && !"".equals(param)) {
 
 			// boardno 전달파라미터 추출
-			boardno.setQna_board_no(Integer.parseInt(param));
+		
+		boardno.setQna_board_no(Integer.parseInt(param));
 		}
 
 		// 결과 객체 반환
@@ -766,11 +773,41 @@ public class MypageServiceImpl implements MypageService {
 	
 	
 	
+	@Override
+	public void insertMsg(HttpServletRequest req, int user_no, int msg_rec) {
 	
-	
-	
-	
-	
+		// DB연결 객체
+		Message message = new Message();
+
+		Connection conn = JDBCTemplate.getConnection();
+		int msgNo = mypageDao.selectNextMessageNo(conn);
+		message.setMsg_no(msgNo);
+		System.out.println("인서트메세지" + msg_rec);
+		message.setMsg_send(user_no);
+		message.setMsg_rec(msg_rec);
+		// user_no 전달파라미터 검증 - null, ""
+		String param = req.getParameter("msg");
+		try {
+			param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		if (param != null && !"".equals(param)) {
+			message.setMsg_content(param);
+		}
+
+		if (mypageDao.insertMessage(conn, message) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+	}
+		
+		
+		
+		
 	
 	
 	

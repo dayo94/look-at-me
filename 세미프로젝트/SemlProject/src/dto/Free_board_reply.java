@@ -1,8 +1,8 @@
 package dto;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class Free_board_reply {
+public class Free_board_reply implements Serializable{
 
 	
 	private int free_reply_no;

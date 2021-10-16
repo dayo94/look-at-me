@@ -14,6 +14,7 @@ import dto.Qna_board;
 import dto.Qna_board_attachment;
 import dto.User_admin;
 import dto.User_info;
+import util.Paging;
 
 public interface MypageDao {
 
@@ -206,6 +207,7 @@ public interface MypageDao {
 	 * @return Qna_board - 조회된 결과 객체
 	 */
 	public List<Qna_board> QnaBoardByUserno(Connection conn, int user_no);
+	
 	
 	/**
 	 * 

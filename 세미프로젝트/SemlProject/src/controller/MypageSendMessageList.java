@@ -18,7 +18,7 @@ import service.impl.MypageServiceImpl;
 /**
  * Servlet implementation class MypageSendMessageList
  */
-@WebServlet("/mypage/sendmessage")
+@WebServlet("/mypage/sendmessage") 
 public class MypageSendMessageList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,15 +27,26 @@ public class MypageSendMessageList extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
 		HttpSession session = req.getSession();
 
 		int user_no = (int) session.getAttribute("user_no");
 
+		System.out.println(user_no);
+		
+		
 		List<Message> message = mypageService.sendMessageSelect(user_no);
 
 		session.setAttribute("message", message);
-		System.out.println(message.get(2));
 
+		List<User_info> user_info = mypageService.getList();
+
+		session.setAttribute("user_info", user_info);
+
+		
+		
+		
+		
 		req.getRequestDispatcher("/WEB-INF/views/my/mypageSendMessageList.jsp").forward(req, resp);
 
 	}

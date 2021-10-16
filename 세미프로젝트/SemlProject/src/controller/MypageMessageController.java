@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dto.Message;
 import dto.Qna_board;
-import dto.User_info;
 import service.face.MypageService;
 import service.impl.MypageServiceImpl;
 
@@ -37,18 +35,16 @@ public class MypageMessageController extends HttpServlet {
 		String boardNo = req.getParameter("boardno");
 		boardNo = new String(boardNo.getBytes("ISO-8859-1"), "UTF-8");
 		
-		
 		int boardno = Integer.parseInt(boardNo);
 		
 		Qna_board qna_board = mypageService.qnaBoardByBoardno(boardno);
-		
-		
+
 		mypageService.insertMessage(req, qna_board, user_no);
 		
-		resp.sendRedirect("/qna/list");
+//		req.getRequestDispatcher("/WEB-INF/views/my/qnaView.jsp").forward(req, resp);
 	
-	
-	
+		
+		resp.sendRedirect("/mypage/sendmessage");
 	}
 	
 	

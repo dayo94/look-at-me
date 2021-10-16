@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import dto.Custom_board;
 import dto.Free_board;
-import dto.User_info;
 import service.face.MypageService;
 import service.impl.MypageServiceImpl;
 
@@ -35,13 +34,11 @@ public class MypageBoardListController extends HttpServlet {
 		
 		List<Custom_board> customBoardList = mypageService.customBoardSelectAll(user_no);
 
-		System.out.println(customBoardList);
 
 		session.setAttribute("customBoardList", customBoardList);
 
 		List<Free_board> freeBoardList = mypageService.freeBoardSelectAll(user_no);
 
-		System.out.println(freeBoardList);
 
 		session.setAttribute("freeBoardList", freeBoardList);
 

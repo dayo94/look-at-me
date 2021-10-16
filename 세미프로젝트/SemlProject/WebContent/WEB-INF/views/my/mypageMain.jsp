@@ -101,7 +101,7 @@ ul {
 					<li><a href="/main">커뮤니티 게시판</a></li>
 					<li><a href="/main">자유게시판</a></li>
 					<li><a href="/main">쇼핑</a></li>
-					<li><a href="/main">문의게시판</a></li>
+					<li><a href="/qna/write">문의게시판</a></li>
 				</ul>
 				<div class="login">
 					<form>
@@ -148,25 +148,10 @@ ul {
 					<li>
 						<h4>나의 활동</h4>
 						<p>
-							<a href="/message/list">내가 쓴 게시글</a>
+							<a href="/mypage/board/list">내가 쓴 게시글</a>
 						</p>
 						<p>
 							<a href="/mypage/reply/list">내가 쓴 댓글</a>
-						</p>
-					</li>
-					<li>
-						<h4>활동 포인트 조회</h4>
-						<p>
-							<a href="/mypage/test">나의 활동 포인트</a>
-						</p>
-					</li>
-					<li>
-						<h4>즐겨찾기</h4>
-						<p>
-							<a href="">레시피</a>
-						</p>
-						<p>
-							<a href="">게시글</a>
 						</p>
 					</li>
 					<li>

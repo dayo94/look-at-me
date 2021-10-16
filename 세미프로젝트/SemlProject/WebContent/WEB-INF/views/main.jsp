@@ -63,7 +63,7 @@
 
 				<c:if test="${login }">
 					<div class="mypage">
-						<button>마이페이지</button>
+						<button id="mypagebutton">마이페이지</button>
 					</div>
 					<div class="logout">
 						<form>
@@ -331,6 +331,11 @@
 				$("#logoutbutton").click(function() {
 					$(location).attr("href", "/mypage/logout");
 				});
+				
+				$("#mypagebutton").click(function() {
+					$(location).attr("href", "/mypage/main");
+				});
+				
 			});
 			</script>
 

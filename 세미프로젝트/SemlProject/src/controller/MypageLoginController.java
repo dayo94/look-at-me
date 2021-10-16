@@ -58,7 +58,6 @@ public class MypageLoginController extends HttpServlet {
 
 			session.setAttribute("attachmentFile", attachmentFile);
 
-			System.out.println(attachmentFile);
 
 			session.setMaxInactiveInterval(60 * 30);
 

@@ -1,9 +1,10 @@
 package dto;
 
+import java.io.Serializable;
 //import java.io.Serializable;
 import java.util.Date;
 
-public class User_info {// implements Serializable {
+public class User_info implements Serializable {// implements Serializable {
 	
 	private int user_no;
 	private String user_email;

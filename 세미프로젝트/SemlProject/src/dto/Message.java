@@ -1,8 +1,8 @@
 package dto;
 
 import java.util.Date;
-
-public class Message {
+import java.io.Serializable;
+public class Message implements Serializable {
 
 	private int msg_no;
 	private int msg_send;

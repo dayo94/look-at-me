@@ -178,7 +178,6 @@
 
 
 				<div>
-
 					<div class="popupWrap hide">
 						<form action="/message/test" method="post">
 						<input type="hidden" name="boardno" value="${viewBoard.qna_board_no }" />
@@ -226,7 +225,8 @@
 				});
 
 				$(".btnWrap").click(function() {
-					$(location).attr("href","/message/test");
+					$(this).parents("form").submit();
+// 					history.go(-1);
 				});
 			</script>
 
