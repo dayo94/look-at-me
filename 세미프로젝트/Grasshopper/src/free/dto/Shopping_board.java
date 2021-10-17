@@ -1,6 +1,6 @@
 package free.dto;
 
-public class ShoppingBoard {
+public class Shopping_board {
 	private int shopping_product_no;
 	private String shopping_category;
 	private String shopping_product_title;

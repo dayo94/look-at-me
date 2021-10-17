@@ -131,7 +131,6 @@ $(document).ready(function(){
 		
 	})
 	*/
-}
 
 });
 
@@ -231,7 +230,7 @@ $(document).ready(function(){
 <div>
 					<div class="popupWrap1 hide1">
 						<form action="/freeboard/message" method="post">
-						<input type="hidden" name="boardno" value="${freeboard.free_board_no }" />
+						<input type="hidden" name="freeboardno" value="${freeboard.free_board_no }" />
 							<div class="popup1">
 								<div class="title">
 									<p>${freeboard.user_nickname }</p>

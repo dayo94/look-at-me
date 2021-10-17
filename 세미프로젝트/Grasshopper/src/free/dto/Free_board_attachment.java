@@ -2,7 +2,7 @@ package free.dto;
 
 import java.util.Date;
 
-public class BoardFile {
+public class Free_board_attachment {
 
 	private int attach_no;
 	private int free_board_no;

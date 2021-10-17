@@ -2,7 +2,7 @@ package free.dto;
 
 import java.util.Date;
 
-public class FreeBoard {
+public class Free_board {
 
 	private int free_board_no;
 	private int user_no;
