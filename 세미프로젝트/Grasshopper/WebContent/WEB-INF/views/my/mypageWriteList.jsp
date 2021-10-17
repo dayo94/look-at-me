@@ -6,9 +6,8 @@
 
 <h1>내가 쓴 글</h1>
 <hr>
-
-<table class="table table-striped">
-	<caption>커스텀게시판</caption>
+<h5>커스텀게시판</h5>
+<table class="table table-hover table-condensed">
 	<tr>
 		<th>글번호</th>
 		<th>글제목</th>
@@ -27,8 +26,8 @@
 		</tr>
 	</c:forEach>
 </table>
-<table class="table table-striped">
-	<caption>자유게시판</caption>
+<h5>자유게시판</h5>
+<table class="table table-hover table-condensed">
 	<tr>
 		<th>글번호</th>
 		<th>글제목</th>

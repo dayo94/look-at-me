@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
-
+<c:import url="/WEB-INF/views/layout/mypagenav.jsp" />
+<div style="display: inline-block; width: 700px;">
 <h1>내가 쓴 댓글</h1>
 <hr>
-
-<table class="table table-striped">
-	<caption>자유게시판 댓글</caption>
+<h5>자유게시판 댓글</h5>
+<table class="table table-hover table-condensed">
 	<tr>
 		<th>글번호</th>
 		<th>댓글내용</th>
@@ -23,8 +23,8 @@
 		</tr>
 	</c:forEach>
 </table>
-<table class="table table-striped">
-	<caption>커스텀게시판 댓글</caption>
+<h5>커스텀게시판 댓글</h5>
+<table class="table table-hover table-condensed">
 	<tr>
 		<th>글번호</th>
 		<th>댓글내용</th>
@@ -40,8 +40,8 @@
 	</c:forEach>
 </table>
 
-<table class="table table-striped">
-	<caption>오피셜게시판 댓글</caption>
+<h5>오피셜게시판 댓글</h5>
+<table class="table table-hover table-condensed">
 	<tr>
 		<th>글번호</th>
 		<th>댓글내용</th>
@@ -55,4 +55,5 @@
 		</tr>
 	</c:forEach>
 </table>
+</div>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

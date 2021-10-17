@@ -3,12 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
-
 <h1>내가 받은 쪽지함</h1>
 <hr>
 
 
-<table class="table table-striped">
+<table class="table table-condensed">
 	<tr>
 		<th>보낸 사람</th>
 		<th>내용</th>

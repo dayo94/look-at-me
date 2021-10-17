@@ -61,38 +61,40 @@
 </div>
 
 <c:forEach items="${qna_board_reply}" var="qna_board_reply">
-<c:if test="${qna_board_reply.qna_board_no eq viewBoard.qna_board_no }">
-<div class="container">
- <div class="card" style="background-color: #ededed; margin-top: 40px;">
-  <div class="card-body">
-<p class="h5">관리자 답변 </p>
-    ${qna_board_reply.qna_reply_content }
-  </div>
-</div>
-</div>
-</c:if>
+	<c:if test="${qna_board_reply.qna_board_no eq viewBoard.qna_board_no }">
+		<div class="container">
+			<div class="card"
+				style="background-color: #ededed; margin-top: 40px;">
+				<div class="card-body">
+					<p class="h5">관리자 답변</p>
+					${qna_board_reply.qna_reply_content }
+				</div>
+			</div>
+		</div>
+	</c:if>
 </c:forEach>
 
 <c:if test="${user_info.user_no eq 2 }">
-<div class="container replyWrite">
-	<hr>
-	<form class="form-horizontal" action="/qna/reply" method="post" >
-		<div class="form-group">
-			<input type="hidden" name="board_no" value="${viewBoard.qna_board_no }">
-			<textarea class="form-control" rows="5" id="commentContent"
-				name="commentContent"></textarea>
-			<br>
-			<button type="submit" class="btn pull-left">등록</button>
-		</div>
-	</form>
-	<hr>
-</div>
-</c:if>
-	<div class="text-center">
-		<button id="btnList" class="btn btn-primary">목록</button>
-		<button id="btnUpdate" class="btn btn-info">수정</button>
-		<button id="btnDelete" class="btn btn-danger">삭제</button>
+	<div class="container replyWrite">
+		<hr>
+		<form class="form-horizontal" action="/qna/reply" method="post">
+			<div class="form-group">
+				<input type="hidden" name="board_no"
+					value="${viewBoard.qna_board_no }">
+				<textarea class="form-control" rows="5" id="commentContent"
+					name="commentContent"></textarea>
+				<br>
+				<button type="submit" class="btn pull-left">등록</button>
+			</div>
+		</form>
+		<hr>
 	</div>
+</c:if>
+<div class="text-center">
+	<button id="btnList" class="btn btn-primary">목록</button>
+	<button id="btnUpdate" class="btn btn-info">수정</button>
+	<button id="btnDelete" class="btn btn-danger">삭제</button>
+</div>
 
 <script type="text/javascript">
 	$(document)
@@ -122,6 +124,12 @@
 																"/qna/delete?boardno=${viewBoard.qna_board_no }");
 											}
 										});
+
+						$(document).ready(function() {
+							//페이지 첫 접속 시 입력창으로 포커스 이동
+							$("input").eq(0).focus();
+						});
+
 					});
 </script>
 

@@ -11,7 +11,7 @@
 	<h1>내가 쓴 문의 내역</h1>
 	<hr>
 
-	<table class="table table-striped table-hover table-condensed">
+	<table class="table table-hover table-condensed">
 		<tr>
 			<th>글번호</th>
 			<th>제목</th>

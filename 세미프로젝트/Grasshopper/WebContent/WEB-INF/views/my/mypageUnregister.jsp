@@ -32,6 +32,11 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
+		$(document).ready(function() {
+			//페이지 첫 접속 시 입력창으로 포커스 이동
+			$("input").eq(0).focus();
+		});
+		
 		//탈퇴버튼 동작
 		$("#btnUnregister").click(function() {
 			$("form").submit();
