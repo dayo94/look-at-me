@@ -10,6 +10,19 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
       
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#btnwrite").click(function() {
+		if( '${login }' == false ){
+			alert("로그인을 해야지 글을 등록할 수 있습니다");
+			return;
+		}
+		location.href="/custom/write";
+		
+	});
+});
+</script>     
 </head>
 
 <style>
@@ -22,7 +35,9 @@
 </style>
 
 <body>
-<br><br><br><br><br>
+<br><br><br>
+<button id="btnwrite" class="btn btn-info" style="">글 쓰기</button>
+<br><br>
 <!-- 검색창 -->
 <div class="search-bar">
 	<form name="searchForm" action="/custom/list" method="get">
@@ -68,38 +83,35 @@
 	</c:forEach>
 </div>
 
-
 </div>
 
 
 </body>
 
-<%-- 맨위로 버튼 --%>
-<button id="topButton" onclick="toTheTop()">맨 위로</button>
-
-<!-- 최상단으로 버튼 스크립트 -->
-<script type="text/javascript">
-var topButton = document.getElementById("topButton");
-//스크롤 시 scrollFunction 동작
-window.onscroll = function() {
-	scrollFunction()	
-};
-//버튼이 나타나게 함
-function scrollFunction(){
-	console.log("[TEST] You are scrolling!") //테스트용
-	//스크롤을 통해 20줄 이상 내려가면 
-	if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20 ){
-		topButton.style.display = "block";	
-	} else {
-		topButton.style.display = "none";
-	}
+<style>
+.center {
+  text-align: center;
 }
-//화면 최상단으로 보내는 기능
-function toTheTop(){
-	window.scrollTo(0,0);
+.pagination {
+  display: inline-flex;
 }
-
-</script>
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
 
 <c:import url="/WEB-INF/views/layout/custom_paging.jsp" />
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" /> 

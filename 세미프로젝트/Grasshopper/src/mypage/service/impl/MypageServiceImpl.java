@@ -28,9 +28,11 @@ import mypage.dto.Message;
 import mypage.dto.Official_reply;
 import mypage.dto.Qna_board;
 import mypage.dto.Qna_board_attachment;
+import mypage.dto.Qna_board_reply;
 import mypage.dto.User_admin;
 import mypage.dto.User_info;
 import mypage.service.face.MypageService;
+import official.dto.OfficialComment;
 
 public class MypageServiceImpl implements MypageService {
 
@@ -798,15 +800,12 @@ public class MypageServiceImpl implements MypageService {
 //		}
 //
 //	}
-	
-	
-	
+
 	@Override
 	public Free_board selectFreeBoard(int boardno) {
 		return mypageDao.getFreeBoardByFreeBoardNo(JDBCTemplate.getConnection(), boardno);
 	}
-	
-	
+
 	@Override
 	public void FreeBoardInsertMessage(HttpServletRequest req, Free_board free_board, int user_no) {
 		// DB연결 객체
@@ -837,7 +836,72 @@ public class MypageServiceImpl implements MypageService {
 		}
 
 	}
-	
-	
 
+	@Override
+	public void CustomBoardInsertMessage(HttpServletRequest req, Custom_board custom_board, int user_no) {
+		// DB연결 객체
+		Message message = new Message();
+
+		Connection conn = JDBCTemplate.getConnection();
+		int msgNo = mypageDao.selectNextMessageNo(conn);
+		message.setMsg_no(msgNo);
+
+		message.setMsg_send(user_no);
+		message.setMsg_rec(custom_board.getUser_no());
+		// user_no 전달파라미터 검증 - null, ""
+		String param = req.getParameter("message");
+		try {
+			param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		if (param != null && !"".equals(param)) {
+			message.setMsg_content(param);
+		}
+
+		if (mypageDao.insertMessage(conn, message) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+	}
+
+	@Override
+	public void writeQnaReply(Qna_board_reply qna_board_reply) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int qna_reply_no = mypageDao.getNextQnaReplyNo(conn);
+		
+		qna_board_reply.setQna_reply_no(qna_reply_no);
+		
+		if( mypageDao.insertQnaReply(conn, qna_board_reply) > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	}
+
+	
+	@Override
+	public List<Qna_board_reply> getReply() {
+		List<Qna_board_reply> qna_board_reply = mypageDao.selectQnaBoardReply(JDBCTemplate.getConnection());
+		System.out.println("qnaboardreply : " +qna_board_reply);
+		return qna_board_reply;
+	}
+	
+	
+	@Override
+	public void msgCheck(int user_no) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		if( mypageDao.updateMsgCheck(conn, user_no) > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	}
+	
+	
 }// class

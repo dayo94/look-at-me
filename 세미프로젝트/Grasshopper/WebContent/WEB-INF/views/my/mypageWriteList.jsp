@@ -20,7 +20,7 @@
 	<c:forEach items="${customBoardList }" var="custom">
 		<tr>
 			<td>${custom.custom_board_no }</td>
-			<td>${custom.custom_board_title }</td>
+			<td><a href="/custom/view?custom_no=${custom.custom_board_no }">${custom.custom_board_title }</a></td>
 			<td>${custom.custom_board_date }</td>
 			<td>${custom.custom_board_hit }</td>
 			<td>${custom.custom_board_vote }</td>
@@ -39,7 +39,7 @@
 	<c:forEach items="${freeBoardList }" var="free">
 		<tr>
 			<td>${free.free_board_no }</td>
-			<td>${free.free_board_title }</td>
+			<td><a href="/free/view?freeboardno=${free.free_board_no }">${free.free_board_title }</a></td>
 			<td>${free.free_board_date }</td>
 			<td>${free.free_board_hit }</td>
 			<td>${free.free_board_vote }</td>

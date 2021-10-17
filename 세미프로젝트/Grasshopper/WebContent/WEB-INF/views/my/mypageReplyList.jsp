@@ -17,12 +17,12 @@
 	<c:forEach items="${freeBoardReply }" var="freeReply">
 		<tr>
 			<td>${freeReply.free_board_no }</td>
-			<td>${freeReply.free_reply_content }</td>
+			<td><a href="/free/view?freeboardno=${freeReply.free_board_no }">${freeReply.free_reply_content }</a>
+			</td>
 			<td>${freeReply.free_reply_date }</td>
 		</tr>
 	</c:forEach>
 </table>
-
 <table class="table table-striped">
 	<caption>커스텀게시판 댓글</caption>
 	<tr>
@@ -33,7 +33,8 @@
 	<c:forEach items="${customReply }" var="customReply">
 		<tr>
 			<td>${customReply.custom_board_no }</td>
-			<td>${customReply.custom_reply_content }</td>
+			<td><a href="/custom/view?custom_no=${customReply.custom_board_no }">
+			${customReply.custom_reply_content }</a></td>
 			<td>${customReply.comment_date }</td>
 		</tr>
 	</c:forEach>
@@ -49,7 +50,7 @@
 	<c:forEach items="${officialReply }" var="officialReply">
 		<tr>
 			<td>${officialReply.official_board_no }</td>
-			<td>${officialReply.official_reply_content }</td>
+			<td><a href="/official/view?official_no=${officialReply.official_board_no }">${officialReply.official_reply_content }</a></td>
 			<td>${officialReply.official_reply_date }</td>
 		</tr>
 	</c:forEach>

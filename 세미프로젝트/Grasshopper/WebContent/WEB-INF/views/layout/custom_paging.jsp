@@ -7,10 +7,9 @@
 var params = new URLSearchParams(window.location.search);
 var category = params.get("category");
 var search = params.get("search");
-
 </script>
-
-<div class="text-center">
+<br>
+<div class="center">
 <nav>
   <ul class="pagination">
   	

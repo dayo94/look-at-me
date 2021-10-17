@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/offcusstyle.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/resources/css/messagePopup.css">
 
 
 <div class="container">
@@ -28,8 +29,8 @@
 	<div class="content-container">
 		<div class="title-container">
 			<h1 class="entry-title">${viewCustom.custom_board_title }</h1>
-			<p class="title-sub-container">추천수 :
-				${viewCustom.custom_board_vote }</p>
+			<p class="title-sub-container popupOpen1">작성자 : ${viewCustom.user_nickname }   |   조회수 :
+				${viewCustom.custom_board_hit }</p>
 		</div>
 	</div>
 
@@ -42,7 +43,7 @@
 
 	<div>
 		<div class="body-container">
-			<h3 class="semi_title">세부사항</h3>
+			<h3 class="semi_title"></h3>
 			<!-- custom_board_content 에서 키워드로 parsing해서 아래나눠서넣어야함 -->
 			${viewCustom.custom_board_content }
 <!-- 			<h3 class="semi_title">재료</h3> -->
@@ -52,7 +53,7 @@
 <%-- 			</c:forEach> --%>
 			<!-- 첨부파일 -->
 			<div class="attachment">
-			<h3 class="semi_title">첨부파일</h3>
+			<h5 class="semi_title">첨부파일</h5>
 				<c:if test="${not empty customFile }">
 					<a href="/upload/${customFile.stored_file_name }" download="${customFile.original_file_name }"> 
 					${customFile.original_file_name }</a>
@@ -106,6 +107,43 @@
 	</div>
 </div>
 
+					<div class="popupWrap1 hide1">
+						<form action="/customboard/message" method="post">
+						<input type="hidden" name="custom_no" value="${param.custom_no }" />
+							<div class="popup1">
+								<div class="title">
+									<p>${viewCustom.user_nickname }</p>
+									<span class="close1">❌</span>
+								</div>
+								<textarea name="message" id="message" cols="30" rows="10"></textarea>
+								<div class="btnWrap1">
+									<button>보내기</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+</div>
+<script>
+	$('.popupOpen1').on('click', function() {
+		$('.popupWrap1').removeClass('hide1');
+	});
+	$('.close1').on('click', function() {
+		$(this).parents('.popupWrap1').addClass('hide1');
+		$(this).parents('.popup1').children('textarea').val('');
+	});
+
+	$(".btnWrap1").click(function() {
+		$(this).parents("form").submit();
+// 		history.go(-1);
+	});
+</script>
+
+
+
+
+
 <script type="text/javascript">
 	//목록으로 버튼 function
 	$(document).ready(function() {
@@ -118,7 +156,6 @@
 	$("#btnUpdate").click(function() {
 		$(location).attr("href", "/custom/update?custom_no=${viewCustom.custom_board_no }");
 	});
-
 	//삭제버튼 동작
 	$("#btnDelete").click(function() {
 		if( confirm("게시글을 삭제하시겠습니까?") ) {
@@ -127,18 +164,15 @@
 		});
 	
 	});
-
 	//코멘트 200자 이상일 시 스크립트
 	
 	// Get the modal
 	var modal = document.getElementById("myModal");
-
 	// Get the button that opens the modal
 	var btn = document.getElementById("comment-write-button");
 	
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
-
 	// When the user clicks on the button, open the modal
 	btn.onclick = function() {
 		if (document.getElementById("textarea").value.length >= 200) {
@@ -147,13 +181,10 @@
 		}
 	}
 			
-
-
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 	  modal.style.display = "none";
 	}
-
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 	  if (event.target == modal) {

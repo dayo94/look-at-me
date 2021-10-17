@@ -76,8 +76,11 @@ ul {
 <div class="nav1">
 	<h2>마이페이지</h2>
 	<ul>
-		<li><img src="/upload/${attachmentFile.profile_name }"
-			alt="프로필사진" /></li>
+		<li><c:if test="${empty attachmentFile.profile_name }">
+				<img src="/resources/img/기본프로필.jpg" />
+			</c:if> <c:if test="${not empty attachmentFile.profile_name }">
+				<img src="/upload/${attachmentFile.profile_name }" alt="프로필사진" />
+			</c:if></li>
 		<li><strong>${user_info.user_nickname }님, 환영합니다</strong></li>
 	</ul>
 </div>
@@ -132,13 +135,19 @@ ul {
 				alt="엘모" />
 		</c:if>
 		<c:if test="${not empty login and login }">
-			<img src="/upload/${attachmentFile.profile_name }" alt="프로필사진" />
+			<c:if test="${not empty attachmentFile.profile_name }">
+				<img src="/upload/${attachmentFile.profile_name }" alt="프로필사진" />
+			</c:if>
+			<c:if test="${empty attachmentFile.profile_name }">
+				<img src="/resources/img/기본프로필.jpg" />
+			</c:if>
 		</c:if>
 
 		<p>
 			<span>${user_info.user_nickname }</span>
 		</p>
-		<button type="button" class="btn btn-secondary""
+		<button type="button" class="btn btn-secondary"
+			"
 			onclick='location.href="/mypage/update";'>내 정보 수정하기</button>
 		<!-- 페이지 이동이면 <a><span>내 정보 수정하기</span></a> -->
 	</div>

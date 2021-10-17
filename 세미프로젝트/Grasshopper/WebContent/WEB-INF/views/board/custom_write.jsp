@@ -19,16 +19,13 @@
 function submitContents(elClickedObj) {
  	// 에디터의 내용이 textarea에 적용된다. id="content"
  	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-
  	// 에디터의 내용에 대한 값 검증은 이곳에서
  	// document.getElementById("content").value를 이용해서 처리한다.
-
  	try {
  	    //<form>태그의 submit을수행 
  		elClickedObj.form.submit();
  	} catch(e) {}
 }
-
 $(document).ready(function() {
 	
 	$("#btnWrite").click(function(){
@@ -46,7 +43,6 @@ $(document).ready(function() {
 	});
 	
 })
-
 </script>
 
 <style type="text/css">
@@ -88,8 +84,8 @@ $(document).ready(function() {
 		</form>
 
 		<div class="bottom-buttons text-center">
-			<button type="button" id="btnWrite" class="btn">작성완료</button>
-			<button type="button" id="btnList" class="btn">목록으로</button>
+			<button type="button" id="btnWrite" class="viewButton">작성완료</button>
+			<button type="button" id="btnList" class="viewButton">목록으로</button>
 		</div>
 
 	</div>
@@ -109,17 +105,13 @@ $(document).ready(function() {
 	 sSkinURI: "/resources/se2/SmartEditor2Skin.html",
 	 fCreator: "createSEditor2"
 	});
-
 	//본문내용이 2000자 이상일시 컷
 	// Get the modal
 	var modal = document.getElementById("myModal");
-
 	// Get the button that opens the modal
 	var btn = document.getElementById("btnWrite");
-
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
-
 	// When the user clicks on the button, open the modal
 	btn.onclick = function() {
 		if (document.getElementById("textarea").value.length > 2000) {
@@ -131,7 +123,6 @@ $(document).ready(function() {
 	span.onclick = function() {
 		modal.style.display = "none";
 	}
-
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 		if (event.target == modal) {
