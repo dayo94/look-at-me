@@ -32,7 +32,6 @@ import mypage.dto.Qna_board_reply;
 import mypage.dto.User_admin;
 import mypage.dto.User_info;
 import mypage.service.face.MypageService;
-import official.dto.OfficialComment;
 
 public class MypageServiceImpl implements MypageService {
 

@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>    
-
+<c:import url="/WEB-INF/views/layout/mypagenav.jsp" />
+<div style="display: inline-block; width: 900px; margin-left: 150px; margin-right: 150px; margin-bottom: 200px;" >
+<div class="container">
 <h1>내가 쓴 글</h1>
 <hr>
 <h5>커스텀게시판</h5>
@@ -46,5 +48,6 @@
 	</c:forEach>
 
 </table>
-
+</div>
+</div>
 <c:import url="/WEB-INF/views/layout/footer.jsp" /> 

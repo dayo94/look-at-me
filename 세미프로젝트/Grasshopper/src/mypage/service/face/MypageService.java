@@ -16,9 +16,6 @@ import mypage.dto.Qna_board_attachment;
 import mypage.dto.Qna_board_reply;
 import mypage.dto.User_admin;
 import mypage.dto.User_info;
-import official.dto.Official;
-import official.dto.OfficialComment;
-import util.Paging;
 
 public interface MypageService {
 

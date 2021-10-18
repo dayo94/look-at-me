@@ -7,6 +7,8 @@
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<c:import url="/WEB-INF/views/layout/mypagenav.jsp" />
+<div style="display: inline-block; width: 700px;">
 
 
 <div id="box">
@@ -28,7 +30,7 @@
 		</div>
 	</form>
 </div>
-
+</div>
 <script type="text/javascript">
 	$(document).ready(function() {
 

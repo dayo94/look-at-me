@@ -6,6 +6,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>  
 
+<c:import url="/WEB-INF/views/layout/mypagenav.jsp" />
+<div style="display: inline-block; width: 900px; margin-left: 150px; margin-right: 150px; margin-bottom: 200px;" >
+
 <div class="container">
 
 	<h1>내가 쓴 문의 내역</h1>
@@ -29,13 +32,13 @@
 
 	</table>
 
-	<div id="btnBox" class="pull-left">
+	<div id="btnBox" class="pull-left" style="text-align: right;">
 		<button id="btnWrite" class="btn btn-primary">글쓰기</button>
 	</div>
 
 	<!-- .container -->
 </div>
-
+</div>
 
 
 <script type="text/javascript">

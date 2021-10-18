@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import mypage.dto.Qna_board_reply;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
-import official.dto.OfficialComment;
 
 /**
  * Servlet implementation class MypageQnaReplyController
