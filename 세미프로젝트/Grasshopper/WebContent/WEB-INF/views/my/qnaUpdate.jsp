@@ -2,14 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:import url="/WEB-INF/views/layout/header.jsp" />
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
+<c:import url="/WEB-INF/views/layout/mypagehd.jsp" />
 <!-- 스마트에디터 2 -->
 <script type="text/javascript"
 	src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+
+<!-- jQuery 2.2.4 -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<!-- 부트스트랩 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
 
 <style type="text/css">
 #content {
@@ -19,9 +26,9 @@
 </style>
 
 
-<div class="container">
+<div class="container" style="margin-top: 100px; margin-bottom: 150px;">
 
-	<h3>문의 내역 수정</h3>
+	<h1>문의 내역 수정</h1>
 	<hr>
 
 	<div>
@@ -35,15 +42,16 @@
 					<td>${user_info.user_nickname }</td>
 				</tr>
 				<tr>
-					<td class="info">제목</td>
+					<td class="info" id="title">제목</td>
 					<td><input type="text" name="title" style="width: 100%"
 						value="${updateBoard.qna_board_title }" /></td>
 				</tr>
 				<tr>
-					<td class="info" colspan="2">본문</td>
+					<td class="info" colspan="2">문의 내용</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea id="content" name="content">${updateBoard.qna_board_content }</textarea></td>
+					<td colspan="2"><textarea id="content" name="content"
+							style="height: 300px;">${updateBoard.qna_board_content }</textarea></td>
 				</tr>
 			</table>
 
@@ -66,80 +74,56 @@
 	</div>
 
 	<div class="text-center">
-		<button type="button" id="btnUpdate" class="btn btn-info">수정</button>
-		<button type="button" id="btnCancel" class="btn btn-danger">취소</button>
+		<button type="button" id="btnUpdate" class="btn btn-primary me-md-2">수정</button>
+		<button type="button" id="btnCancel" class="btn btn-primary ml-1">취소</button>
 	</div>
 
 	<!-- .container -->
 </div>
-<!-- <form>태그의 submit을 수행하면 editor에 작성한 내용을 <textarea>에 반영 -->
+
+
+<!-- <textarea>태그에 스마트에디터2 적용하는 스크립트 -->
 <script type="text/javascript">
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : oEditors,
+		elPlaceHolder : "content",
+		sSkinURI : "/resources/se2/SmartEditor2Skin.html",
+		fCreator : "createSEditor2"
+	});
+</script>
+<script type="text/javascript">
+	//<form>태그에 submit이 수행되면 스마트에디터에 작성한 내용을 <textarea>에 반영한다
 	function submitContents(elClickedObj) {
 
-		//에디터의 내용을 #content에 반영한다
+		//에디터의 내용을 #content에 반영해준다
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 
 		try {
-			// <form>태그의 submit 수행
+			//<form>태그의 submit을 수행한다
 			elClickedObj.form.submit();
 		} catch (e) {
 		}
-
 	}
 </script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
 		//수정버튼 동작
 		$("#btnUpdate").click(function() {
-
 			//스마트 에디터의 내용을 <textarea>에 적용하는 함수를 호출한다
 			submitContents($("#btnUpdate"))
-
 			//<form> submit
 			$("form").submit();
 		});
-
 		//취소버튼 동작
 		$("#btnCancel").click(function() {
 			history.go(-1);
 		});
-
-			//파일이 없을 경우
-			if(${not empty boardFile }) {
-				$("#beforeFile").show();
-				$("#afterFile").hide();
-			}
-
-			//파일이 있을 경우
-			if(${empty boardFile }) {
-				$("#beforeFile").hide();
-				$("#afterFile").show();
-			})
-
-			//파일 삭제 버튼(X) 처리
-			$("#delFile").click(function() {
-				$("#beforeFile").toggle();
-				$("#afterFile").toggle();
-			})
-
-			$(document).ready(function() {
-				//페이지 첫 접속 시 입력창으로 포커스 이동
-				$("input").eq(0).focus();
-			});
-			
+		
 	});
 </script>
 
-<script type="text/javascript">
-		var oEditors = [];
-		nhn.husky.EZCreator.createInIFrame({
-			oAppRef : oEditors,
-			elPlaceHolder : "content", //에디터가 적용될 <textarea>의 id를 입력
-			sSkinURI : "/resources/se2/SmartEditor2Skin.html",
-			fCreator : "createSEditor2"
-		})
-	</script>
+
 
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

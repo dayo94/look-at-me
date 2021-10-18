@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:import url="/WEB-INF/views/layout/header.jsp" />
+<c:import url="/WEB-INF/views/layout/mypagehd.jsp" />
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -42,7 +42,6 @@ ul {
 .content {
 	display: flex;
 	align-content: center;
-	align-items: center;
 }
 
 .menu {
@@ -94,6 +93,8 @@ ul {
 	color: #000000;
 }
 </style>
+
+
 <div style="min-height: 90vh;">
 	<div class="nav1">
 		<h1><a href="/mypage/main">마이페이지</a></h1>
@@ -103,7 +104,7 @@ ul {
 				</c:if> <c:if test="${not empty attachmentFile.profile_name }">
 					<img src="/upload/${attachmentFile.profile_name }" alt="프로필사진" />
 				</c:if></li>
-			<li><strong>${user_info.user_nickname }님, 환영합니다</strong></li>
+							<li><strong>${user_info.user_nickname }님, 환영합니다</strong></li>
 		</ul>
 	</div>
 
@@ -170,13 +171,10 @@ ul {
 					<span><strong>${user_info.user_nickname }</strong></span>
 				</p>
 				<button type="button" class="btn btn-light"
-					"
 			onclick='location.href="/mypage/update";'>내 정보 수정하기</button>
 				<!-- 페이지 이동이면 <a><span>내 정보 수정하기</span></a> -->
 			</div>
 		</div>
 	</div>
-</div>
-</div>
 </div>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

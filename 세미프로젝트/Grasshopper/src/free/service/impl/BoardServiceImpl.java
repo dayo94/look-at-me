@@ -27,6 +27,7 @@ import free.dto.User_info;
 import free.service.face.BoardService;
 import free.util.Paging;
 
+
 public class BoardServiceImpl implements BoardService {
 
 	private BoardDao boardDao = new Free_board_daoImpl();
@@ -66,6 +67,7 @@ public class BoardServiceImpl implements BoardService {
 
 		board.setFree_board_no(Integer.parseInt(req.getParameter("freeboardno")));
 		System.out.println("boardno: " + req.getParameter("freeboardno"));
+		
 		int res = boardDao.SearchByBoardNo(JDBCTemplate.getConnection(), board);
 
 		if( res <= 0 ) {
@@ -189,7 +191,20 @@ public class BoardServiceImpl implements BoardService {
 
 		int freeBoardno = boardDao.selectNextFreeBoardno(conn);
 		int attachno = boardDao.selectNextAttachno(conn);
+		boardFile = new Free_board_attachment();
+		boardFile.setAttach_no(attachno);
+		System.out.println("boardFile.getAttach_no(): " + boardFile.getAttach_no());
+		boardFile.setFree_board_no(freeBoardno);
+		System.out.println("boardFile.getFree_board_no()"+boardFile.getFree_board_no());
+		int res = boardDao.createByAttachno(conn, boardFile);
 
+		if(res > 0) {
+			JDBCTemplate.commit(conn);
+			System.out.println("attachment 빈자리 생성 성공 ");
+		}else {
+			JDBCTemplate.rollback(conn);
+			System.out.println("attachment 빈자리 생성 실패");
+		}
 
 		//게시글 정보가 있을 경우
 		if(freeBoard != null) {
@@ -527,40 +542,62 @@ public class BoardServiceImpl implements BoardService {
 
 
 
-
-	
-	/*
 	@Override
-	public void updateLike(HttpServletRequest req) {
-		int res = -1;
-		
-		Connection conn = JDBCTemplate.getConnection();	
+	public Paging getSearchPaging(HttpServletRequest req) {
+		System.out.println("boardService.getSearchPaging() ");
 
-		FreeBoard freeBoard = new FreeBoard();
-		freeBoard.setFree_board_no(Integer.parseInt(req.getParameter("freeboardno")));
-		
-		if(req.getParameter("btnlike").equals("false")) {
-			res = boardDao.PlusLike(conn, freeBoard);
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if(param != null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
 		}else {
-			res = boardDao.MinusLike(conn, freeBoard);
+			System.out.println("[WARNING] curPage값이 null이거나 비어있습니다");
 		}
+
+		String type = req.getParameter("type"); 
 		
-		if(res>0) {
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.rollback(conn);
+
+		if(type.equals("title")) {
+			type="free_board_title";
+		}else if (type.equals("writer")) {
+			type="user_nickname";
+		}else if (type.equals("content")){
+			type="free_board_content";
 		}
-				
+
+		String search = req.getParameter("search");
+		
+		System.out.println("type: " + type);
+		System.out.println("search: " + search);
+		
+		int totalCount = boardDao.selectCntByCategory(JDBCTemplate.getConnection(), type, search);
+
+		Paging paging = new Paging(totalCount, curPage);
+
+
+		return paging;
 	}
 
+
+
 	@Override
-	public FreeBoard getVote(HttpServletRequest req) {
-		FreeBoard freeBoard = new FreeBoard();
-
-		return boardDao.getLike(JDBCTemplate.getConnection(), freeBoard);
+	public List<Free_board> getSearchList(Paging paging, HttpServletRequest req) {
+		
+		String type = null;
+		
+		if(req.getParameter("type").equals("title")) {
+			type="free_board_title";
+		}else if (req.getParameter("type").equals("writer")) {
+			type="user_nickname";
+		}else {
+			type="free_board_content";
+		}
+		
+		String search = req.getParameter("search");
+		
+		System.out.println("search: " + search);
+		
+		return boardDao.selectSearchList(JDBCTemplate.getConnection(), paging, type, search);
 	}
-	*/
 
-
-	
 }

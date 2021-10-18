@@ -16,7 +16,7 @@ public class SearchBarController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/searchbar [GET]");
 	
-		req.getRequestDispatcher("/WEB-INF/views/barresult.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/searchbar.jsp").forward(req, resp);
 		 
 	}
 

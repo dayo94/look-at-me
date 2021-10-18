@@ -7,6 +7,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>    
 <link rel="stylesheet" type="text/css" href="/resources/css/offcusstyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/messagePopup.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
@@ -27,25 +28,39 @@
 
 	<div class="content-container">
 		<div class="title-container">
-			<h1 class="entry-title">${viewOfficial.official_cocktail_name }</h1>
+			<h1 class="entry-title">
+				<c:set var="cocktail_title"
+					value="${fn:split(viewOfficial.official_cocktail_name,',')}" />
+				${ cocktail_title[0]} | ${ cocktail_title[1]}
+			</h1>
 			<p class="title-sub-container">추천수 :
 				${viewOfficial.official_cocktail_vote }</p>
 		</div>
 	</div>
 
 	<div class="pic-container">
-		<img src="/resources/img/${viewOfficial.official_cocktail_name }.jpg" />
+		<img src="/resources/img/official_cocktail/official_cocktail_${viewOfficial.official_cocktail_no }.jpg" />
 	</div>
 
 	<div>
 		<div class="body-container">
-			<h3 class="semi_title">새부사항</h3>
-			<p>${viewOfficial.official_cocktail_detail }</p>
-			<h3 class="semi_title">재료</h3>
+			<br>
+			<br>
+			<h4 class="semi_title">재료</h4>
 			<c:forEach var="split"
 				items="${fn:split(viewOfficial.official_cocktail_ingred,',') }">
 					${split } <br>
 			</c:forEach>
+			<br>
+			<h4 class="semi_title"></h4>
+			<p id="cocktail-detail"></p>
+			<br>
+			<h4 class="semi_title">제조법</h4>
+			<p id="cocktail-recipe"></p>
+			<br>
+			<h4 class="semi_title">가니쉬</h4>
+			<p id="cocktail-garnish"></p>
+			<br>
 		</div>
 
 		<div class="comment-container">
@@ -61,7 +76,7 @@
 				<c:forEach var="c" items="${comments }">
 					<div class="comment-list comment-show" id="comment-show${ c.official_reply_no }">
 						<div id="" style="display: none;">${c.user_no }</div>
-						닉네임 : ${c.user_nickname } <br> 댓글내용:
+						<div class="popupOpen1">닉네임 : ${c.user_nickname }</div> 댓글내용:
 						${c.official_reply_content }<br> 작성일시:
 						${c.official_reply_date }<br>
 						<c:if test="${c.user_no == sessionScope.user_no }">
@@ -87,10 +102,40 @@
 		</div>
 
 		<div class="bottom-buttons text-center">
-			<button id="btnList" class="btn">목록으로</button>
+			<button id="btnList" class="btn viewButton">목록으로</button>
 		</div>
 	</div>
 </div>
+
+<div class="popupWrap1 hide1">
+	<form action="/customboard/message" method="post">
+		<input type="hidden" name="custom_no" value="${param.custom_no }" />
+		<div class="popup1">
+			<div class="title">
+				<p>${viewCustom.user_nickname }</p>
+				<span class="close1">❌</span>
+			</div>
+			<textarea name="message" id="message" cols="30" rows="10"></textarea>
+			<div class="btnWrap1">
+				<button>보내기</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$('.popupOpen1').on('click', function() {
+		$('.popupWrap1').removeClass('hide1');
+	});
+	$('.close1').on('click', function() {
+		$(this).parents('.popupWrap1').addClass('hide1');
+		$(this).parents('.popup1').children('textarea').val('');
+	});
+
+	$(".btnWrap1").click(function() {
+		$(this).parents("form").submit();
+// 		history.go(-1);
+	});
+</script>
 
 <script>
 	//목록으로 버튼 function
@@ -117,9 +162,7 @@
 			return false;
 		}
 	}
-			
-
-
+	
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 	  modal.style.display = "none";
@@ -153,6 +196,21 @@
 		document.getElementById(input).classList.add("comment-hide");
 		return false;
 	}
+	
+	//칵테일 세부내역 나누기
+	window.onload = function() {
+
+		var details = "${viewOfficial.official_cocktail_detail }";
+		var paragraph1 = details.split('Recipe:');
+		detail = paragraph1[0];
+		var paragraph2 = paragraph1[1].split('Garnish:');
+		recipe = paragraph2[0];
+		garnish = paragraph2[1];
+
+		document.getElementById('cocktail-detail').innerHTML = detail;
+		document.getElementById('cocktail-recipe').innerHTML = recipe;
+		document.getElementById('cocktail-garnish').innerHTML = garnish;
+	};
 </script>
 
 <c:import url="/WEB-INF/views/layout/footer.jsp" />     

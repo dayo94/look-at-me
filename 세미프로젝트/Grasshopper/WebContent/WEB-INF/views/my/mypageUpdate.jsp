@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:import url="/WEB-INF/views/layout/header.jsp" />
-
+<c:import url="/WEB-INF/views/layout/mypagehd.jsp" />
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

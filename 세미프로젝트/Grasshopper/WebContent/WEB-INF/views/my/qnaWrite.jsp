@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:import url="/WEB-INF/views/layout/header.jsp" />
+<c:import url="/WEB-INF/views/layout/mypagehd.jsp" />
 <!-- 스마트에디터 2 -->
 <script type="text/javascript"
 	src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
@@ -10,6 +10,13 @@
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<!-- 부트스트랩 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
 
 <style type="text/css">
 #content {

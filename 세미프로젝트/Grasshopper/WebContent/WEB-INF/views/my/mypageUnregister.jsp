@@ -2,13 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:import url="/WEB-INF/views/layout/header.jsp" />
-
+<c:import url="/WEB-INF/views/layout/mypagehd.jsp" />
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<c:import url="/WEB-INF/views/layout/mypagenav.jsp" />
-<div style="display: inline-block; width: 700px;">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 
 <div id="box">
@@ -30,7 +38,6 @@
 		</div>
 	</form>
 </div>
-</div>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -38,7 +45,7 @@
 			//페이지 첫 접속 시 입력창으로 포커스 이동
 			$("input").eq(0).focus();
 		});
-		
+
 		//탈퇴버튼 동작
 		$("#btnUnregister").click(function() {
 			$("form").submit();

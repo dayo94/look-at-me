@@ -87,7 +87,7 @@ public class MemberDaoImpl implements MemberDao {
 //				result.setUser_birth(rs.getInt("user_birth"));
 //				result.setUser_birth(rs.getDate("user_birth"));
 				result.setUser_birth(rs.getString("user_birth"));
-//				result.setUser_check(rs.getInt("user_check"));
+				result.setUser_check(rs.getInt("user_check"));
 				result.setUser_nickname( rs.getString("user_nickname") );
 				
 			}
