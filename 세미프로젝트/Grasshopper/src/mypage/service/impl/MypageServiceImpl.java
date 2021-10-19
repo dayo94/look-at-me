@@ -513,11 +513,18 @@ public class MypageServiceImpl implements MypageService {
 			JDBCTemplate.rollback(conn);
 		}
 
+		if (mypageDao.deleteReply(conn, board) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
 		if (mypageDao.delete(conn, board) > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
+
 
 	}
 

@@ -56,7 +56,58 @@ $(document).ready(function() {
 	height: 300px;
 }
 </style>
+<body>
 
+	<div class="wrap">
+		<div class="intro_bg2" style="width: 100%; height: 500px; background-position: top; background-positoin: center; background-repeat: no-repeat; background-image: url('/resources/img/cocktailbar.jpg');">
+			<div class="header">
+				<div class="header_logo">
+					<a href="/main"> <img width=100px;
+						src='/resources/img/header_logo2.png' />
+					</a>
+				</div>
+				<ul class="nav">
+					<li><a href="/official/main">칵테일 검색</a></li>
+					<li><a href="/custom/main">칵테일 제작</a></li>
+					<li><a href="/free/list">자유게시판</a></li>
+					<li><a href="/shopping/main">쇼핑</a></li>
+					<li><a href="/searchbar">어디가서 마실까</a></li>
+					<li><a href="/qna/write">문의게시판</a></li>
+				</ul>
+
+				<div class="navbar_togleBtn">
+					<button class="btn btn-success">MENU</button>
+				</div>
+
+				<c:if test="${empty login or not login }">
+					<div class="login">
+						<form>
+							<button type="reset" onclick='location.href="/mypage/main";'
+								class="btn btn-info">로그인</button>
+						</form>
+					</div>
+					<div class="join">
+						<button type="reset" class="btn btn-warning"
+							onclick='location.href="/kh1/logout";'>회원가입</button>
+					</div>
+				</c:if>
+
+				<c:if test="${login }">
+					<div class="mypage">
+						<button type="reset" onclick='location.href="/mypage/main";'
+							class="btn btn-info">마이페이지</button>
+					</div>
+					<div class="logout">
+						<form>
+							<button type="reset" class="btn btn-warning"
+								onclick='location.href="/kh1/logout";'>로그아웃</button>
+						</form>
+					</div>
+				</c:if>
+
+			</div>
+		</div>
+	</div>
 <div class="container">
 	<!-- The Modal -->
 	<div id="myModal" class="modal">
@@ -71,7 +122,7 @@ $(document).ready(function() {
 
 	</div>
 
-	<div class="content-container">
+	<div class="content-container" style="margin-top:30px;">
 		<form action="/custom/write" method="post" name="cmtForm"
 			enctype="multipart/form-data" >
 			<div class="title-container">
@@ -94,7 +145,11 @@ $(document).ready(function() {
 
 	</div>
 </div>
-
+<style>
+footer {
+	position: sticky !important;
+}
+</style>
 <script>
 	//목록으로 버튼 function
 	document.getElementById("btnList").addEventListener("click", goList);

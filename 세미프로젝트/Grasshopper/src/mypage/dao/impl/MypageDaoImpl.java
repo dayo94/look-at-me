@@ -987,6 +987,38 @@ public class MypageDaoImpl implements MypageDao {
 		return res;
 	}
 
+	
+	@Override
+	public int deleteReply(Connection conn, Qna_board board) {
+		// 다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "DELETE qna_board_reply";
+		sql += " WHERE qna_board_no = ?";
+
+		// DB 객체
+		PreparedStatement ps = null;
+
+		int res = -1;
+
+		try {
+			// DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board.getQna_board_no());
+
+			res = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+
+		return res;
+	}
+	
+	
+	
 	@Override
 	public int deleteFile(Connection conn, Qna_board board) {
 		// 다음 게시글 번호 조회 쿼리

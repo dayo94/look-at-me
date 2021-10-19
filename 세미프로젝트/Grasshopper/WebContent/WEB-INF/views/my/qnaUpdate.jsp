@@ -88,16 +88,16 @@ a:link {
 
 				<table class="table table-bordered">
 					<tr>
-						<td class="info">닉네임</td>
+						<td class="">닉네임</td>
 						<td>${user_info.user_nickname }</td>
 					</tr>
 					<tr>
-						<td class="info" id="title">제목</td>
+						<td class="" id="title">제목</td>
 						<td><input type="text" name="title" style="width: 100%"
 							value="${updateBoard.qna_board_title }" /></td>
 					</tr>
 					<tr>
-						<td class="info" colspan="2">문의 내용</td>
+						<td class="" colspan="2">문의 내용</td>
 					</tr>
 					<tr>
 						<td colspan="2"><textarea id="content" name="content"

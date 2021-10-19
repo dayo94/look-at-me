@@ -235,6 +235,9 @@ public interface MypageDao {
 	 */
 	public int delete(Connection conn, Qna_board board);
 
+	public int deleteReply(Connection conn, Qna_board board);
+	
+	
 	/**
 	 * 게시글에 첨부된 파일 기록 삭제
 	 * 

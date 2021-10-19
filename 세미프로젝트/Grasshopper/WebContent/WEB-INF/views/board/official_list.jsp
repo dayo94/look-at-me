@@ -9,7 +9,58 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/cards.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-      
+ <body>
+
+	<div class="wrap">
+		<div class="intro_bg2" style="width: 100%; height: 500px; background-position: top; background-positoin: center; background-repeat: no-repeat; background-image: url('/resources/img/cocktailbar.jpg');">
+			<div class="header">
+				<div class="header_logo">
+					<a href="/main"> <img width=100px;
+						src='/resources/img/header_logo2.png' />
+					</a>
+				</div>
+				<ul class="nav">
+					<li><a href="/official/main">칵테일 검색</a></li>
+					<li><a href="/custom/main">칵테일 제작</a></li>
+					<li><a href="/free/list">자유게시판</a></li>
+					<li><a href="/shopping/main">쇼핑</a></li>
+					<li><a href="/searchbar">어디가서 마실까</a></li>
+					<li><a href="/qna/write">문의게시판</a></li>
+				</ul>
+
+				<div class="navbar_togleBtn">
+					<button class="btn btn-success">MENU</button>
+				</div>
+
+				<c:if test="${empty login or not login }">
+					<div class="login">
+						<form>
+							<button type="reset" onclick='location.href="/mypage/main";'
+								class="btn btn-info">로그인</button>
+						</form>
+					</div>
+					<div class="join">
+						<button type="reset" class="btn btn-warning"
+							onclick='location.href="/kh1/logout";'>회원가입</button>
+					</div>
+				</c:if>
+
+				<c:if test="${login }">
+					<div class="mypage">
+						<button type="reset" onclick='location.href="/mypage/main";'
+							class="btn btn-info">마이페이지</button>
+					</div>
+					<div class="logout">
+						<form>
+							<button type="reset" class="btn btn-warning"
+								onclick='location.href="/kh1/logout";'>로그아웃</button>
+						</form>
+					</div>
+				</c:if>
+
+			</div>
+		</div>
+	</div>     
 <br><br><br><br><br>
 
 <!-- 검색창 -->
@@ -46,8 +97,8 @@
 		<p>${o.official_cocktail_detail }</p>
 	</div>
 	<div class="card_info">
-		<div>
-			<i class="material-icons">thumb_up</i> ${o.official_cocktail_vote }
+		<div class="card_viewcount">
+			<span class="material-icons">visibility</span><a style="margin-left:5px;">${o.official_cocktail_hit }</a>
 		</div>
 		<div>
 			<a class="card_link" href="/official/view?official_no=${o.official_cocktail_no }">Read More...</a>
@@ -58,41 +109,10 @@
 </div>
 </div>
 <div class="space" style="height:20px;display:inline-block;"></div>
-<%-- 맨위로 버튼 --%>
-<!-- <button id="topButton" onclick="toTheTop()">맨 위로</button> -->
-
-<!-- 최상단으로 버튼 스크립트 -->
-<script type="text/javascript">
-var topButton = document.getElementById("topButton");
-//스크롤 시 scrollFunction 동작
-window.onscroll = function() {
-	scrollFunction()	
-};
-//버튼이 나타나게 함
-function scrollFunction(){
-	console.log("[TEST] You are scrolling!") //테스트용
-	//스크롤을 통해 20줄 이상 내려가면 
-	if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20 ){
-		topButton.style.display = "block";	
-	} else {
-		topButton.style.display = "none";
-	}
+<style>
+footer {
+	position: sticky !important;
 }
-//화면 최상단으로 보내는 기능
-function toTheTop(){
-	window.scrollTo(0,0);
-}
-
-window.onload = function() {
-
-	var details = "${viewOfficial.official_cocktail_detail }";
-	var paragraph1 = details.split(',');
-
-	document.getElementById('cocktail-detail').innerHTML = detail;
-	document.getElementById('cocktail-recipe').innerHTML = recipe;
-	document.getElementById('cocktail-garnish').innerHTML = garnish;
-};
-</script>
-
+</style>
 <c:import url="/WEB-INF/views/layout/official_paging.jsp" />
 <c:import url="/WEB-INF/views/layout/footer.jsp" />    
