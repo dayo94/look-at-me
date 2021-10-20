@@ -27,8 +27,6 @@ public class MypageQnaDeleteController extends HttpServlet {
 		Qna_board board = mypageService.getBoardno(req);
 
 		mypageService.deleteQna(board);
-		
-		System.out.println(board);
 
 		// 목록으로 리다이렉트
 		resp.sendRedirect("/qna/list");

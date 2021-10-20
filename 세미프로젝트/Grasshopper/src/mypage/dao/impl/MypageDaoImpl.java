@@ -400,20 +400,16 @@ public class MypageDaoImpl implements MypageDao {
 	public int insertFile(Connection conn, Attachment_profile attachment_profile) {
 		String sql = "";
 		sql += "INSERT INTO attachment_profile( profile_no, user_no, profile_name )";
-//		sql += " values(attachment_profile_seq.nextval,?,?)";
-		if (attachment_profile.getProfile_no() != 0) { // attach_no 가 매개변수에 존재할 경우 그 값 활용하여 처리
-			sql += " VALUES( " + attachment_profile.getProfile_no() + ", ?, ? )";
-		} else if (attachment_profile.getProfile_no() == 0) { // attach_no가 없을경우 시퀀스를 이용한 nextval 처리
-			sql += " VALUES( attachment_profile_seq.nextval, ?, ? )";
-		}
-
+		sql += " values(?,?,?)";
+	
 		int res = 0;
 
 		try {
 			ps = conn.prepareStatement(sql);
 
-			ps.setInt(1, attachment_profile.getUser_no());
-			ps.setString(2, attachment_profile.getProfile_name());
+			ps.setInt(1, attachment_profile.getProfile_no());
+			ps.setInt(2, attachment_profile.getUser_no());
+			ps.setString(3, attachment_profile.getProfile_name());
 
 			res = ps.executeUpdate();
 
@@ -486,7 +482,7 @@ public class MypageDaoImpl implements MypageDao {
 				viewBoard.setCustom_board_no(rs.getInt("custom_board_no"));
 				viewBoard.setUser_no(rs.getInt("user_no"));
 				viewBoard.setCustom_reply_content(rs.getString("custom_reply_content"));
-				viewBoard.setComment_date(rs.getDate("comment_date"));
+				viewBoard.setCustom_reply_date(rs.getDate("custom_reply_date"));
 
 				BoardList.add(viewBoard);
 
@@ -987,38 +983,6 @@ public class MypageDaoImpl implements MypageDao {
 		return res;
 	}
 
-	
-	@Override
-	public int deleteReply(Connection conn, Qna_board board) {
-		// 다음 게시글 번호 조회 쿼리
-		String sql = "";
-		sql += "DELETE qna_board_reply";
-		sql += " WHERE qna_board_no = ?";
-
-		// DB 객체
-		PreparedStatement ps = null;
-
-		int res = -1;
-
-		try {
-			// DB작업
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, board.getQna_board_no());
-
-			res = ps.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		} finally {
-			JDBCTemplate.close(ps);
-		}
-
-		return res;
-	}
-	
-	
-	
 	@Override
 	public int deleteFile(Connection conn, Qna_board board) {
 		// 다음 게시글 번호 조회 쿼리

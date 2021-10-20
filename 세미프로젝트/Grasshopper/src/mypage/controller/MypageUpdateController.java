@@ -46,6 +46,9 @@ public class MypageUpdateController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		mypageService.update(req);
+		
+		
+		
 
 		resp.sendRedirect("/mypage/main");
 

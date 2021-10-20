@@ -134,6 +134,8 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void update(HttpServletRequest req) {
 
+		Connection conn = JDBCTemplate.getConnection();
+
 //		// 유저정보 DTO객체
 		User_info user_info = null;
 
@@ -233,12 +235,15 @@ public class MypageServiceImpl implements MypageService {
 
 				attachment_profile = new Attachment_profile();
 				attachment_profile.setProfile_name(origin);
+				attachment_profile.setProfile_no(mypageDao.getNextProfileNo(conn));
+				attachment_profile.setUser_no(user_info.getUser_no());
+
+				System.out.println(attachment_profile);
 
 			} // if( !item.isFormField() ) end
 		} // while( iter.hasNext() ) end
 
 		// DB연결 객체
-		Connection conn = JDBCTemplate.getConnection();
 
 		if (user_info != null) {
 			if (mypageDao.update(conn, user_info) > 0) {
@@ -247,16 +252,21 @@ public class MypageServiceImpl implements MypageService {
 				JDBCTemplate.rollback(conn);
 			}
 		}
+		;
 
-//		if (attachment_profile == null) {
-//
-//			if (mypageDao.insertFile(conn, attachment_profile) > 0) {
-//				JDBCTemplate.commit(conn);
-//			} else {
-//				JDBCTemplate.rollback(conn);
-//			}
-//		}
-		if (attachment_profile != null) {
+		if (attachment_profile.getProfile_name() == null) {
+			return;
+		}
+		;
+
+		if (mypageDao.insertFile(conn, attachment_profile) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		;
+
+		if (attachment_profile.getProfile_name() != null) {
 
 			if (mypageDao.updateProfile(conn, user_info, attachment_profile) > 0) {
 				JDBCTemplate.commit(conn);
@@ -513,18 +523,11 @@ public class MypageServiceImpl implements MypageService {
 			JDBCTemplate.rollback(conn);
 		}
 
-		if (mypageDao.deleteReply(conn, board) > 0) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-
 		if (mypageDao.delete(conn, board) > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
-
 
 	}
 
@@ -876,38 +879,35 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public void writeQnaReply(Qna_board_reply qna_board_reply) {
-		
+
 		Connection conn = JDBCTemplate.getConnection();
 		int qna_reply_no = mypageDao.getNextQnaReplyNo(conn);
-		
+
 		qna_board_reply.setQna_reply_no(qna_reply_no);
-		
-		if( mypageDao.insertQnaReply(conn, qna_board_reply) > 0 ) {
+
+		if (mypageDao.insertQnaReply(conn, qna_board_reply) > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
 	}
 
-	
 	@Override
 	public List<Qna_board_reply> getReply() {
 		List<Qna_board_reply> qna_board_reply = mypageDao.selectQnaBoardReply(JDBCTemplate.getConnection());
-		System.out.println("qnaboardreply : " +qna_board_reply);
+		System.out.println("qnaboardreply : " + qna_board_reply);
 		return qna_board_reply;
 	}
-	
-	
+
 	@Override
 	public void msgCheck(int user_no) {
-		
+
 		Connection conn = JDBCTemplate.getConnection();
-		if( mypageDao.updateMsgCheck(conn, user_no) > 0 ) {
+		if (mypageDao.updateMsgCheck(conn, user_no) > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
 	}
-	
-	
+
 }// class
