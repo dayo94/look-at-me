@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 마이바티스 3 Mapper DOCTYPE -->
+
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -7,16 +7,20 @@
 <mapper namespace="dao.face.EmpDao">
 
 	<select id="selectAll" resultType="dto.Emp">
-		SELECT
-			empno, ename, job, mgr, hiredate, sal, comm, deptno
+		SELECT 
+			empno, ename, job, mgr
+			, hiredate, sal, comm, deptno
 		FROM emp
 		ORDER BY empno
 	</select>
 
-
-
-
-
-
+	<select id="selectByEmpno" resultType="dto.Emp" parameterType="dto.Emp">
+		SELECT 
+			empno, ename, job, mgr
+			, hiredate, sal, comm, deptno
+		FROM emp
+		WHERE empno = #{empno }
+	</select>
 
 </mapper>
+
