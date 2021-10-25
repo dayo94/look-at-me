@@ -6,6 +6,28 @@
 
 <mapper namespace="dao.face.EmpDao">
 
+
+<!-- 		resultMap - id적기 -->
+	<resultMap type="dto.Emp" id="Emp">
+<!-- 		pk -->
+		<id column="empno" property="empno" />
+
+<!-- 		column -->
+<!-- 		column - table			property - dto -->
+<!-- 		컬럼명과 멤버필드명이 다른 애만 적어줘도됨 -->
+		<result column="ename" property="ename" />
+		<result column="job" property="job" />
+		<result column="mgr" property="mgr" />
+		<result column="hiredate" property="hiredate" />
+		<result column="sal" property="sal" />
+		<result column="comm" property="comm" />
+		<result column="deptno" property="deptno" />
+		
+	</resultMap>
+
+
+
+
 	<select id="selectAll" resultType="dto.Emp">
 		SELECT 
 			empno, ename, job, mgr
