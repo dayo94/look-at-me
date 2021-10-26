@@ -21,6 +21,10 @@ public interface EmpDao {
 	 */
 	public Emp selectByEmpno(Emp emp);
 	
+	
+	
+	
+	
 }
 
 

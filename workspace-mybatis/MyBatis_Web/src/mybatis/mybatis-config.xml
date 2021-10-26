@@ -10,6 +10,21 @@
 
 	<!-- Properties파일에서 추출한 데이터를 변수로 사용할수있도록 설정 -->
 	<properties resource="mybatis/db.properties" />
+	
+	
+	
+	
+	<typeAliases>
+<!-- 		<typeAlias type="dto.Emp" alias="Emp"/> -->
+
+<!-- 		패키지 안에 들어있는 모든 클래스에 별칭을 적용한다 -->
+<!-- 		기본 별칭을 클래스 이름으로 설정한다	 -->
+<!-- 		DTO클래스ㅔ @Alias("") 를 이용하여 개별적인 별칭 적용 가능 -->
+		<package name="dto"/>
+	
+	</typeAliases>
+	
+	
 
 	<!-- 접속할 db의 정보를 설정한다 -->
 	<environments default="development">
@@ -31,6 +46,8 @@
 
 	<mappers>
 		<mapper resource="dao/mapper/EmpMapper.xml"/>
+		<mapper resource="selectKey/dao/SelectKeyMapper.xml"/>
+		<mapper resource="dynamic/dao/DynamicQueryMapper.xml"/>
 	</mappers>
 
 

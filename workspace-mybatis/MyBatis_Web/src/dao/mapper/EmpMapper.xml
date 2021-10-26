@@ -25,24 +25,69 @@
 		
 	</resultMap>
 
-
-
-
-	<select id="selectAll" resultType="dto.Emp">
+	<sql id="selectEmp">
 		SELECT 
 			empno, ename, job, mgr
 			, hiredate, sal, comm, deptno
 		FROM emp
+	</sql>
+	
+	<sql id="whereCond">
+		WHERE search LIKE '%' || #{keyword } || '%'
+	</sql>
+	
+	
+	
+	
+	
+	
+
+	<select id="selectAll" resultType="Emp">
+		<include refid="selectEmp" />
 		ORDER BY empno
 	</select>
 
-	<select id="selectByEmpno" resultType="dto.Emp" parameterType="dto.Emp">
-		SELECT 
-			empno, ename, job, mgr
-			, hiredate, sal, comm, deptno
-		FROM emp
+	<select id="selectByEmpno" resultType="Emp" parameterType="Emp">
+		<include refid="selectEmp" />
 		WHERE empno = #{empno }
 	</select>
+
+
+<!-- 	<insert id="insert" parameterType="Test_member"> -->
+<!-- 		INSERT INTO test_member (no, id, pw) -->
+<!-- 		VALUES (test_member_seq.nextval, #{id }, #{pw }) -->
+<!-- 	</insert> -->
+
+
+
+
+
+
+
+
+
+
+<!-- 	sql태그 예시 -->
+
+<!-- 	sele -->
+
+
+
+<!-- 	<select id="selectBoardList"> -->
+<!-- 	SELECT * FROM ( -->
+<!-- 		SELECT rownum rnum, B.* FROM ( -->
+<!-- 			SELECT * FROM board -->
+<!-- 			WHERE title LIKE '%' || ${search } || '%' -->
+<!-- 			ORDER BY boardno DESC -->
+<!-- 		) b -->
+<!-- 	) BOARD -->
+<!-- 	WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
+
+<!-- 	</select> -->
+
+
+
+
 
 </mapper>
 
