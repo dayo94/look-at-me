@@ -5,7 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dynamic.dao.DynamicQueryDao">
-
+<!-- 			dao method명 		반환타입-->
 	<select id="select1" resultType="hashmap">
 		SELECT * FROM emp
 		<if test="false">
@@ -18,6 +18,7 @@
 		SELECT * FROM emp
 		WHERE 1=1
 		<if test='ename!=null and !ename.equals("")'>
+<!-- 				  Like '%' || 	"king"	   || '%' -->
 			AND ename LIKE '%' || #{ename} || '%'
 		</if>
 		ORDER BY empno
@@ -26,9 +27,11 @@
 	<select id="select3" resultType="hashmap" parameterType="Emp">
 		SELECT * FROM emp
 		WHERE 1=0
+<!-- 				int -->
 		<if test="empno!=null and empno!=0">
 			OR empno = #{empno }
 		</if>
+<!-- 				String -->
 		<if test='ename!=null and !ename.equals("")'>
 			OR ename LIKE '%' || #{ename } || '%'
 		</if>
@@ -36,18 +39,118 @@
 	</select>
 	
 	<select id="select4" resultType="hashmap" parameterType="hashmap">
+<!-- 		SELECT * FROM emp -->
+<!-- 		WHERE 1=1 -->
+<!-- 		<choose> -->
+<!-- 		<when test="category!=null and category.equals('ename')"> -->
+<!-- 			AND ename = #{keyword } -->
+<!-- 		</when> -->
+<!-- 		<when test="category!=null and category.equals('job')"> -->
+<!-- 			AND job = #{keyword } -->
+<!-- 		</when> -->
+<!-- 		</choose> -->
+<!-- 		ORDER BY empno -->
+
 		SELECT * FROM emp
-		WHERE 1=1
-		<choose>
-		<when test="category!=null and category.equals('ename')">
-			AND ename = #{keyword }
-		</when>
-		<when test="category!=null and category.equals('job')">
-			AND job = #{keyword }
-		</when>
-		</choose>
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<choose>
+				<when test="category!=null and category.equals('ename')">
+	 				AND ename = #{keyword }
+				</when>
+				<when test="category!=null and category.equals('job')">
+					AND job = #{keyword }
+				</when>
+			</choose>
+		</trim>
 		ORDER BY empno
+		
+<!-- 		SELECT * FROM emp -->
+<!-- 		<where> -->
+<!-- 			<choose> -->
+<!-- 				<when test="category!=null and category.equals('ename')"> -->
+<!-- 	 				AND ename = #{keyword } -->
+<!-- 				</when> -->
+<!-- 				<when test="category!=null and category.equals('job')"> -->
+<!-- 					AND job = #{keyword } -->
+<!-- 				</when> -->
+<!-- 			</choose> -->
+<!-- 		</where> -->
+<!-- 		ORDER BY empno -->
+		
 	</select>
+
+
+	<select id="selectCheckbox" resultType="hashmap" parameterType="hashmap">
+		SELECT * FROM emp
+		<if test="deptnoArr !=null">
+		WHERE deptno IN 
+			<foreach collection="deptnoArr" item="deptno" open="(" close=")" separator=",">
+				#{deptno }
+			</foreach>
+		</if>
+		ORDER BY empno
+
+<!-- 		SELECT * FROM emp -->
+<!-- 		<if test="deptnoArr !=null"> -->
+<!-- 		<foreach collection="deptnoArr" item="deptno" open="WHERE" separator="OR"> -->
+<!-- 			deptno = #{deptno } -->
+<!-- 		</foreach> -->
+<!-- 		</if> -->
+<!-- 		ORDER BY empno -->
+
+	</select>
+	
+	<select id="selectByEmpno" resultType="hashmap" parameterType="int">
+		SELECT * FROM emp
+		WHERE empno = #{empno }
+	</select>
+
+	<update id="update" parameterType="hashmap">
+		UPDATE emp
+
+		<trim prefix="SET" prefixOverrides="," >
+		
+			<if test="job != null and !job.equals('')">
+				, job = #{job }
+			</if>
+			<if test="sal != null and !sal.equals('')">
+				, sal = #{sal }
+			</if>
+			<if test="comm != null and !comm.equals('')">
+				, comm = #{comm }
+			</if>
+		</trim>
+		WHERE empno = #{empno }
+		
+<!-- 		UPDATE emp -->
+
+<!-- 		<trim prefix="SET" suffixOverrides="," > -->
+		
+<!-- 			<if test="job != null and !job.equals('')"> -->
+<!-- 				job = #{job }, -->
+<!-- 			</if> -->
+<!-- 			<if test="sal != null and !sal.equals('')"> -->
+<!-- 				sal = #{sal }, -->
+<!-- 			</if> -->
+<!-- 			<if test="comm != null and !comm.equals('')"> -->
+<!-- 				comm = #{comm }, -->
+<!-- 			</if> -->
+<!-- 		</trim> -->
+<!-- 		WHERE empno = #{empno } -->
+		
+	</update>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>
 

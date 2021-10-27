@@ -86,9 +86,11 @@ public class DynamicQueryController extends HttpServlet {
 //		param.put("category", "ename");
 //		param.put("keyword", "FORD");
 		
-		//직무 검색
-//		param.put("category", "job");
-//		param.put("keyword", "MANAGER");
+//		직무 검색
+		param.put("category", "job");
+		param.put("keyword", "MANAGER");
+		
+		System.out.println("---- list6 ----");
 		
 		List<HashMap<String, Object>> list6 = dynamicQueryDao.select4( param );
 		
