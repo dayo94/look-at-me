@@ -21,6 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+<!-- 	web이라고 패키지만 써도 되는데 마이바티스에 dao적용할거라 분리해서 적어준다 -->
 	<context:component-scan base-package="a.b.c, web.controller, web.service" />
 	
 	

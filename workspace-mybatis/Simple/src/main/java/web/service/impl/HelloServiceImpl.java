@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import web.controller.ReturnController;
 import web.dao.face.HelloDao;
 import web.dto.Dept;
 import web.service.face.HelloService;
@@ -19,7 +19,7 @@ public class HelloServiceImpl implements HelloService {
 	private static final Logger logger = LoggerFactory.getLogger(HelloServiceImpl.class);
 	
 	//DAO 객체
-	private HelloDao helloDao;
+	@Autowired private HelloDao helloDao;
 	
 	
 	
@@ -28,7 +28,15 @@ public class HelloServiceImpl implements HelloService {
 
 		logger.info("serviceTest() 시작");
 		
-		return null;
+		List<Dept> list = helloDao.selectDept();
+		
+		for(Dept d : list) {
+			
+//			logger.info("{}", d);
+			
+		}
+		
+		return list;
 	}
 	
 	

@@ -1,12 +1,19 @@
 package web.controller;
 
+import java.util.List;
+
+import javax.jws.WebParam.Mode;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import web.dto.Dept;
 import web.service.face.HelloService;
 
 @Controller
@@ -20,12 +27,13 @@ public class HelloController {
 	
 
 	@RequestMapping(value = "/hello" , method = RequestMethod.GET)
-	public String hello() {
-		
+	public String hello(Model model) {
 		logger.info("/hello [GET]");
 		
-		helloService.serviceTest();
+		//서비스메소드 호출
+		List<Dept> list = helloService.serviceTest();
 		
+		model.addAttribute("list", list);
 		
 		return "test/hello";
 		
