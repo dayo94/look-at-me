@@ -5,11 +5,29 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 <!-- 		DB접속 정보 -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="scott"/>
 		<property name="password" value="tiger"/>
+	</bean>
+	
+<!-- 	마이바티스 로깅 -->
+<!-- 	마이바티스 dataSource의 프록시  -->
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+
+<!-- 	프록시 대상 db datasource설정하기(원본 디비 정보) -->
+		<constructor-arg ref="dataSourceSpied"/>
+
+<!-- 		로그 출력 양식 설정 -->
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL:::"/>
+			</bean>
+		</property>		
+		
+		
 	</bean>
 	
 	
@@ -22,13 +40,14 @@
 		<property name="mapperLocations">
 			<array>
 				<value>classpath:/web/dao/**/*Mapper.xml</value>
+				<value>classpath:/login/dao/**/*Mapper.xml</value>
 			</array>
 		</property>
 	</bean>		
 		
 <!-- 		마이바티스 인터페이스 설정(dao설정) -->
 		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-			<property name="basePackage" value="web.dao"/>
+			<property name="basePackage" value="web.dao, login.dao"/>
 		</bean>
 		
 </beans>

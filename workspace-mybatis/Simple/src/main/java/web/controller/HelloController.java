@@ -2,7 +2,6 @@ package web.controller;
 
 import java.util.List;
 
-import javax.jws.WebParam.Mode;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import web.dto.Dept;
 import web.service.face.HelloService;
