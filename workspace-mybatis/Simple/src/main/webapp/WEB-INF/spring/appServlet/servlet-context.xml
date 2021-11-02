@@ -11,6 +11,17 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	
+<!-- 	인터셉터 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/interceptor/admin/**"/>
+			<beans:bean class="interceptor.interceptor.AdminInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	
+	
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -22,7 +33,7 @@
 	</beans:bean>
 	
 <!-- 	web이라고 패키지만 써도 되는데 마이바티스에 dao적용할거라 분리해서 적어준다 -->
-	<context:component-scan base-package="a.b.c, web.controller, web.service, login.controller, login.service" />
+	<context:component-scan base-package="a.b.c, web.controller, web.service, login.controller, login.service, interceptor.controller" />
 	
 	
 	

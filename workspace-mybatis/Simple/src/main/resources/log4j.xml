@@ -24,6 +24,12 @@
 	</logger>
 	
 	
+	<logger name="interceptor">
+		<level value="info" />
+	</logger>
+	
+	
+	
 <!-- 	마이바티스 Loggers -->
 	
 	<logger name="jdbc.connection">
