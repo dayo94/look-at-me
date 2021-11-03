@@ -15,8 +15,21 @@
 <!-- 	인터셉터 설정 -->
 	<interceptors>
 		<interceptor>
+<!-- 			적용될URL -->
 			<mapping path="/interceptor/admin/**"/>
+<!-- 			예외페이지 -->
+			<exclude-mapping path="/interceptor/admin/fail"/>
+<!-- 			클래스지정 -->
 			<beans:bean class="interceptor.interceptor.AdminInterceptor" />
+		</interceptor>
+
+		<interceptor>
+<!-- 			적용될URL -->
+			<mapping path="/board/write"/>
+<!-- 			예외페이지 -->
+<!-- 			<exclude-mapping path="/interceptor/admin/fail"/> -->
+<!-- 			클래스지정 -->
+			<beans:bean class="interceptor.interceptor.BoardInterceptor" />
 		</interceptor>
 	</interceptors>
 	
@@ -25,15 +38,51 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/upload/**" location="/upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+
+	<!-- JSP기반의 뷰리졸버 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+
+		<beans:property name="order" value="1" />
 	</beans:bean>
 	
+	<!-- BeanNameViewResolver - 스프링 빈(class) 기반의 뷰리졸버 -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" >
+		<beans:property name="order" value="0" />
+	</beans:bean>
+	
+	<!-- DownloadView 클래스를 down이라는 이름의 스프링빈으로 등록하기 -->
+	<beans:bean id="down" class="file.view.DownloadView" />
+	
+	
+	<!-- MultipartResolver 설정 -->
+	<!-- 파일 업로드 요청을 처리하는 클래스 (스프링 빈) -->
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		
+		<!-- 메모리에서 파일을 처리할 수 있는 최대 사이즈 제한 1mb -->
+		<beans:property name="maxInMemorySize" value="1048576" />
+		
+		<!-- 파일업로드 허용 최대 사이즈 제한 10mb -->
+		<beans:property name="maxUploadSize" value="10485760" />
+		
+		<!-- 업로드 된 파일 하나 당 최대 사이즈 제한 5mb -->
+		<beans:property name="maxUploadSizePerFile" value="5242880" />
+	
+	</beans:bean>
+	
+	
+	
+	
+	
+	
+	
 <!-- 	web이라고 패키지만 써도 되는데 마이바티스에 dao적용할거라 분리해서 적어준다 -->
-	<context:component-scan base-package="a.b.c, web.controller, web.service, login.controller, login.service, interceptor.controller" />
+	<context:component-scan base-package="a.b.c, web.controller, web.service, login.controller, login.service, interceptor.controller, file.controller, file.service" />
 	
 	
 	

@@ -25,6 +25,9 @@
 <h3>${nick }님, 환영합니다</h3>
 <button onclick="location.href = '/interceptor/logout';">로그아웃</button><br>
 </c:if>
+<button onclick="location.href = '/board/list';">목록</button><br>
+
+
 
 <hr>
 
