@@ -15,6 +15,14 @@
 		<level value="info" />
 	</logger>
 
+	<logger name="tx">
+		<level value="info" />
+	</logger>
+
+	<logger name="ajax">
+		<level value="info" />
+	</logger>
+
 	<logger name="file">
 		<level value="info" />
 	</logger>
