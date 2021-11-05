@@ -28,13 +28,13 @@ public class BoardController {
 	
 	
 	@RequestMapping(value = "/board/list", method=RequestMethod.GET)
-	public void boardList(HttpSession session,HttpServletRequest req) {
+	public void boardList(HttpServletRequest req) {
 		logger.info("/board/list [GET]");
 		
 		Paging paging = boardService.getPaging(req);
 		List<Board> list = boardService.getList(paging);
 		
-		session.setAttribute("list", list);
+		req.setAttribute("list", list);
 		req.setAttribute("paging", paging);
 		
 		

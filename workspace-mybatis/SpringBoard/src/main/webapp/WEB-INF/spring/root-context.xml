@@ -46,13 +46,14 @@
 <!-- 				<value>classpath:/tx/dao/**/*Mapper.xml</value> -->
 				
 				<value>classpath:/web/dao/mapper/BoardMapper.xml</value>
+				<value>classpath:/member/dao/mapper/MemberMapper.xml</value>
 			</array>
 		</property>
 	</bean>		
 		
 <!-- 		마이바티스 인터페이스 설정(dao설정) -->
 		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-			<property name="basePackage" value="web.dao" />
+			<property name="basePackage" value="web.dao, member.dao" />
 		</bean>
 	
 	

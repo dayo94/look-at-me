@@ -21,7 +21,7 @@
 		(SELECT board_no,title,content,writer_id,writer_nick,hit,write_date FROM board
 		ORDER BY board_no DESC) b
 	) board
-	WHERE rnum BETWEEN #{curPage } AND #{totalCount }
+	WHERE rnum BETWEEN #{startNo } AND #{endNo }
 </select>
 
 <select id="selectCntAll" resultType="int">
