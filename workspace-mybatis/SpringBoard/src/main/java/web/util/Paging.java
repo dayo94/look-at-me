@@ -1,4 +1,4 @@
-package web.dto;
+package web.util;
 
 public class Paging {
 

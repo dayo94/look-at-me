@@ -3,7 +3,7 @@ package web.dao.face;
 import java.util.List;
 
 import web.dto.Board;
-import web.dto.Paging;
+import web.util.Paging;
 
 public interface BoardDao {
 
@@ -11,4 +11,8 @@ public interface BoardDao {
 
 	public int selectCntAll();
 
+	public Board select(int boardno);
+
+	public void hit(int boardno);
+	
 }

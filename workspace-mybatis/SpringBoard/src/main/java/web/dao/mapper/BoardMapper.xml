@@ -15,7 +15,7 @@
 
 
 
-<select id="selectAll" resultMap="Board" parameterType="web.dto.Paging">
+<select id="selectAll" resultMap="Board" parameterType="web.util.Paging">
 	SELECT * FROM ( 
 		SELECT rownum rnum, b.* FROM
 		(SELECT board_no,title,content,writer_id,writer_nick,hit,write_date FROM board
@@ -28,6 +28,16 @@
 	SELECT count(*) FROM board
 </select>
 
+<select id="select" resultMap="Board" parameterType="int">
+	SELECT board_no,title,content,writer_id,writer_nick,hit,write_date FROM board
+	WHERE board_no = #{boardno}
+</select>
+
+<update id="hit" parameterType="int">
+	UPDATE board 
+	SET hit = hit+1
+	WHERE board_no = #{boardno}
+</update>
 
 
 

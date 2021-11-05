@@ -2,16 +2,17 @@ package web.service.face;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import web.dto.Board;
-import web.dto.Paging;
+import web.util.Paging;
 
 public interface BoardService {
 
 	public List<Board> getList(Paging paging);
 
-	public Paging getPaging(HttpServletRequest req);
+	public Paging getPaging(Paging paramData);
+
+	public Board view(int boardno);
 
 	
 	
