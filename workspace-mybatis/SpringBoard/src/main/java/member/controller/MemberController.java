@@ -70,11 +70,15 @@ public class MemberController {
 			boolean isLogin = memberService.login(member);
 			logger.info("isLogin : {} ", isLogin);
 			
+			Member memberNick = memberService.getNick(member);
+			logger.info("memberNick : {} ", memberNick);
+			
 			//인증결과에 따른 세션 처리
 			if( isLogin ) { //성공
+
 				session.setAttribute("login", isLogin);
-				session.setAttribute("id", member.getId());
-				session.setAttribute("nick", member.getNick());
+				session.setAttribute("id", memberNick.getId());
+				session.setAttribute("nick", memberNick.getNick());
 				
 			} else { //실패
 				session.invalidate();

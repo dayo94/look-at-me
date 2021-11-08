@@ -3,6 +3,7 @@ package web.dao.face;
 import java.util.List;
 
 import web.dto.Board;
+import web.dto.BoardFile;
 import web.util.Paging;
 
 public interface BoardDao {
@@ -14,5 +15,13 @@ public interface BoardDao {
 	public Board select(int boardno);
 
 	public void hit(int boardno);
+
+	public void insertBoard(Board board);
+
+	public void insertBoardFile(BoardFile boardFile);
+	
+	public int getNextBoardno();
+
+	public BoardFile selectByBoardNo(int boardno);
 	
 }

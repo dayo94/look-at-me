@@ -13,6 +13,14 @@
 	<result column="write_date" property="writeDate"/>
 </resultMap>
 
+<resultMap type="web.dto.BoardFile" id="BoardFile">
+
+	<result column="file_no" property="fileNo"/>
+	<result column="board_no" property="boardNo"/>
+	<result column="origin_name" property="originName"/>
+	<result column="stored_name" property="storedName"/>
+	
+</resultMap>
 
 
 <select id="selectAll" resultMap="Board" parameterType="web.util.Paging">
@@ -39,6 +47,26 @@
 	WHERE board_no = #{boardno}
 </update>
 
+<select id="getNextBoardno" resultType="int">
+	SELECT board_seq.nextval FROM dual
+</select>
+
+<insert id="insertBoard" parameterType="web.dto.Board">
+	INSERT INTO board (board_no,title,content,writer_id,writer_nick,hit,write_date)
+	VALUES (#{boardNo},#{title},#{content},#{writerId},#{writerNick},0,sysdate)
+</insert>
+
+
+<insert id="insertBoardFile" parameterType="web.dto.BoardFile">
+	INSERT INTO boardfile(file_no,board_no,origin_name,stored_name)
+	VALUES (boardfile_seq.nextval,#{boardNo},#{originName},#{storedName})
+</insert>
+
+
+<select id="selectByBoardNo" resultMap="BoardFile" parameterType="int">
+	SELECT * FROM boardfile
+	WHERE board_no = #{boardno}
+</select>
 
 
 </mapper>

@@ -32,6 +32,16 @@
 .container {
 	min-height: 400px;
 }
+
+a:hover {
+	text-decoration: none;
+}
+
+#main {
+
+	color: #2C7063;
+
+}
 </style>
 
 </head>
@@ -40,5 +50,5 @@
 <div class="wrap">
 
 <header class="header">
-	<h1>DAYOYO SPRING BOARD</h1>
+	<a href="/member/main"><h1 id="main">DAYOYO SPRING BOARD</h1></a>
 </header>

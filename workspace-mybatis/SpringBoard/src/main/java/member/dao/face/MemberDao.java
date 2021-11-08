@@ -10,6 +10,11 @@ public interface MemberDao {
 	
 	
 	public void insertMember(Member memberInfo);
+
+
+
+
+	public Member selectNickById(Member member);
 	
 	
 	

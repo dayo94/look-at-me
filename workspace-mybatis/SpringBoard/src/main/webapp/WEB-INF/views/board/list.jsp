@@ -47,7 +47,10 @@ td:nth-child(2) {
 </tbody>
 </table>
 
-<span class="pull-right">total : ${paging.totalCount }</span>
+<span class="pull-left">total : ${paging.totalCount }</span>
+<c:if test="${login }">
+<button class="pull-right"  onclick="location.href = '/board/write';">글쓰기</button>
+</c:if>
 <div class="clearfix"></div>
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />

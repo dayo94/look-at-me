@@ -19,6 +19,13 @@
 </insert>
 
 
+<select id="selectNickById" resultType="member.dto.Member" parameterType="member.dto.Member">
+	SELECT id,pw,nick FROM member
+	WHERE id = #{id}
+	AND pw = #{pw}
+</select>
+
+
 
 
 

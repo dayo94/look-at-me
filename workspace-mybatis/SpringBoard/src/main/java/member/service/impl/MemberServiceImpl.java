@@ -40,5 +40,14 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	
+	@Override
+	public Member getNick(Member member) {
+
+		Member memberNick = memberDao.selectNickById(member);
+		
+		
+		return memberNick;
+	}
+	
 	
 }

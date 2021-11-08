@@ -7,7 +7,7 @@
 
 
 
-<h1>사원 상세보기</h1>
+<h1>수정</h1>
 <hr>
 
 <table class="table table-bordered">
@@ -57,15 +57,7 @@
 
 
 <div class="text-center" style="margin-bottom: 150px;">
-	<button onclick="location.href = '/board/list';">목록</button>
-</div>
-
-<div class="text-center" style="margin-bottom: 150px;">
-	<button onclick="location.href = '/board/update';">수정</button>
-</div>
-
-<div class="text-center" style="margin-bottom: 150px;">
-	<button onclick="location.href = '/board/delete';">삭제</button>
+	<button onclick="location.href = '/board/update';">확인</button>
 </div>
 
 

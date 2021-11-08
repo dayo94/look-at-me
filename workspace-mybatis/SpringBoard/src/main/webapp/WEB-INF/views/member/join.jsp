@@ -5,7 +5,7 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-
+<div class="text-center" style="margin-bottom: 150px;">
 <h1>회원가입</h1>
 <hr>
 
@@ -14,10 +14,10 @@
 <label>아이디<input type="text" name="id" id="id" /></label><br>
 <label>비밀번호<input type="text" name="pw" id="pw" /></label><br>
 <label>닉네임<input type="text" name="nick" id="nick" /></label><br><br>
-<button>가입</button>
+<button>가입하기</button>
 
 </form>
-
+</div>
 
 
 </div><!-- .container -->

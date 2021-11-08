@@ -5,16 +5,17 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-
+<div class="text-center" style="margin-bottom: 150px;">
 <h1>로그인</h1>
 <hr>
 <form action="/member/login" method="post">
 
-<label>아이디<input type="text" name="id" id="id" /></label><br>
-<label>비밀번호<input type="text" name="pw" id="pw" /></label><br>
+<label>아이디 <input type="text" name="id" id="id" /></label><br>
+<label>비밀번호 <input type="text" name="pw" id="pw" /></label><br><br>
 
 <button>로그인</button>
 </form>
+</div>
 
 </div><!-- .container -->
 
