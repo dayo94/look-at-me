@@ -7,7 +7,7 @@
 
 <div class="text-center" style="margin-bottom: 150px;">
 
-<h1>메인</h1>
+<h1>메인화면</h1>
 <hr>
 
 <!-- 비로그인 상태 -->

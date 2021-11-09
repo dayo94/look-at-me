@@ -70,9 +70,7 @@ public class BoardController {
 	@RequestMapping(value = "/board/write", method=RequestMethod.POST)
 	public String boardWriteProcess(Board board, MultipartFile file, HttpSession session, Model model) {
 		logger.info("/board/writeProcess [POST]");
-		
 	
-		System.out.println((String) session.getAttribute("nick")); 
 		String writerId = (String) session.getAttribute("id");
 		String writerNick = (String) session.getAttribute("nick");
 		
@@ -87,20 +85,80 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	
+	
+	@RequestMapping(value = "/download")
+	public String download(int boardno, Model model) {
+		
+		
+		BoardFile file1 = boardService.getFile(boardno);
+		
+		int fileNo = file1.getFileNo();
+		
+		BoardFile file = boardService.getFileByFileNo(fileNo);
+		
+		model.addAttribute("downFile", file);
+		
+		return "down";
+		
+		
+	}
+	
+	@RequestMapping(value = "/board/error")
+	public void error() {
+		
+	}
+	
+	
 	@RequestMapping(value = "/board/update", method=RequestMethod.GET)
-	public void boardUpdate() {
+	public void boardUpdate(int boardno, Model model) {
 		logger.info("/board/update [GET]");
+		
+		Board board = boardService.viewBoard(boardno);
+		BoardFile boardFile = boardService.getFile(boardno);
+		
+		model.addAttribute("board",board);
+		model.addAttribute("boardFile",boardFile);
+		
 		
 	}
 
 	@RequestMapping(value = "/board/update", method=RequestMethod.POST)
-	public String boardUpdateProcess() {
-		logger.info("/board/updateprocess [GET]");
+	public String boardUpdateProcess(Board board, MultipartFile file) {
+		logger.info("/board/updateprocess [POST]");
 		
+		logger.info("board : {}", board);
+		logger.info("boardfile : {}", file);
+		System.out.println(file.getOriginalFilename());
 		
-		return "redirect:/board/view";
+		boardService.boardUpdate(board,file);
+		
+		int boardno = board.getBoardNo();
+		
+		return "redirect:/board/view?boardno=" + boardno;
 		
 	}
+	
+	@RequestMapping(value = "/board/delete", method=RequestMethod.GET)
+	public String boardDelete(int boardno) {
+		logger.info("/board/delete [GET]");
+
+		logger.info("boardno : {}",boardno);
+		
+		boardService.boardDelete(boardno);
+		
+		return "redirect:/board/list";
+		
+	}
+
+	@RequestMapping(value = "/board/recommend", method=RequestMethod.GET)
+	public void boardRecommend() {
+		logger.info("/board/recommend [GET]");
+		
+		
+		
+	}
+	
 	
 	
 	

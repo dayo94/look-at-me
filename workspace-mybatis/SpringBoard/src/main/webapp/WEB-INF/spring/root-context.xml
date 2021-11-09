@@ -37,6 +37,9 @@
 	
 <!-- 	dataSource빈으로 등록된 db연결 설정 정보 적용하기 -->
 		<property name="dataSource" ref="dataSource"/>
+		
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		
 <!-- 	mapper xml 파일의 위치 설정하기 -->
 		<property name="mapperLocations">
 			<array>

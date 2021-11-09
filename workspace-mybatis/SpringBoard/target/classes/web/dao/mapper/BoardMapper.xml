@@ -22,7 +22,6 @@
 	
 </resultMap>
 
-
 <select id="selectAll" resultMap="Board" parameterType="web.util.Paging">
 	SELECT * FROM ( 
 		SELECT rownum rnum, b.* FROM
@@ -63,10 +62,42 @@
 </insert>
 
 
-<select id="selectByBoardNo" resultMap="BoardFile" parameterType="int">
+<select id="selectFileByBoardNo" resultMap="BoardFile" parameterType="int">
 	SELECT * FROM boardfile
 	WHERE board_no = #{boardno}
 </select>
+
+<select id="selectByFileNo" resultMap="BoardFile" parameterType="int">
+	SELECT * FROM boardfile
+	WHERE file_no = #{fileNo}
+</select>
+
+<update id="updateBoard" parameterType="web.dto.Board">
+	update board
+		set title = #{title},
+			content = #{content}
+	where board_no = #{boardNo}
+</update>
+
+<update id="updateBoardFile" parameterType="web.dto.BoardFile">
+	update boardfile
+		set origin_name = #{originName},
+			stored_name = #{storedName}
+		where board_no = #{boardNo}
+</update>
+
+
+
+<delete id="deleteBoard" parameterType="int">
+	DELETE board
+	where board_no = #{boardno}
+</delete>
+
+<delete id="deleteBoardFile" parameterType="int">
+	DELETE boardfile
+	where board_no = #{boardno}
+</delete>
+
 
 
 </mapper>

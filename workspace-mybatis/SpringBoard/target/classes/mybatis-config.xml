@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<settings>
+	<!-- 컬럼의 snake case(_)를 DTO의 camel case로 자동 변환하는 설정 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- SQL에서 여분의 공백문자를 제거한다 -->
+<!-- 		<setting name="shrinkWhitesapcesInSql" value="true"/> -->
+		
+<!-- 		<setting name="jdbcTypeForNull" value="NULL"/> -->
+		
+		
+	</settings>
+
+</configuration>

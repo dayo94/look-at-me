@@ -20,6 +20,14 @@ public interface BoardService {
 
 	public BoardFile getFile(int boardno);
 
+	public Board viewBoard(int boardno);
+
+
+	public void boardDelete(int boardno);
+
+	public void boardUpdate(Board board, MultipartFile file);
+
+	public BoardFile getFileByFileNo(int fileNo);
 	
 	
 	

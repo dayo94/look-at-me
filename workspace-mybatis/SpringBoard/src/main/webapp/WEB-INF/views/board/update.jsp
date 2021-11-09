@@ -5,66 +5,112 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-
-
-<h1>수정</h1>
-<hr>
-
-<table class="table table-bordered">
-	<tr>
-		<td>닉네임</td>
-		<td>${board.writerNick }</td>
-	</tr>
-
-
-	<tr>
-		<td>글번호</td>
-		<td>${board.boardNo }</td>
-	</tr>
-
-	<tr>
-		<td>제목</td>
-		<td>${board.title }</td>
-	</tr>
-
-
-	<tr>
-		<td>본문</td>
-		<td>${board.content }</td>
-	</tr>
-
-	<tr>
-		<td>조회수</td>
-		<td>${board.hit }</td>
-	</tr>
-
-	<tr>
-		<td>작성일</td>
-		<td><fmt:formatDate value="${board.writeDate }"
-				pattern="yy-MM-dd HH:mm:ss" /></td>
-	</tr>
-
-</table>
-
-<!-- 첨부파일 -->
-<div>
-	<c:if test="${not empty boardFile }">
-		<a href="/upload/${boardFile.storedName}"
-			download="${boardFile.originName }">${boardFile.originName }</a>
-	</c:if>
-</div>
-
+<link rel="stylesheet" type="text/css" href="/resources/css/mypage.css">
+<!-- 스마트에디터 2 -->
+<script type="text/javascript"
+	src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 
 <div class="text-center" style="margin-bottom: 150px;">
-	<button onclick="location.href = '/board/update';">확인</button>
+
+
+	<h1>게시글 수정하기</h1>
+	<hr>
+
+	<div>
+		<form action="/board/update" method="post"
+			enctype="multipart/form-data">
+			<input type="hidden" name="boardNo"
+					value="${board.boardNo }" />
+
+			<table class="table table-bordered">
+
+				<tr>
+					<td class="">제목</td>
+					<td><input type="text" name="title" value="${board.title }"
+						style="width: 100%" /></td>
+				</tr>
+				<tr>
+					<td class="" colspan="2">문의 내용</td>
+				</tr>
+				<tr>
+					<td colspan="10"><textarea name="content" id="content"
+							style="width: 100%; height: 500px;">${board.content }</textarea></td>
+				</tr>
+			</table>
+
+			<!-- 첨부파일 -->
+			<div id="beforeFile">
+				기존 첨부파일: <a href="/upload/${boardFile.storedName }"
+					download="${boardFile.originName }">${boardFile.originName }</a> <span
+					id="delFile"
+					style="color: red; font-weight: bold; cursor: pointer;">X</span>
+			</div>
+
+			<div id="afterFile">
+				<input type="file" name="file" />
+			</div>
+
+		</form>
+	</div>
+
+	<div class="text-center">
+		<button type="button" id="btnUpdate" class="btn btn-primary me-md-2">수정</button>
+		<button type="button" id="btnCancel" class="btn btn-primary ml-1">취소</button>
+	</div>
+
+
+
+
+	<!-- .container -->
 </div>
 
+<!-- <textarea>태그에 스마트에디터2 적용하는 스크립트 -->
+<script type="text/javascript">
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : oEditors,
+		elPlaceHolder : "content",
+		sSkinURI : "/resources/se2/SmartEditor2Skin.html",
+		fCreator : "createSEditor2"
+	});
+</script>
+<script type="text/javascript">
+	//<form>태그에 submit이 수행되면 스마트에디터에 작성한 내용을 <textarea>에 반영한다
+	function submitContents(elClickedObj) {
 
+		//에디터의 내용을 #content에 반영해준다
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 
-</div>
-<!-- .container -->
+		try {
+			//<form>태그의 submit을 수행한다
+			elClickedObj.form.submit();
+		} catch (e) {
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		//수정버튼 동작
+		$("#btnUpdate").click(function() {
+			//스마트 에디터의 내용을 <textarea>에 적용하는 함수를 호출한다
+			submitContents($("#btnUpdate"))
+			//<form> submit
+			$("form").submit();
+		});
+		//취소버튼 동작
+		$("#btnCancel").click(function() {
+			history.go(-1);
+		});
+
+		//파일 삭제 버튼(X) 처리
+		$("#delFile").click(function() {
+			$("#beforeFile").toggle();
+		})
+
+	});
+</script>
 
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
-
-

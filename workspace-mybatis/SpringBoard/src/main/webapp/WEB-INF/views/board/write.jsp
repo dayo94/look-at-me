@@ -43,7 +43,7 @@
 <!-- 			<button onclick="location.href = '/board/delete';">삭제</button> -->
 <!-- 			<br> -->
 
-			<button>작성</button>
+			<button type="button" id="btnWrite">작성</button>
 
 		</form>
 	</div>
@@ -75,7 +75,20 @@
 		}
 	}
 </script>
+<script type="text/javascript">
+	$(document).ready(function() {
 
+		//수정버튼 동작
+		$("#btnWrite").click(function() {
+			//스마트 에디터의 내용을 <textarea>에 적용하는 함수를 호출한다
+			submitContents($("#btnWrite"))
+			//<form> submit
+			$("form").submit();
+		});
+
+
+	});
+</script>
 
 
 </div>

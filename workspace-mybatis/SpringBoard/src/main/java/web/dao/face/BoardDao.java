@@ -22,6 +22,16 @@ public interface BoardDao {
 	
 	public int getNextBoardno();
 
-	public BoardFile selectByBoardNo(int boardno);
+	public BoardFile selectFileByBoardNo(int boardno);
+
+	public void updateBoard(Board board);
+
+	public void deleteBoard(int boardno);
+
+	public void deleteBoardFile(int boardno);
+
+	public void updateBoardFile(BoardFile boardFile);
+
+	public BoardFile selectByFileNo(int fileNo);
 	
 }
